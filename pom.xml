@@ -1,19 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>fr.eql.ai110.laserre</groupId>
-  <artifactId>LaSerreParis-Parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.eql.ai110.laserre</groupId>
+	<artifactId>LaSerreParis-Parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
 		<jee.version>7.0</jee.version>
 		<java.version>1.8</java.version>
 		<ejb.version>3.1</ejb.version>
+		<log4j.version>2.17.1</log4j.version>
 		<plugin.compiler.version>3.6.0</plugin.compiler.version>
 		<plugin.ear.version>2.10.1</plugin.ear.version>
 		<plugin.ejb.version>2.5.1</plugin.ejb.version>
 		<plugin.war.version>3.0.0</plugin.war.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 	</properties>
 
 	<dependencyManagement>
@@ -24,7 +28,18 @@
 				<version>${jee.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
 		</dependencies>
+
 	</dependencyManagement>
 
 	<build>
@@ -66,15 +81,17 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-  
-  <modules>
-  	<module>LaSerreParis-EAR</module>
-  	<module>LaSerreParis-IDAO</module>
-  	<module>LaSerreParis-DAO</module>
-  	<module>LaSerreParis-IBusiness</module>
-  	<module>LaSerreParis-Business</module>
-  	<module>LaSerreParis-Web</module>
-  	<module>LaSerreParis-Entity</module>
-  </modules>
-  
+	
+	
+
+	<modules>
+		<module>LaSerreParis-EAR</module>
+		<module>LaSerreParis-IDAO</module>
+		<module>LaSerreParis-DAO</module>
+		<module>LaSerreParis-IBusiness</module>
+		<module>LaSerreParis-Business</module>
+		<module>LaSerreParis-Web</module>
+		<module>LaSerreParis-Entity</module>
+	</modules>
+
 </project>
