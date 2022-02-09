@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<ui:insert name="head"></ui:insert>
+	<h:outputStylesheet library="css" name="style.css" position="last" />
+</h:head>
+<h:body>
+	<b:navBar brand="LA SERRE PARIS" brand-img="#{request.contextPath}/resources/images/logo/logo_42_bg.png" brandHref="index.xhtml" 
+	fixed="top" fluid="true" inverse="true" class="navbar-light bg-light" 
+	brand-img-style-class="logoNavbar" style-class="navbarStyle">
+		<b:navbarLinks pull="right">
+			<b:navLink value="La ferme" icon-awesome="home" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Les variétés" icon-awesome="leaf" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Le restaurant" icon-awesome="cutlery" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Nos offres" icon-awesome="shopping-cart" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Dites bonjour !" icon-awesome="envelope" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="#{mbUser.user.firstName}" icon-awesome="user" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Connexion" icon-awesome="key" href="login.xhtml" style="color: #FAECE1"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+	
+	<b:container fluid="true">
+		<b:row>
+			<b:column style-class="lsp-content">
+				<ui:insert name="content"></ui:insert>
+			</b:column>
+		</b:row>
+	</b:container>
+
+	<div class="lsp-footer">
+		<div class="footer-decoration"></div>
+		<div class="footer-content lsp-flex-justify-content lsp-flex-align-items">
+			<div class="footer-element">
+				<img src="#{request.contextPath}/resources/images/logo/logo_512_txt2.png" alt="logo" class="footer-img" />
+			</div>
+			<div class="footer-element">
+			<strong>Adresse</strong><br/>
+			La Serre Paris<br/>
+			81 Rue du Charolais<br/>
+			75012 Paris, France<br/>
+			hello@laserre-paris.com
+			</div>
+			<div class="footer-element">
+			Envois et livraisons<br/>
+			Conditions de vente<br/>
+			Vie privée et données<br/>
+			FAQ
+			</div>
+			<div class="footer-element">
+			PH FB<br/>
+			PH Inst<br/>
+			<br/>
+			©2022 by La Serre
+			</div>
+		</div>
+		
+	</div>
+</h:body>
+
+</html>

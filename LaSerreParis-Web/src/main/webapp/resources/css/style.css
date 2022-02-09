@@ -1,0 +1,88 @@
+body {	
+	background-color: #FAECE1 !important;
+}
+
+.lsp-content {
+	min-height: calc(100vh - 30rem) !important;
+	background-color: red !important;
+}
+
+.lsp-footer {
+	min-height: 10rem !important;
+}
+
+.lsp-flex-justify-content {
+	display: flex;
+	justify-content: center;
+}
+
+.lsp-flex-align-items {
+	display: flex;
+	align-items: center;
+}
+
+
+
+.navbarStyle {
+	background-color: #00a1a1;
+	position: -webkit-sticky; 
+ 	position: sticky;
+  	top: 0;
+}
+.logoNavbar {
+	position: relative;
+	top: -50%;
+	margin-right: 1rem;
+}
+.navbar-brand {
+	color: #FAECE1 !important;
+}
+
+
+
+
+
+
+.footer-decoration {
+	margin-top: 2rem;
+	min-height: 4rem;
+	background-color: #00a1a1;
+}
+
+.footer-content {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	justify-content: space-evenly;
+}
+.footer-element {
+	margin: 2rem;
+	min-width: 200px;
+}
+
+.footer-img {
+	max-width: 10rem;
+	max-height: 10rem;
+}
+
+
+
+
+
+.lsp-padding-1rem {
+padding: 1rem !important;
+}
+
+.lsp-vertical-padding-1rem {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.lsp-width-100 {
+width: 100% !important;
+}
+
+.lsp-top-1rem {
+position: relative !important;
+top: 1rem !important;
+}
