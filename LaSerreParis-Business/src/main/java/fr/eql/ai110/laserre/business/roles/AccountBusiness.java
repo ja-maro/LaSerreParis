@@ -74,7 +74,7 @@ public class AccountBusiness implements AccountIBusiness {
 	public User connect(String email, String password) {
 		String salt = userDAO.getSalt(email);
 		String hashedPassword = hashPassword(salt, password);
-		
+
 		return userDAO.authenticate(email, hashedPassword);
 	}
 

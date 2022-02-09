@@ -11,6 +11,9 @@ import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
 
@@ -19,6 +22,7 @@ import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
 public class UserRolesManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LogManager.getLogger(UserRolesManagedBean.class);
 	
 	@EJB
 	private AccountIBusiness accountBU;
@@ -31,9 +35,11 @@ public class UserRolesManagedBean implements Serializable {
 	
 	public String connect() {
 		String forward = null;
+
 		user = accountBU.connect(email, password);
 		if (user != null) {
 			forward = "/index.xhtml?faces-redirection=true";
+			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail());
 		} else {
 			FacesMessage fMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN, 
@@ -41,6 +47,7 @@ public class UserRolesManagedBean implements Serializable {
 					"Email et/ou mot de passe incorrect(s)");
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", fMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", fMessage);
+			LOG.info("Connexion échouée : " + email);
 		}
 		return forward;
 	}
