@@ -144,6 +144,11 @@
 				</b:row>
 				
 				<b:row>
+					<b:column>
+						<b:message for="inpBirth" />
+					</b:column>
+				</b:row>
+				<b:row>
 					<b:column
 						style-class="hidden-xs lsp-top-1rem col-sm-offset-1 col-sm-2 col-md-2">
 						<h:outputText value="Date de naissance" />
@@ -154,7 +159,7 @@
 					</b:column>
 					<b:column
 						style-class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-8 col-md-8 lsp-padding-1rem">
-						 <b:dateTimePicker format="DD.MM.YYYY" locale="fr" value="#{mbUser.birthDate}" 
+						 <b:dateTimePicker id="inpBirth" format="DD.MM.YYYY" locale="fr" value="#{mbUser.birthDate}" 
 						 allow-input-toggle="true" use-current="true"/>
 					</b:column>
 				</b:row>
@@ -176,6 +181,11 @@
 					</b:column>
 				</b:row>
 				
+				<b:row>
+					<b:column>
+						<b:message for="inpPhone" />
+					</b:column>
+				</b:row>
 				<b:row>
 					<b:column
 						style-class="hidden-xs lsp-top-1rem col-sm-offset-1 col-sm-2 col-md-2">
@@ -205,7 +215,7 @@
 					</b:column>
 					<b:column
 						style-class="col-xs-offset-1 col-sm-offset-0 col-xs-10 col-sm-8 col-md-8">
-						<b:slider2 min="1" max="12" value="#{mbUser.homeSize}"/>
+						<b:slider2 min="1" max="12" handleShape="md square" value="#{mbUser.homeSize}"/>
 					</b:column>
 				</b:row>
 				

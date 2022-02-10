@@ -2,7 +2,7 @@ package fr.eql.ai110.laserre.ibusiness.services;
 
 import java.time.LocalDate;
 
-public interface FormValidationService {
+public interface FormValidationIService {
 
 	boolean isEmailSyntaxValid (String email);
 	boolean isPhoneSyntaxValid(String phone);

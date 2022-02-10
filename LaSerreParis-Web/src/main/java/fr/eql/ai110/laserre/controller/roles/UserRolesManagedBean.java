@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.ibusiness.roles.UserAccountIBusiness;
+import fr.eql.ai110.laserre.ibusiness.services.FormValidationIService;
 
 @ManagedBean(name = "mbUser")
 @SessionScoped
@@ -27,6 +28,8 @@ public class UserRolesManagedBean implements Serializable {
 	
 	@EJB
 	private UserAccountIBusiness accountBU;
+	@EJB
+	private FormValidationIService validator;
 	
 	private User user;
 	private String email;
@@ -93,10 +96,71 @@ public class UserRolesManagedBean implements Serializable {
 		LocalDate birth = birthDate.toInstant()
 			      .atZone(ZoneId.systemDefault())
 			      .toLocalDate();
-		//user = new User(null, firstName, lastName, email, null, null, address, phone, homeSize, birth, null, null, null, null);
-		user = new User(firstName, lastName, email, address, phone, homeSize, birth);
-		accountBU.register(user, password); 
-		String forward = "/index.xhtml?faces-redirection=true";
+		
+		String forward = null;
+		boolean isInfoValid = true;
+		
+		if (!validator.isEmailSyntaxValid(email)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Email inapproprié", "Votre email doit être valide.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpEmail", fMessage);
+		}
+		if (!validator.isPasswordSyntaxvalid(password)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Mot de passe trop faible", 
+				"Votre mot de passe doit faire au moins 6 caractères et inclure un chiffre, une minuscule, "
+				+ "une majuscule et un caractère spécial.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpPassword", fMessage);
+		}
+		if (!password.equals(password2)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+					FacesMessage.SEVERITY_WARN, 
+					"Mot de passe inconstant", 
+					"Veuillez répéter exactement votre mot de passe.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpPassword2", fMessage);
+		}
+		if (!validator.isNameSyntaxValid(firstName)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Prénom inapproprié", "Votre prénom ne peut pas contenir de chiffres ou de caractères spéciaux.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpFirstName", fMessage);
+		}
+		if (!validator.isNameSyntaxValid(lastName)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Nom inapproprié", "Votre nom ne peut pas contenir de chiffres ou de caractères spéciaux.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpLastName", fMessage);
+		}
+		if (!phone.equals("")) {
+			if (!validator.isPhoneSyntaxValid(phone)) {
+				isInfoValid = false;
+				FacesMessage fMessage = new FacesMessage(
+					FacesMessage.SEVERITY_WARN, 
+					"Téléphone inapproprié", "Ce numéro de téléphone n'est pas français.");
+				FacesContext.getCurrentInstance().addMessage("registerForm:inpPhone", fMessage);
+			}
+		}
+		if (!validator.isBirthDateValid(birth)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Date de naissance inappropriée", "Vous devez être majeur et avoir moins de 150 ans.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpBirth", fMessage);
+		}
+		
+		if (isInfoValid) {
+			user = new User(firstName, lastName, email, address, phone, homeSize, birth);
+			accountBU.register(user, password); 
+			forward = "/index.xhtml?faces-redirection=true";
+		}
+	
 		return forward;
 	}
 
