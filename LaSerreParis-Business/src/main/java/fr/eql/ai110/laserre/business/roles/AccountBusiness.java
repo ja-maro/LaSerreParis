@@ -10,12 +10,12 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai110.laserre.entity.User;
-import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
+import fr.eql.ai110.laserre.ibusiness.roles.UserAccountIBusiness;
 import fr.eql.ai110.laserre.idao.UserIDAO;
 
-@Remote(AccountIBusiness.class)
+@Remote(UserAccountIBusiness.class)
 @Stateless
-public class AccountBusiness implements AccountIBusiness {
+public class AccountBusiness implements UserAccountIBusiness {
 
 	@EJB
 	private UserIDAO userDAO;

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/arch.xhtml">
+
+	<ui:define name="head">
+		<title>Contact</title>
+		<style>
+			#contactForm {
+			    margin: auto 0;
+	    	min-width: 100%;
+	    	}
+		</style>
+	</ui:define>
+
+	<ui:define name="content">
+		<b:form id="contactForm">
+			<b:panel
+				style-class="col-sm-offset-1 col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
+				<b:message for="inpEmail" />
+				<b:message for="inpName" />
+				<b:message for="inpBody" />
+				<b:panelGrid colSpans="2,10" size="sm">
+
+					<h:outputLabel value="Email" class="lsp-padding-1rem" />
+					<b:inputText id="inpEmail" placeholder="exemple@mail.fr"
+						value="#{TODO}" required="true"
+						requiredMessage="Indiquez votre email" />
+
+					<h:outputLabel value="Nom" class="lsp-padding-1rem" />
+					<b:inputText id="inpName" value="#{TODO}" required="true"
+						requiredMessage="Indiquez votre nom" />
+
+					<h:outputLabel value="Téléphone" class="lsp-padding-1rem" />
+					<b:inputText id="inpPhone" value="#{TODO}" />
+
+					<h:outputLabel value="Message" class="lsp-padding-1rem" />
+					<b:inputTextarea id="inpBody" value="#{TODO}" required="true"
+						requiredMessage="Ecrivez votre message" />
+				</b:panelGrid>
+				<b:row>
+					<b:column
+						style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
+						<b:commandButton style-class="lsp-width-100" value="Envoyer"
+							action="#{TODO}" />
+					</b:column>
+				</b:row>
+			</b:panel>
+		</b:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

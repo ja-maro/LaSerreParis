@@ -4,6 +4,7 @@ body {
 
 .lsp-content {
 	min-height: calc(100vh - 30rem) !important;
+	display: flex;
 	background-color: red !important;
 }
 
@@ -20,7 +21,10 @@ body {
 	display: flex;
 	align-items: center;
 }
-
+.row-flex {
+	margin: auto 0;
+	min-width: 100%
+}
 
 
 .navbarStyle {
@@ -67,6 +71,15 @@ body {
 
 
 
+
+
+.slider.slider-horizontal {
+       width: 97%;  
+}       
+      
+      
+      
+ 
 
 
 .lsp-padding-1rem {

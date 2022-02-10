@@ -2,7 +2,7 @@ package fr.eql.ai110.laserre.ibusiness.roles;
 
 import fr.eql.ai110.laserre.entity.User;
 
-public interface AccountIBusiness {
+public interface UserAccountIBusiness {
 	
 	static final int SALT_LENGTH = 4;
 	static final String HASH_ALGORITHM = "SHA-256";

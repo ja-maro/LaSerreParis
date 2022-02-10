@@ -9,10 +9,19 @@
 
 	<ui:define name="head">
 		<title>Connexion</title>
+		<style>
+			div.panel-group {
+			margin-bottom: 0;
+			}
+			
+		</style>
+		<f:metadata>
+			<f:event listener="#{mbUser.disconnect()}" type="preRenderView"></f:event>
+		</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">
-		<b:row>
+		<b:row style-class="row-flex">
 			<b:form id="loginForm">
 				<b:panel
 					style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-5 col-md-6">

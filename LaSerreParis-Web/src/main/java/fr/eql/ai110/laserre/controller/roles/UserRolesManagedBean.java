@@ -1,21 +1,22 @@
 package fr.eql.ai110.laserre.controller.roles;
 
 import java.io.Serializable;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Column;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import fr.eql.ai110.laserre.entity.User;
-import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
+import fr.eql.ai110.laserre.ibusiness.roles.UserAccountIBusiness;
 
 @ManagedBean(name = "mbUser")
 @SessionScoped
@@ -25,14 +26,23 @@ public class UserRolesManagedBean implements Serializable {
 	private static final Logger LOG = LogManager.getLogger(UserRolesManagedBean.class);
 	
 	@EJB
-	private AccountIBusiness accountBU;
+	private UserAccountIBusiness accountBU;
 	
 	private User user;
 	private String email;
 	private String password;
+	private String password2;
 	private String firstName;
 	private String lastName;
+	private String address;
+	private String phone;
+	private Integer homeSize;
+	private Date birthDate;
 	
+	/**
+	 * Allows user to authenticate through their email and password and saves user data in managedBean.
+	 * @return Redirects to index page if successful.
+	 */
 	public String connect() {
 		String forward = null;
 
@@ -52,10 +62,18 @@ public class UserRolesManagedBean implements Serializable {
 		return forward;
 	}
 	
+	/**
+	 * Checks if user is connected.
+	 * @return True if user is connected.
+	 */
 	public boolean isConnected() {
 		return user != null;
 	}
 	
+	/**
+	 * Disconnects the user by invalidating the session and erasing user data from the managedBean.
+	 * @return Redirects to login page.
+	 */
 	public String disconnect() {
 		HttpSession session = (HttpSession) FacesContext
 				.getCurrentInstance()
@@ -67,11 +85,18 @@ public class UserRolesManagedBean implements Serializable {
 		return "/login.xhtml?faces-redirection=true";
 	}
 	
+	/**
+	 * Allows user to register to the application.
+	 * @return Redirects to index.
+	 */
 	public String register() {
-		System.out.println(email + " " + password);
-		user = new User(null, firstName, lastName, email, null, null, null);
+		LocalDate birth = birthDate.toInstant()
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDate();
+		//user = new User(null, firstName, lastName, email, null, null, address, phone, homeSize, birth, null, null, null, null);
+		user = new User(firstName, lastName, email, address, phone, homeSize, birth);
 		accountBU.register(user, password); 
-		String forward = "/login.xhtml?faces-redirection=true";
+		String forward = "/index.xhtml?faces-redirection=true";
 		return forward;
 	}
 
@@ -104,6 +129,44 @@ public class UserRolesManagedBean implements Serializable {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getPassword2() {
+		return password2;
+	}
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getHomeSize() {
+		return homeSize;
+	}
+
+	public void setHomeSize(Integer homeSize) {
+		this.homeSize = homeSize;
+	}
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 }
