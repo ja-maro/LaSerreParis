@@ -43,7 +43,7 @@ public class User implements Serializable {
 	@Column(name = "birth")
 	private LocalDate birthDate;
 	@Column(name = "validation_code")
-	private Integer validationCode;
+	private String validationCode;
 	@Column(name = "mail_validation_date")
 	private LocalDate mailValidationDate;
 	@Column(name = "deactivation_date")
@@ -77,7 +77,7 @@ public class User implements Serializable {
 
 
 	public User(Integer id, String firstName, String lastName, String email, String password, String salt,
-			String address, String phone, Integer homeSize, LocalDate birthDate, Integer validationCode,
+			String address, String phone, Integer homeSize, LocalDate birthDate, String validationCode,
 			LocalDate mailValidationDate, LocalDate deactivationDate, List<Comment> comments) {
 		super();
 		this.id = id;
@@ -165,10 +165,10 @@ public class User implements Serializable {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	public Integer getValidationCode() {
+	public String getValidationCode() {
 		return validationCode;
 	}
-	public void setValidationCode(Integer validationCode) {
+	public void setValidationCode(String validationCode) {
 		this.validationCode = validationCode;
 	}
 	public LocalDate getMailValidationDate() {

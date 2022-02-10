@@ -10,21 +10,22 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.eql.ai110.laserre.entity.User;
-import fr.eql.ai110.laserre.ibusiness.roles.UserAccountIBusiness;
+import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
 import fr.eql.ai110.laserre.idao.UserIDAO;
 
-@Remote(UserAccountIBusiness.class)
+@Remote(AccountIBusiness.class)
 @Stateless
-public class AccountBusiness implements UserAccountIBusiness {
+public class AccountBusiness implements AccountIBusiness {
 
 	@EJB
 	private UserIDAO userDAO;
 	
 	@Override
 	public User register(User user, String password) {
-		String salt = generateSalt();
+		String salt = alphanumericGenerator(SALT_LENGTH);
 		user.setSalt(salt);
 		user.setPassword(hashPassword(salt, password));
+		user.setValidationCode(alphanumericGenerator(VALIDATION_CODE_LENGTH));
 		userDAO.add(user);
 		return user;
 	}
@@ -52,17 +53,17 @@ public class AccountBusiness implements UserAccountIBusiness {
 	}
 
 	/**
-	 * Generates random alphanumeric String of SALT_LENGTH for salting password
-	 * @return salt
+	 * Generates a random alphanumeric String
+	 * @param length Length of generated String
+	 * @return
 	 */
-	private String generateSalt() {
-
+	private String alphanumericGenerator(int length) {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		
 		String alphanumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		
-		for (int i = 0; i < SALT_LENGTH; i++) {
+		for (int i = 0; i < length; i++) {
 			int randomIndex = random.nextInt(alphanumeric.length());
 			char randomChar = alphanumeric.charAt(randomIndex);
 			sb.append(randomChar);

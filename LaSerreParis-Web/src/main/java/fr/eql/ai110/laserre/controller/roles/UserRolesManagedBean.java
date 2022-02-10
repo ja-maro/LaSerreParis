@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import fr.eql.ai110.laserre.entity.User;
-import fr.eql.ai110.laserre.ibusiness.roles.UserAccountIBusiness;
+import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
 import fr.eql.ai110.laserre.ibusiness.services.FormValidationIService;
 
 @ManagedBean(name = "mbUser")
@@ -27,7 +27,7 @@ public class UserRolesManagedBean implements Serializable {
 	private static final Logger LOG = LogManager.getLogger(UserRolesManagedBean.class);
 	
 	@EJB
-	private UserAccountIBusiness accountBU;
+	private AccountIBusiness accountBU;
 	@EJB
 	private FormValidationIService validator;
 	
@@ -89,7 +89,9 @@ public class UserRolesManagedBean implements Serializable {
 	}
 	
 	/**
-	 * Allows user to register to the application.
+	 * Allows user to register to the application after checking the 
+	 * validity of their information.
+	 * 
 	 * @return Redirects to index.
 	 */
 	public String register() {
