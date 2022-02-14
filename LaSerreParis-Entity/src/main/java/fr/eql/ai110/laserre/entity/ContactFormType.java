@@ -23,10 +23,39 @@ public class ContactFormType implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	@Column(name = "type")
-	private String type;
+	@Column(name = "name")
+	private String name;
 	
 	@OneToMany(mappedBy = "type", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ContactForm> forms;
 
+	public ContactFormType() {}
+
+	public ContactFormType(Integer id, String name, List<ContactForm> forms) {
+		this.id = id;
+		this.name = name;
+		this.forms = forms;
+	}
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<ContactForm> getForms() {
+		return forms;
+	}
+	public void setForms(List<ContactForm> forms) {
+		this.forms = forms;
+	}
+
+	
 }

@@ -47,6 +47,19 @@ public class ContactForm implements Serializable {
 	public ContactForm() {
 	}
 
+	
+	
+	public ContactForm(String email, String name, String phone, String title, String body, ContactFormType type) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.phone = phone;
+		this.title = title;
+		this.body = body;
+		this.type = type;
+	}
+
+
 
 	public ContactForm(Integer id, String email, String name, String phone, String title, String body,
 			LocalDate creationDate, LocalDate processingStartDate, LocalDate processingEndDate, ContactFormType type) {

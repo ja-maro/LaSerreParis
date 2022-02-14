@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.eql.ai110.laserre.entity.subscription.Subscription;
+
 @Entity
 @Table(name="user")
 public class User implements Serializable {
@@ -53,6 +55,8 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Comment> comments;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Subscription> subscriptions;
 	
 	
 	public User() {
@@ -78,7 +82,8 @@ public class User implements Serializable {
 
 	public User(Integer id, String firstName, String lastName, String email, String password, String salt,
 			String address, String phone, Integer homeSize, LocalDate birthDate, String validationCode,
-			LocalDate mailValidationDate, LocalDate deactivationDate, List<Comment> comments) {
+			LocalDate mailValidationDate, LocalDate deactivationDate, List<Comment> comments,
+			List<Subscription> subscriptions) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -94,6 +99,7 @@ public class User implements Serializable {
 		this.mailValidationDate = mailValidationDate;
 		this.deactivationDate = deactivationDate;
 		this.comments = comments;
+		this.subscriptions = subscriptions;
 	}
 
 
@@ -182,6 +188,12 @@ public class User implements Serializable {
 	}
 	public void setDeactivationDate(LocalDate deactivationDate) {
 		this.deactivationDate = deactivationDate;
+	}
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
+	}
+	public void setSubscriptions(List<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
 	}
 	
 }

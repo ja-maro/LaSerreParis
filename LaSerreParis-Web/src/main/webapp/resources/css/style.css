@@ -1,11 +1,12 @@
 body {	
 	background-color: #FAECE1 !important;
+	color: #015738;
 }
 
 .lsp-content {
 	min-height: calc(100vh - 30rem) !important;
 	display: flex;
-	background-color: red !important;
+	background-color: rgba(255,0,0,0.15) !important;
 }
 
 .lsp-footer {
@@ -76,7 +77,11 @@ body {
 .slider.slider-horizontal {
        width: 97%;  
 }       
-      
+  
+.square-200-img {
+	max-width: 200px;
+	max-height: 200px;
+}    
       
       
  

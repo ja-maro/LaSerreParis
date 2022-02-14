@@ -18,5 +18,13 @@ public interface UserIDAO extends GenericIDAO<User>{
 	 * @return authentified user
 	 */
 	User authenticate(String email, String hashedPassword);
+	
+	/**
+	 * Searches for user with given email in database
+	 * 
+	 * @param email 
+	 * @return User with given email
+	 */
+	User getByEmail(String email);
 
 }

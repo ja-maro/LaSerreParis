@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.ibusiness.services.FormValidationIService;
+import fr.eql.ai110.laserre.idao.UserIDAO;
 
 @Remote(FormValidationIService.class)
 @Stateless
@@ -15,14 +18,15 @@ public class FormValidationService implements FormValidationIService {
 	
 	private static final long MAJORITY_AGE = 18;
 	private static final long MAX_AGE = 150;
+	private static final int MIN_TEXT_LENGTH = 15;
+	
+	@EJB
+	private UserIDAO userDao;
 
 	@Override
 	public boolean isEmailSyntaxValid(String email) {
 		String regex = "[^@]+@[^@]+\\.[^@.]+";
 		return regexValidator(regex, email);
-//		Pattern pattern = Pattern.compile(regex);
-//		Matcher matcher = pattern.matcher(email);
-//		return matcher.matches();
 	}
 
 	@Override
@@ -53,6 +57,25 @@ public class FormValidationService implements FormValidationIService {
 		return isValid;
 	}
 
+	@Override
+	public boolean isMessageValid(String text) {
+		boolean isValid = false;
+		if (text.length() >= MIN_TEXT_LENGTH) {
+			isValid = true;
+		}
+		return isValid;
+	}
+
+	@Override
+	public boolean isEmailAvailable(String email) {
+		boolean isAvailable = true;
+		User user = userDao.getByEmail(email);
+		if (user != null) {
+			isAvailable = false;
+		}
+		return isAvailable;
+	}
+
 	/**
 	 * Checks if the String matches the given Regular Expression Pattern
 	 * 
@@ -65,6 +88,5 @@ public class FormValidationService implements FormValidationIService {
 		Matcher matcher = pattern.matcher(toCheck);
 		return matcher.matches();
 	}
-	
 	
 }

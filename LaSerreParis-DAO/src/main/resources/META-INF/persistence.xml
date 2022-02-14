@@ -8,6 +8,16 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 
 <class>fr.eql.ai110.laserre.entity.User</class>
 <class>fr.eql.ai110.laserre.entity.Comment</class>
+<class>fr.eql.ai110.laserre.entity.ContactForm</class>
+<class>fr.eql.ai110.laserre.entity.ContactFormType</class>
+<class>fr.eql.ai110.laserre.entity.subscription.Subscription</class>
+<class>fr.eql.ai110.laserre.entity.subscription.SubscriptionOffer</class>
+<class>fr.eql.ai110.laserre.entity.subscription.SubscriptionPeriod</class>
+<class>fr.eql.ai110.laserre.entity.subscription.SubscriptionSize</class>
+<class>fr.eql.ai110.laserre.entity.subscription.PremiumCrop</class>
+<class>fr.eql.ai110.laserre.entity.subscription.PremiumSubscriptionCrop</class>
+<class>fr.eql.ai110.laserre.entity.subscription.Season</class>
+<class>fr.eql.ai110.laserre.entity.subscription.WeeklyStatus</class>
 
 <properties>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

@@ -102,6 +102,13 @@ public class UserRolesManagedBean implements Serializable {
 		String forward = null;
 		boolean isInfoValid = true;
 		
+		if (!validator.isEmailAvailable(email)) {
+			isInfoValid = false;
+			FacesMessage fMessage = new FacesMessage(
+				FacesMessage.SEVERITY_WARN, 
+				"Email existant", "Cet email est déjà utilisé.");
+			FacesContext.getCurrentInstance().addMessage("registerForm:inpEmail", fMessage);
+		}
 		if (!validator.isEmailSyntaxValid(email)) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(

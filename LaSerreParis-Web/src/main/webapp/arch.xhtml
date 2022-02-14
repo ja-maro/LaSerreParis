@@ -10,14 +10,14 @@
 	<h:outputStylesheet library="css" name="style.css" position="last" />
 </h:head>
 <h:body>
-	<b:navBar brand="LA SERRE PARIS" brand-img="#{request.contextPath}/resources/images/logo/logo_42_bg.png" brandHref="index.xhtml" 
+	<b:navBar brand="La Serre Paris" brand-img="#{request.contextPath}/resources/images/logo/logo_42_bg.png" brandHref="index.xhtml" 
 	fixed="top" fluid="true" inverse="true" class="navbar-light bg-light" 
 	brand-img-style-class="logoNavbar" style-class="navbarStyle">
 		<b:navbarLinks pull="right">
 			<b:navLink value="La ferme" icon-awesome="home" href="farm.xhtml" style="color: #FAECE1"></b:navLink>
 			<b:navLink value="Les variétés" icon-awesome="leaf" href="crops.xhtml" style="color: #FAECE1"></b:navLink>
 			<b:navLink value="Le restaurant" icon-awesome="cutlery" href="" style="color: #FAECE1"></b:navLink>
-			<b:navLink value="Nos offres" icon-awesome="shopping-cart" href="" style="color: #FAECE1"></b:navLink>
+			<b:navLink value="Nos offres" icon-awesome="shopping-cart" href="offers.xhtml" style="color: #FAECE1"></b:navLink>
 			<b:navLink value="Dites bonjour !" icon-awesome="envelope" href="contact.xhtml" style="color: #FAECE1"></b:navLink>
 			<b:navLink value="#{mbUser.user.firstName}" icon-awesome="user" href="" style="color: #FAECE1" rendered="#{mbUser.isConnected()}"></b:navLink>
 			<b:navLink value="Connexion" icon-awesome="key" href="login.xhtml" style="color: #FAECE1" rendered="#{!mbUser.isConnected()}"></b:navLink>

@@ -3,50 +3,77 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/arch.xhtml">
 
 	<ui:define name="head">
 		<title>Contact</title>
 		<style>
-			#contactForm {
-			    margin: auto 0;
-	    	min-width: 100%;
-	    	}
-		</style>
+#contactForm {
+	margin: auto 0;
+	min-width: 100%;
+}
+</style>
 	</ui:define>
 
 	<ui:define name="content">
 		<b:form id="contactForm">
 			<b:panel
-				style-class="col-sm-offset-1 col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
-				<b:message for="inpEmail" />
-				<b:message for="inpName" />
-				<b:message for="inpBody" />
-				<b:panelGrid colSpans="2,10" size="sm">
+				style-class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
-					<h:outputLabel value="Email" class="lsp-padding-1rem" />
+				<b:panelGrid colSpans="2,10" size="sm">
+					<span></span>
+					<b:message for="inpEmail" />
+					<h:outputLabel value="Email*" class="lsp-padding-1rem" />
 					<b:inputText id="inpEmail" placeholder="exemple@mail.fr"
-						value="#{TODO}" required="true"
+						value="#{mbContact.email}" required="true"
 						requiredMessage="Indiquez votre email" />
 
-					<h:outputLabel value="Nom" class="lsp-padding-1rem" />
-					<b:inputText id="inpName" value="#{TODO}" required="true"
+					<span></span>
+					<b:message for="inpName" />
+					<h:outputLabel value="Nom*" class="lsp-padding-1rem" />
+					<b:inputText id="inpName" value="#{mbContact.name}" required="true"
 						requiredMessage="Indiquez votre nom" />
 
+					<span></span>
+					<b:message for="inpPhone" />
 					<h:outputLabel value="Téléphone" class="lsp-padding-1rem" />
-					<b:inputText id="inpPhone" value="#{TODO}" />
+					<b:inputText id="inpPhone" value="#{mbContact.phone}" />
 
-					<h:outputLabel value="Message" class="lsp-padding-1rem" />
-					<b:inputTextarea id="inpBody" value="#{TODO}" required="true"
-						requiredMessage="Ecrivez votre message" />
+					<span></span>
+					<b:message for="inpType" />
+					<h:outputLabel value="Raison*" class="lsp-padding-1rem" />
+					<b:formGroup>
+						<b:selectOneMenu id="inpType" value="#{mbContact.type}"
+							required="true"
+							requiredMessage="Renseignez une raison de contact">
+							<f:selectItem itemLabel="..." />
+							<c:forEach var="type" items="#{mbContact.types}">
+								<f:selectItem itemLabel="#{type.name}" itemValue="#{type}" />
+							</c:forEach>
+						</b:selectOneMenu>
+					</b:formGroup>
+
+					<span></span>
+					<b:message for="inpTitle" />
+					<h:outputLabel value="Titre*" class="lsp-padding-1rem" />
+					<b:inputText id="inpTitle" value="#{mbContact.title}"
+						required="true" requiredMessage="Renseignez un titre" />
+
+					<span></span>
+					<b:message for="inpBody" />
+					<h:outputLabel value="Message*" class="lsp-padding-1rem" />
+					<b:inputTextarea id="inpBody" value="#{mbContact.body}"
+						required="true" requiredMessage="Ecrivez votre message" />
 				</b:panelGrid>
+
 				<b:row>
 					<b:column
 						style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
 						<b:commandButton style-class="lsp-width-100" value="Envoyer"
-							action="#{TODO}" />
+							action="#{mbContact.submitContactForm()}" />
 					</b:column>
 				</b:row>
 			</b:panel>

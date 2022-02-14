@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/arch.xhtml">
+
+	<ui:define name="head">
+		<title>Les abonnements</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div>
+			<h1>Abonnements classiques</h1>
+			<div class="lsp-flex-justify-content" style="background-color: red;">
+
+				<ui:repeat value="#{mbSubscription.availableSimpleOffers}"
+					var="offer">
+					<div>
+						<img
+							src="#{request.contextPath}/resources/images/offers/#{offer.picture}"
+							alt="Illustration de l'offre" class="square-200-img" />
+						<div>
+							<h3>#{offer.size.name}</h3>
+							<h3>#{offer.size.displayHomeSize}</h3>
+							<p>#{offer.pricePerMonth} € par mois</p>
+							<p>
+								<b:button look="success" value="S'abonner" />
+							</p>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+			<h1>Abonnements Premium</h1>
+			<div class="lsp-flex-justify-content">
+
+				<ui:repeat value="#{mbSubscription.availablePremiumOffers}"
+					var="offer">
+					<div>
+						<img
+							src="#{request.contextPath}/resources/images/offers/#{offer.picture}"
+							alt="Illustration de l'offre" class="square-200-img" />
+						<div>
+							<h3>Premium #{offer.size.name}</h3>
+							<h3>#{offer.size.displayHomeSize}</h3>
+							<p>#{offer.pricePerMonth} € par mois</p>
+							<p>
+								<b:button look="success" value="S'abonner" />
+							</p>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
