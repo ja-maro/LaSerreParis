@@ -16,6 +16,7 @@ body {
 .lsp-flex-justify-content {
 	display: flex;
 	justify-content: center;
+	    flex-wrap: wrap;
 }
 
 .lsp-flex-align-items {

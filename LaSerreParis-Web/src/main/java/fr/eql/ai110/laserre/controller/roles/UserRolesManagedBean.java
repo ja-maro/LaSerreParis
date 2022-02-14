@@ -53,6 +53,7 @@ public class UserRolesManagedBean implements Serializable {
 		if (user != null) {
 			forward = "/index.xhtml?faces-redirection=true";
 			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail());
+			
 		} else {
 			FacesMessage fMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN, 

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/arch.xhtml">
+	<ui:define name="head">
+		<title>Détails de l'offre</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+
+
+
+		<b:row style-class="row-flex">
+		
+		<b:panel
+				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-4 col-md-3">
+				<h4>Vos coordonnées</h4>
+				<p>#{mbUser.user.address}</p>
+				<p>#{mbSubscription.connectedUser.phone}</p>
+			</b:panel>
+			
+			
+			<b:form id="subscribeForm">
+				<b:panel
+					style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-5 col-md-6">
+
+					<b:panelGrid colSpans="2,10" size="sm">
+						<span></span>
+						<h:outputLabel
+							value="#{mbSubscription.offer.size.name} #{mbSubscription.offer.size.displayHomeSize}"
+							class="lsp-padding-1rem" />
+						<span></span>
+						<h:outputLabel
+							value="#{mbSubscription.offer.pricePerMonth} € par mois"
+							class="lsp-padding-1rem" />
+
+						<span></span>
+						<b:message for="inpDuration" />
+						<h:outputLabel value="Durée*" class="lsp-padding-1rem" />
+						<b:formGroup>
+							<b:selectOneMenu id="inpDuration"
+								value="#{mbSubscription.duration}" required="true"
+								requiredMessage="Choisissez une durée d'abonnement">
+								<f:selectItem itemLabel="..." />
+								<c:if test="#{mbSubscription.nbPeriod == 0}">
+									<f:selectItem
+										itemLabel="Erreur ! Pas de périodes d'abonnement disponibles"
+										itemValue="0" />
+								</c:if>
+								<c:if test="#{mbSubscription.nbPeriod >= 1}">
+									<f:selectItem itemLabel="Une saison - 3 mois" itemValue="1" />
+								</c:if>
+								<c:if test="#{mbSubscription.nbPeriod >= 2}">
+									<f:selectItem itemLabel="Deux saisons - 6 mois" itemValue="2" />
+								</c:if>
+								<c:if test="#{mbSubscription.nbPeriod >= 4}">
+									<f:selectItem itemLabel="Quatre saisons - 12 mois"
+										itemValue="4" />
+								</c:if>
+							</b:selectOneMenu>
+						</b:formGroup>
+					</b:panelGrid>
+
+					<b:row>
+						<b:column
+							style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
+							<b:commandButton style-class="lsp-width-100" value="Souscrire"
+								action="#{mbSubscription.subscribe()}" />
+						</b:column>
+					</b:row>
+				</b:panel>
+			</b:form>
+			
+			
+		</b:row>
+
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

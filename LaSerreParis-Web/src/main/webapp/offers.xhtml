@@ -13,7 +13,7 @@
 	</ui:define>
 
 	<ui:define name="content">
-
+<h:form id="offersForm">
 		<div>
 			<h1>Abonnements classiques</h1>
 			<div class="lsp-flex-justify-content" style="background-color: red;">
@@ -29,7 +29,7 @@
 							<h3>#{offer.size.displayHomeSize}</h3>
 							<p>#{offer.pricePerMonth} € par mois</p>
 							<p>
-								<b:button look="success" value="S'abonner" />
+								<b:commandButton look="success" value="S'abonner" action="#{mbSubscription.displayOfferDetails(offer)}"/>
 							</p>
 						</div>
 					</div>
@@ -49,15 +49,19 @@
 							<h3>#{offer.size.displayHomeSize}</h3>
 							<p>#{offer.pricePerMonth} € par mois</p>
 							<p>
-								<b:button look="success" value="S'abonner" />
+							<b:commandButton look="success" value="S'abonner" action="#{mbSubscription.displayOfferDetails(offer)}"/>
 							</p>
 						</div>
 					</div>
 				</ui:repeat>
 			</div>
 		</div>
-
-
+<b:growl id="growl"
+		allow-dismiss="true"
+         globalOnly="true"
+         showDetail="true"
+         severity="info,warn,error"/>
+</h:form>
 	</ui:define>
 
 </ui:composition>
