@@ -12,39 +12,34 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<p>Les variétés</p>
-
-
-        <div style="width:400px;
-        height:400px;    
-        overflow:hidden;">
-        <h:graphicImage library="images" name="crops/chou_rouge.jpg"
-						alt="test" style="height: 100%;
-      max-width: none;
-      left: 50%;
-      position: relative;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);"/>
-        </div>
-        
-        <div style="width: 100px;
-  height: 100px;
-  background-position: center center;
-  background-repeat: no-repeat; background-image:#{request.contextPath}/resources/images/crops/chou_rouge.jpg"></div>
 
 
 
-		<b:carousel id="premiumCrops" style="width:300px; height: 300px;"
-			interval="2500">
+
+		<b:carousel id="premiumCrops" style="width:500px; height: 500px;"
+			interval="3500">
+
 			<b:carouselItem>
-					<h:graphicImage library="images" name="crops/chou_rouge.jpg"
-						alt="test" />
-				</b:carouselItem>
+				<h:graphicImage library="images" name="static/crop.jpg"
+					alt="variétés" />
+				<b:carouselCaption
+					style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+					<h2>Nos variétés</h2>
+					<p>Nous vous proposons de nombreuses variétés anciennes ou
+						méconnues.</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+
 			<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
 				var="crop">
-				<b:carouselItem caption="#{crop.name}">
+				<b:carouselItem>
 					<h:graphicImage library="images" name="crops/#{crop.picture}"
-						alt="#{crop.name}" style="min-width:100%;" />
+						alt="#{crop.name}" />
+					<b:carouselCaption
+						style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+						<h2>#{crop.name}</h2>
+						<p>#{crop.carouselDescription}</p>
+					</b:carouselCaption>
 				</b:carouselItem>
 			</ui:repeat>
 
