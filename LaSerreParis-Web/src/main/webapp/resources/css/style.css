@@ -57,6 +57,11 @@ body {
 	background-color: #00a1a1;
 	border-color: #00a1a1;
 }
+.slider-handle {
+	background-image: linear-gradient(to bottom,#00a1a1 0,#008b8b 100%) !important;
+}
+
+
 
 
 

@@ -56,6 +56,7 @@ public class SubscriptionManagedBean implements Serializable {
 		availableSimpleOffers = offerBU.findAllVisibleSimple();
 		availablePremiumOffers = offerBU.findAllVisiblePremium();
 		nbPeriod = periodBU.getNbFuturePeriods();
+		subscribedCrops = getPossibleCrops();
 
 	}
 
@@ -67,11 +68,11 @@ public class SubscriptionManagedBean implements Serializable {
 				this.offer = detailedOffer;
 				forward = "/offerDetails.xhtml?faces-redirection=true";
 			} else {
-				FacesMessages.error("Erreur", "Vous devez renseigner votre adresse et numéro de téléphone dans votre espace pour continuer.");
+				FacesMessages.warning("Attention :", "Vous devez renseigner votre adresse et numéro de téléphone dans votre espace pour continuer.");
 			}
 		} else {
-			FacesMessages.error("Erreur", "Vous devez être inscrit et authentifié pour continuer.");
-		}	
+			FacesMessages.error("Erreur :", "Vous devez être inscrit et authentifié pour continuer.");
+		}
 		return forward;
 	}
 
@@ -85,6 +86,7 @@ public class SubscriptionManagedBean implements Serializable {
 		for (PremiumCrop crop : list) {
 			PremiumSubscriptionCrop sCrop = new PremiumSubscriptionCrop();
 			sCrop.setCrop(crop);
+			sCrop.setQuantity(0);
 			result.add(sCrop);
 		}
 		return result;
@@ -118,8 +120,14 @@ public class SubscriptionManagedBean implements Serializable {
 			}		
 		}
 		sub.setWeeklyStatuses(statusList);
-		subBU.generateWeeklyStatus(sub);
+		
+		for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
+			sCrop.setSubscription(sub);
+		}
+		sub.setSubscriptionCrops(subscribedCrops);
+		subBU.finalizeSubscription(sub);
 
+		//TODO retirer les crops avec quantité 0
 		return "/index.xhtml";
 	}
 

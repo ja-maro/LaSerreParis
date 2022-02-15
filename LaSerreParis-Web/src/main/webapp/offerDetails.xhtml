@@ -77,25 +77,18 @@
 
 
 
-
-						
-
-								<ui:repeat value="#{mbSubscription.getPossibleCrops()}"
-									var="crop">
+								<ui:repeat value="#{mbSubscription.subscribedCrops}" var="subCrop">
 									<div>
 										
 										<div>
-											<h3>#{crop.crop.name}</h3>
-											<h3>#{crop.crop.harvestQty}</h3>
-											<b:slider2 min="1" max="5" handleShape="md square" value="#{crop.quantity}"/>
-												<b:commandButton look="success" value="Ajouter"
-													action="#{mbSubscription.addCrop(crop)}" />
+											<h3>#{subCrop.crop.name} (#{subCrop.crop.harvestQty})</h3>
+											
+											<b:slider2 min="0" max="5" handleShape="md square" span="6" value="#{subCrop.quantity}"/>
 											
 										</div>
 									</div>
 								</ui:repeat>
 								
-
 
 							
 							</div>

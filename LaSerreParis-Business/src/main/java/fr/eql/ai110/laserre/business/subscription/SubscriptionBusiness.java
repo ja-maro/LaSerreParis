@@ -22,14 +22,10 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 		return subDao.add(sub);
 	}
 
-//	@Override
-//	public void saveWeeklyStatus(WeeklyStatus status) {
-//		wsDao.add(status);
-//	}
-
-
 	@Override
-	public Subscription generateWeeklyStatus(Subscription sub) {
+	public Subscription finalizeSubscription(Subscription sub) {
 		return subDao.update(sub);
 	}
+
+
 }
