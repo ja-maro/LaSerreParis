@@ -8,12 +8,44 @@
 <ui:composition template="/arch.xhtml">
 	<ui:define name="head">
 		<title>Accueil</title>
+		<style>
+			.carousel-control {
+			background-image: none !important;
+			}
+		</style>
 	</ui:define>
 
 	<ui:define name="content">
-		<h4>
-			Accueil
-		</h4>
+		
+			<b:carousel id="comments" style="width:500px" interval="4500">
+
+			<b:carouselItem style="width:500px; height:350px">
+				<b:carouselCaption style="min-height: 66%;">
+				<b:icon value="comment" size="5x" />
+					<h4>Commentaires</h4>
+					<p>Ce qu'en disent nos clients.</p>
+				</b:carouselCaption>
+			</b:carouselItem>
+
+			<ui:repeat value="#{mbComment.getDisplayedComments()}"
+				var="com">
+				<b:carouselItem style="width:500px; height:350px">
+					<b:carouselCaption style="min-height: 66%;">
+						<h4>#{com.text}</h4>
+						<p>#{com.user.firstName}</p>
+					</b:carouselCaption>
+				</b:carouselItem>
+			</ui:repeat>
+
+		</b:carousel>
+		
+		
+		
+		
+	
+ 
+ 
+ 
 	</ui:define>
 </ui:composition>
 

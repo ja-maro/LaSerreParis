@@ -1,9 +1,18 @@
 --ROLES
 
 INSERT INTO `user` (first_name, last_name, email, password, salt, mail_validation_date, phone, address, birth, home_size) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', 'Vbl���F�aw�o��u�����Z^-}ɹ��', 'UGSA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
+INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Cécile', 'Dupont');
+INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Guillaume', 'Verboise');
+INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Fatima', 'Soussa');
 
 --COMMENTS & CONTACT FORMS
-INSERT INTO `comment` (submission_date, text, user_id) VALUES ('2022-02-12', 'Ce fut une expérience incroyable, je recommande chaudement !', 1);
+INSERT INTO `comment` (submission_date, text,  `validation_date`, user_id) VALUES ('2022-02-12', 'Ce fut une expérience incroyable, je recommande chaudement !', '2022-02-14', 1);
+INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'Top ces livraisons ! Des légumes bios et locaux, et régulièrement des découvertes délicieuses !', '2022-02-14', '2');
+INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'La Serre propose de multiples plats végétariens voire vegans, et dans un cadre impressionnant ! Enfin on peut ne pas se limiter quand on sort avec des amis.', '2022-02-14', '3');
+INSERT INTO `comment` (`hide_date`, `submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-15', '2022-02-13', 'Ce commentaire devrait être masqué', '2022-02-14', '1');
+INSERT INTO `comment` (`submission_date`, `text`, `user_id`) VALUES ('2022-02-13', 'Commentaire pas encore accepté', '1');
+INSERT INTO `laserre_paris_db`.`comment` (`rejection_date`, `submission_date`, `text`, `user_id`) VALUES ('2022-02-14', '2022-02-13', 'Ce commentaire a été rejeté', '1');
+
 
 INSERT INTO `contact_form_type` (name) VALUES ('Abonnement');
 INSERT INTO `contact_form_type` (name) VALUES ('Restaurant');

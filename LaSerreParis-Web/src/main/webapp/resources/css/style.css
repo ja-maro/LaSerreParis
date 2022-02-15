@@ -28,6 +28,10 @@ body {
 	min-width: 100%
 }
 
+.carousel-inner {
+	display: flex;
+}
+
 
 .navbarStyle {
 	background-color: #00a1a1;
