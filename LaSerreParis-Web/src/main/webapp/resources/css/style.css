@@ -52,6 +52,13 @@ body {
 
 
 
+.btn-success {
+	color: #FAECE1;
+	background-color: #00a1a1;
+	border-color: #00a1a1;
+}
+
+
 
 .footer-decoration {
 	margin-top: 2rem;

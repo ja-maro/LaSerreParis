@@ -12,7 +12,7 @@
 	</ui:define>
 
 	<ui:define name="content">
-
+<div class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
 		<b:carousel id="premiumCrops" style="width:500px; height: 500px;"
 			interval="3500">
@@ -34,7 +34,7 @@
 					<h:graphicImage library="images" name="crops/#{crop.picture}"
 						alt="#{crop.name}" />
 					<b:carouselCaption
-						style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+						style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
 						<h2>#{crop.name}</h2>
 						<p>#{crop.carouselDescription}</p>
 					</b:carouselCaption>
@@ -42,7 +42,7 @@
 			</ui:repeat>
 
 		</b:carousel>
-
+</div>
 
 	</ui:define>
 

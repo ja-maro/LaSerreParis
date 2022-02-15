@@ -69,10 +69,35 @@
 
 					<c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">
 						<b:row>
-						<h:outputLabel value="Variétés*&lt;br /&gt;(total : #{mbSubscription.offer.totalHarvestQuantity})" escape="false" class="lsp-padding-1rem col-sm-2" />
-							
+							<h:outputLabel
+								value="Variétés*&lt;br /&gt;(total : #{mbSubscription.offer.totalHarvestQuantity})"
+								escape="false" class="lsp-padding-1rem col-sm-2" />
+
 							<div class="col-sm-10">
-								<p>#{mbSubscription.getAvailablePremiumCrops()}</p>
+
+
+
+
+						
+
+								<ui:repeat value="#{mbSubscription.getPossibleCrops()}"
+									var="crop">
+									<div>
+										
+										<div>
+											<h3>#{crop.crop.name}</h3>
+											<h3>#{crop.crop.harvestQty}</h3>
+											<b:slider2 min="1" max="5" handleShape="md square" value="#{crop.quantity}"/>
+												<b:commandButton look="success" value="Ajouter"
+													action="#{mbSubscription.addCrop(crop)}" />
+											
+										</div>
+									</div>
+								</ui:repeat>
+								
+
+
+							
 							</div>
 						</b:row>
 					</c:if>

@@ -13,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.PremiumCrop;
+import fr.eql.ai110.laserre.entity.subscription.PremiumSubscriptionCrop;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
 import fr.eql.ai110.laserre.entity.subscription.SubscriptionOffer;
 import fr.eql.ai110.laserre.entity.subscription.SubscriptionPeriod;
@@ -38,7 +39,6 @@ public class SubscriptionManagedBean implements Serializable {
 	@EJB
 	private PremiumCropIBusiness cropBU;
 
-
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 	private SubscriptionOffer offer;
@@ -46,6 +46,10 @@ public class SubscriptionManagedBean implements Serializable {
 	private List<SubscriptionOffer> availablePremiumOffers;
 	private Long nbPeriod;
 	private Integer duration;
+	private List<PremiumSubscriptionCrop> subscribedCrops;
+	private PremiumSubscriptionCrop subCrop;
+//	private Integer nbCrop;
+//	private PremiumCrop crop;
 
 	@PostConstruct
 	void init() {
@@ -73,6 +77,21 @@ public class SubscriptionManagedBean implements Serializable {
 
 	public List<PremiumCrop> getAvailablePremiumCrops() {
 		return cropBU.getAllAvailablePremiumCrops();
+	}
+	
+	public List<PremiumSubscriptionCrop> getPossibleCrops() {
+		List<PremiumSubscriptionCrop> result = new ArrayList<PremiumSubscriptionCrop>();
+		List<PremiumCrop> list = cropBU.getAllAvailablePremiumCrops();
+		for (PremiumCrop crop : list) {
+			PremiumSubscriptionCrop sCrop = new PremiumSubscriptionCrop();
+			sCrop.setCrop(crop);
+			result.add(sCrop);
+		}
+		return result;
+	}
+	
+	public void addCrop(PremiumCrop crop, Integer nbCrop) {
+		
 	}
 
 	public String subscribe() {
@@ -142,6 +161,29 @@ public class SubscriptionManagedBean implements Serializable {
 	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
-
+	public List<PremiumSubscriptionCrop> getSubscribedCrops() {
+		return subscribedCrops;
+	}
+	public void setSubscribedCrops(List<PremiumSubscriptionCrop> subscribedCrops) {
+		this.subscribedCrops = subscribedCrops;
+	}
+	public PremiumSubscriptionCrop getSubCrop() {
+		return subCrop;
+	}
+	public void setSubCrop(PremiumSubscriptionCrop subCrop) {
+		this.subCrop = subCrop;
+	}
+//	public Integer getNbCrop() {
+//		return nbCrop;
+//	}
+//	public void setNbCrop(Integer nbCrop) {
+//		this.nbCrop = nbCrop;
+//	}
+//	public PremiumCrop getCrop() {
+//		return crop;
+//	}
+//	public void setCrop(PremiumCrop crop) {
+//		this.crop = crop;
+//	}
 
 }
