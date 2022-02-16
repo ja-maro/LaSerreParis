@@ -19,7 +19,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 <class>fr.eql.ai110.laserre.entity.subscription.Season</class>
 <class>fr.eql.ai110.laserre.entity.subscription.WeeklyStatus</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.Booking</class>
-<class>fr.eql.ai110.laserre.entity.restaurant.SocialtableBooking</class>
+<class>fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.RestaurantTable</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.PrivateTableBooking</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.SocialTable</class>

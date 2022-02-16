@@ -4,14 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("social")
 @Table(name = "social_table_booking")
-public class SocialtableBooking extends Booking implements Serializable {
+public class SocialTableBooking extends Booking implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,9 +27,9 @@ public class SocialtableBooking extends Booking implements Serializable {
 	private SocialTable socialTable;
 
 	
-	public SocialtableBooking() {}
+	public SocialTableBooking() {}
 
-	public SocialtableBooking(Integer guestNumber, LocalDate waitlistInscriptionDate, SocialTable socialTable) {
+	public SocialTableBooking(Integer guestNumber, LocalDate waitlistInscriptionDate, SocialTable socialTable) {
 		super();
 		this.guestNumber = guestNumber;
 		this.waitlistInscriptionDate = waitlistInscriptionDate;

@@ -41,9 +41,6 @@ public class ContactFormManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		types = contactBU.findAllTypes();
-		for (ContactFormType t : types) {
-			System.out.println(t.getName());
-		}
 	}
 
 

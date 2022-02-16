@@ -28,7 +28,7 @@ public class OpeningDay implements Serializable {
 	@Column(name = "day")
 	private LocalDate day;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "openingDay", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<DaySlot> daySlot;
 
 	public OpeningDay() {}

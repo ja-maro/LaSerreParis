@@ -33,12 +33,12 @@ public class SocialTable implements Serializable {
 	private LocalDate hideDate;
 
 	@OneToMany(mappedBy = "socialTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SocialtableBooking> bookings;
+	private List<SocialTableBooking> bookings;
 
 	public SocialTable() {}
 
 	public SocialTable(Integer id, Integer seatsQuantity, Integer subscriptorsHeldSeats, LocalDate hideDate,
-			List<SocialtableBooking> bookings) {
+			List<SocialTableBooking> bookings) {
 		super();
 		this.id = id;
 		this.seatsQuantity = seatsQuantity;
@@ -71,10 +71,10 @@ public class SocialTable implements Serializable {
 	public void setHideDate(LocalDate hideDate) {
 		this.hideDate = hideDate;
 	}
-	public List<SocialtableBooking> getBookings() {
+	public List<SocialTableBooking> getBookings() {
 		return bookings;
 	}
-	public void setBookings(List<SocialtableBooking> bookings) {
+	public void setBookings(List<SocialTableBooking> bookings) {
 		this.bookings = bookings;
 	}
 	

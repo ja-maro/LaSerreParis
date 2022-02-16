@@ -33,7 +33,7 @@ public class TimeSlot implements Serializable {
 	@Column(name = "end_minute")
 	private Integer endMinute;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "timeSlot", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<DaySlot> daySlot;
 
 	public TimeSlot() {}

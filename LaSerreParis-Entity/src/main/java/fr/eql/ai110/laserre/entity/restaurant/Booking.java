@@ -5,10 +5,13 @@ import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -18,8 +21,10 @@ import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.WeeklyStatus;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="booking_type")
 @Table(name = "booking")
-public class Booking implements Serializable {
+public abstract class Booking implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -40,7 +45,7 @@ public class Booking implements Serializable {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "day_slot_id", referencedColumnName = "id")
-	private DaySlot dayslot;
+	private DaySlot daySlot;
 	
 	@OneToOne(mappedBy = "booking")
 	private WeeklyStatus weeklyStatus;
@@ -54,7 +59,7 @@ public class Booking implements Serializable {
 
 
 	public Booking(Integer id, LocalDate bookingDate, LocalDate cancelDate, String details, String name,
-			String contactInfo, DaySlot dayslot, WeeklyStatus weeklyStatus, User user) {
+			String contactInfo, DaySlot daySlot, WeeklyStatus weeklyStatus, User user) {
 		super();
 		this.id = id;
 		this.bookingDate = bookingDate;
@@ -62,7 +67,7 @@ public class Booking implements Serializable {
 		this.details = details;
 		this.name = name;
 		this.contactInfo = contactInfo;
-		this.dayslot = dayslot;
+		this.daySlot = daySlot;
 		this.weeklyStatus = weeklyStatus;
 		this.user = user;
 	}
@@ -104,11 +109,11 @@ public class Booking implements Serializable {
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
 	}
-	public DaySlot getDayslot() {
-		return dayslot;
+	public DaySlot getDaySlot() {
+		return daySlot;
 	}
-	public void setDayslot(DaySlot dayslot) {
-		this.dayslot = dayslot;
+	public void setDaySlot(DaySlot dayslot) {
+		this.daySlot = dayslot;
 	}
 	public WeeklyStatus getWeeklyStatus() {
 		return weeklyStatus;

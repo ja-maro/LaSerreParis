@@ -2,12 +2,14 @@ package fr.eql.ai110.laserre.entity.restaurant;
 
 import java.io.Serializable;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("private")
 @Table(name = "private_table_booking")
 public class PrivateTableBooking extends Booking implements Serializable {
 

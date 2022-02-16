@@ -30,7 +30,7 @@ public class DaySlot implements Serializable {
 	@JoinColumn(referencedColumnName = "id")
 	private OpeningDay openingDay;
 	
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "daySlot")
 	private Booking booking;
 
 	public DaySlot() {}
