@@ -6,7 +6,7 @@ body {
 .lsp-content {
 	min-height: calc(100vh - 30rem) !important;
 	display: flex;
-	background-color: rgba(255,0,0,0.15) !important;
+	_background-color: rgba(255,0,0,0.15) !important;
 }
 
 .lsp-footer {
@@ -52,7 +52,10 @@ body {
 .navbar-brand {
 	color: #FAECE1 !important;
 }
-
+.deco-icon > a {
+    padding-top: 13.5px !important;
+    padding-bottom: 13.5px !important;
+}
 
 
 
@@ -103,6 +106,11 @@ body {
 }
 .slider-handle {
 	background-image: linear-gradient(to bottom,#00a1a1 0,#008b8b 100%) !important;
+}
+.panel-success > .panel-heading {
+	background-color:#00a1a1;
+	border-color: #00a1a1;
+	color: #FAECE1;
 }
 
 

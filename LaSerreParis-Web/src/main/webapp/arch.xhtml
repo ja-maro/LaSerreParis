@@ -22,7 +22,7 @@
 			<b:navLink value="Dites bonjour !" icon-awesome="envelope" href="contact.xhtml" style="color: #FAECE1"></b:navLink>
 			<b:navLink value="#{mbUser.user.firstName}" icon-awesome="user" href="user.xhtml" style="color: #FAECE1" rendered="#{mbUser.isConnected()}"></b:navLink>
 			<b:navLink value="Connexion" icon-awesome="key" href="login.xhtml" style="color: #FAECE1" rendered="#{!mbUser.isConnected()}"></b:navLink>
-			<b:navLink value="Déconnexion" icon-awesome="close" href="login.xhtml" action="#{mbUser.disconnect()}" style="color: #FAECE1" rendered="#{mbUser.isConnected()}"></b:navLink>
+			<b:navLink value="" icon-awesome="close" style-class="deco-icon" icon-size="2x" href="login.xhtml" action="#{mbUser.disconnect()}" style="color: #FAECE1" rendered="#{mbUser.isConnected()}"></b:navLink>
 		</b:navbarLinks>
 	</b:navBar>
 	
