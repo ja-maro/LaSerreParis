@@ -95,8 +95,6 @@ public class SubscriptionManagedBean implements Serializable {
 		String forward = null;
 		Boolean isValid = true;
 
-
-		//TODO validation premiumcrops
 		int requiredQty = offer.getTotalHarvestQuantity();
 		int nbCropsSelected = 0;
 		int totalChoice = 0;
@@ -108,19 +106,19 @@ public class SubscriptionManagedBean implements Serializable {
 			}
 		}
 
-		if (totalChoice < requiredQty) {
-			FacesMessages.warning("Attention :", "Vous devez sélectionner plus de points.");
-			isValid = false;
-		} else if (totalChoice > requiredQty) {
-			FacesMessages.warning("Attention :", "Vous avez sélectionné trop de points.");
-			isValid = false;
+		if (requiredQty > 0) {
+			if (totalChoice < requiredQty) {
+				FacesMessages.warning("Attention :", "Vous devez sélectionner plus de points.");
+				isValid = false;
+			} else if (totalChoice > requiredQty) {
+				FacesMessages.warning("Attention :", "Vous avez sélectionné trop de points.");
+				isValid = false;
+			}
+			if (subBU.isNbCropsSelectedEnough(nbCropsSelected)) {
+				FacesMessages.warning("Attention :", "Vous devez sélectionner au moins " + subBU.getMinNbCropsSelected() + " variétés différentes .");
+				isValid = false;
+			} 
 		}
-		if (subBU.isNbCropsSelectedEnough(nbCropsSelected)) {
-			FacesMessages.warning("Attention :", "Vous devez sélectionner au moins " + subBU.getMinNbCropsSelected() + " variétés différentes .");
-			isValid = false;
-		} 
-
-
 
 
 		Subscription sub = new Subscription();
