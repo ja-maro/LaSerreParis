@@ -13,32 +13,14 @@
 
 	<ui:define name="content">
 
-
-
-
 		<b:row style-class="row-flex">
-
-			<b:panel
-				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-4 col-md-3">
-				<h4>Vos coordonnées</h4>
-				<p>#{mbUser.user.address}</p>
-				<p>#{mbSubscription.connectedUser.phone}</p>
-			</b:panel>
 
 
 			<b:form id="subscribeForm">
 				<b:panel
-					style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-5 col-md-6">
+					style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-6">
 
 					<b:panelGrid colSpans="2,10" size="sm">
-						<span></span>
-						<h:outputLabel
-							value="#{mbSubscription.offer.size.name} #{mbSubscription.offer.size.displayHomeSize}"
-							class="lsp-padding-1rem" />
-						<span></span>
-						<h:outputLabel
-							value="#{mbSubscription.offer.pricePerMonth} € par mois"
-							class="lsp-padding-1rem" />
 
 						<span></span>
 						<b:message for="inpDuration" />
@@ -69,36 +51,31 @@
 
 					<c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">
 						<b:row>
-							<h:outputLabel
-								value="Variétés*&lt;br /&gt;(total : #{mbSubscription.offer.totalHarvestQuantity})"
-								escape="false" class="lsp-padding-1rem col-sm-2" />
-
-							<div class="col-sm-10">
-
-
-
-								<ui:repeat value="#{mbSubscription.subscribedCrops}" var="subCrop">
-									<div>
-										
-										<div>
-											<h3>#{subCrop.crop.name} (#{subCrop.crop.harvestQty})</h3>
-											
-											<b:slider2 min="0" max="5" handleShape="md square" span="6" value="#{subCrop.quantity}"/>
-											
-										</div>
-									</div>
-								</ui:repeat>
-								
-
 							
-							</div>
+								<h4>Choisissez vos variétés !</h4>
+								<p>Chaque variété coûte un certain nombre de points. Vous pouvez en sélectionner une plusieurs fois.</p>
+								<p>Vous devez en choisir au moins 3 différentes.</p>
+								<h4>Total des points disponibles : <strong>#{mbSubscription.offer.totalHarvestQuantity}</strong> </h4>
 						</b:row>
+
+						<ui:repeat value="#{mbSubscription.subscribedCrops}" var="subCrop">
+
+							<b:panelGrid colSpans="3,7,2" size="sm" style-class="crop-grid">
+								<h4>#{subCrop.crop.name}</h4>
+								<b:slider2 min="0"
+									max="#{mbSubscription.offer.size.homeSizeHigh*2}"
+									handleShape="md square" span="12" value="#{subCrop.quantity}" />
+								<h4>#{subCrop.crop.harvestQty} point(s)</h4>
+							</b:panelGrid>
+
+						</ui:repeat>
+
 					</c:if>
 
 					<b:row>
 						<b:column
 							style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
-							<b:commandButton style-class="lsp-width-100" value="Souscrire"
+							<b:commandButton style-class="lsp-width-100" value="Souscrire" look="success" 
 								action="#{mbSubscription.subscribe()}" />
 						</b:column>
 					</b:row>
@@ -106,9 +83,27 @@
 			</b:form>
 
 
+
+
+
+
+			<b:panel
+				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-3">
+				<h4>Vos coordonnées</h4>
+				<p>#{mbUser.user.address}</p>
+				<p>#{mbSubscription.connectedUser.phone}</p>
+				<br />
+				<h4>Offre choisie :</h4>
+				<h4><c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">Premium </c:if>#{mbSubscription.offer.size.name}</h4>
+				<p>Une livraison par semaine pour #{mbSubscription.offer.size.displayHomeSize}</p>
+				<p>#{mbSubscription.offer.pricePerMonth} € par mois</p>
+			</b:panel>
+
+
 		</b:row>
 
-
+		<b:growl id="growl" allow-dismiss="true" globalOnly="true"
+			showDetail="true" severity="info,warn,error" />
 
 
 	</ui:define>

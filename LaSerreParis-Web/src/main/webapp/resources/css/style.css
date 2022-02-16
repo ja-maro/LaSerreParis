@@ -31,7 +31,12 @@ body {
 .carousel-inner {
 	display: flex;
 }
-
+.crop-grid {
+	border-bottom: solid 1px #015738;
+	margin-bottom: 2rem;
+}
+		
+		
 
 .navbarStyle {
 	background-color: #00a1a1;
@@ -51,15 +56,6 @@ body {
 
 
 
-
-.btn-success {
-	color: #FAECE1;
-	background-color: #00a1a1;
-	border-color: #00a1a1;
-}
-.slider-handle {
-	background-image: linear-gradient(to bottom,#00a1a1 0,#008b8b 100%) !important;
-}
 
 
 
@@ -99,8 +95,38 @@ body {
 	max-width: 200px;
 	max-height: 200px;
 }    
-      
-      
+
+.btn-success {
+	color: #FAECE1;
+	background-color: #00a1a1;
+	border-color: #00a1a1;
+}
+.slider-handle {
+	background-image: linear-gradient(to bottom,#00a1a1 0,#008b8b 100%) !important;
+}
+
+
+.catalog-item {
+	margin: 2rem 2rem;
+	_padding: 7rem 10rem 0 7rem;
+	padding-top: 20rem;
+	border: 1px solid #00a1a1;
+	border-radius: 8px;
+	box-shadow: 2px 2px 3px grey;
+	width: 330px;
+	
+}      
+.catalog-item > img {
+	border: 1px solid #00a1a1;
+	border-radius: 5px; 
+}  
+.catalog-item > div {
+	background-color: rgba(250,236,225,0.7);
+	width: 25rem;
+	padding: 0.5rem 5rem 0.5rem 5rem;
+	width: 100%;
+	border-radius: 0 0 8px 8px;
+}
  
 
 

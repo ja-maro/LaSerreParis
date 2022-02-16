@@ -48,8 +48,6 @@ public class SubscriptionManagedBean implements Serializable {
 	private Integer duration;
 	private List<PremiumSubscriptionCrop> subscribedCrops;
 	private PremiumSubscriptionCrop subCrop;
-//	private Integer nbCrop;
-//	private PremiumCrop crop;
 
 	@PostConstruct
 	void init() {
@@ -79,7 +77,7 @@ public class SubscriptionManagedBean implements Serializable {
 	public List<PremiumCrop> getAvailablePremiumCrops() {
 		return cropBU.getAllAvailablePremiumCrops();
 	}
-	
+
 	public List<PremiumSubscriptionCrop> getPossibleCrops() {
 		List<PremiumSubscriptionCrop> result = new ArrayList<PremiumSubscriptionCrop>();
 		List<PremiumCrop> list = cropBU.getAllAvailablePremiumCrops();
@@ -91,44 +89,76 @@ public class SubscriptionManagedBean implements Serializable {
 		}
 		return result;
 	}
-	
-	public void addCrop(PremiumCrop crop, Integer nbCrop) {
-		
-	}
 
 	public String subscribe() {
 
+		String forward = null;
+		Boolean isValid = true;
+
+
+		//TODO validation premiumcrops
+		int requiredQty = offer.getTotalHarvestQuantity();
+		int nbCropsSelected = 0;
+		int totalChoice = 0;
+		for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
+			int cropTotalWeight = sCrop.getQuantity()*sCrop.getCrop().getHarvestQty();
+			totalChoice += cropTotalWeight;
+			if (sCrop.getQuantity() > 0) {
+				nbCropsSelected ++;
+			}
+		}
+
+		if (totalChoice < requiredQty) {
+			FacesMessages.warning("Attention :", "Vous devez sélectionner plus de points.");
+			isValid = false;
+		} else if (totalChoice > requiredQty) {
+			FacesMessages.warning("Attention :", "Vous avez sélectionné trop de points.");
+			isValid = false;
+		}
+		if (subBU.isNbCropsSelectedEnough(nbCropsSelected)) {
+			FacesMessages.warning("Attention :", "Vous devez sélectionner au moins " + subBU.getMinNbCropsSelected() + " variétés différentes .");
+			isValid = false;
+		} 
+
+
+
+
 		Subscription sub = new Subscription();
+
 		List<SubscriptionPeriod> periods = (List<SubscriptionPeriod>) periodBU.findNextPeriods(duration);
 		sub.setPeriods(periods);
 		sub.setSubscriptionDate(LocalDate.now());
 		sub.setUser(connectedUser);
 		sub.setOffer(offer);
 
-		sub = subBU.subscribe(sub);
 
-		System.out.println(periods.get(0).getDuration());
 
-		List<WeeklyStatus> statusList = new ArrayList<WeeklyStatus>();
+		if (isValid) { //registerSubscription
 
-		for (SubscriptionPeriod period : periods) {
-			for (int i = 0; i < period.getDuration(); i++) {
-				WeeklyStatus status = new WeeklyStatus();
-				status.setStartDay(period.getStartDate().plusWeeks(i));
-				status.setSubscription(sub);
-				statusList.add(status);	
-			}		
+			sub = subBU.firstStepSubscription(sub);
+
+			List<WeeklyStatus> statusList = new ArrayList<WeeklyStatus>();
+			for (SubscriptionPeriod period : periods) {
+				for (int i = 0; i < period.getDuration(); i++) {
+					WeeklyStatus status = new WeeklyStatus();
+					status.setStartDay(period.getStartDate().plusWeeks(i));
+					status.setSubscription(sub);
+					statusList.add(status);	
+				}		
+			}
+			sub.setWeeklyStatuses(statusList);
+
+			subscribedCrops.removeIf(c->c.getQuantity() <= 0);
+			for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
+				sCrop.setSubscription(sub);
+			}
+			sub.setSubscriptionCrops(subscribedCrops);
+
+			subBU.finalizeSubscription(sub);
+			forward = "/index.xhtml";	
 		}
-		sub.setWeeklyStatuses(statusList);
-		
-		for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
-			sCrop.setSubscription(sub);
-		}
-		sub.setSubscriptionCrops(subscribedCrops);
-		subBU.finalizeSubscription(sub);
 
-		//TODO retirer les crops avec quantité 0
-		return "/index.xhtml";
+		return forward;
 	}
 
 
@@ -181,17 +211,5 @@ public class SubscriptionManagedBean implements Serializable {
 	public void setSubCrop(PremiumSubscriptionCrop subCrop) {
 		this.subCrop = subCrop;
 	}
-//	public Integer getNbCrop() {
-//		return nbCrop;
-//	}
-//	public void setNbCrop(Integer nbCrop) {
-//		this.nbCrop = nbCrop;
-//	}
-//	public PremiumCrop getCrop() {
-//		return crop;
-//	}
-//	public void setCrop(PremiumCrop crop) {
-//		this.crop = crop;
-//	}
 
 }

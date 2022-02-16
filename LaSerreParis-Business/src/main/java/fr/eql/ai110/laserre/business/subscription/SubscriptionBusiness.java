@@ -18,7 +18,7 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 	WeeklyStatusIDAO wsDao;
 
 	@Override
-	public Subscription subscribe(Subscription sub) {
+	public Subscription firstStepSubscription(Subscription sub) {
 		return subDao.add(sub);
 	}
 
@@ -27,5 +27,17 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 		return subDao.update(sub);
 	}
 
+	@Override
+	public boolean isNbCropsSelectedEnough(int nbCropsSelected) {
+		if (nbCropsSelected >= MIN_NB_CROPS_SELECTED) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public int getMinNbCropsSelected() {
+		return MIN_NB_CROPS_SELECTED;
+	}
 
 }
