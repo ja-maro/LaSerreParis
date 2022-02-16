@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.eql.ai110.laserre.entity.restaurant.Booking;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
 
 @Entity
@@ -58,6 +59,10 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Subscription> subscriptions;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Booking> bookings;
+	
+
 	
 	public User() {
 	}

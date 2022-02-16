@@ -3,6 +3,7 @@ package fr.eql.ai110.laserre.entity.subscription;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import fr.eql.ai110.laserre.entity.restaurant.Booking;
+import fr.eql.ai110.laserre.entity.restaurant.DaySlot;
 
 @Entity
 @Table(name = "weekly_status")
@@ -32,19 +37,34 @@ public class WeeklyStatus implements Serializable {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	private Subscription subscription;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking", referencedColumnName = "id")
+	private Booking booking;
 
 	public WeeklyStatus() {}
 
+	
+
 	public WeeklyStatus(Integer id, LocalDate startDay, LocalDate deliveryDecisionDate, LocalDate deliveryDate,
-			Subscription subscription) {
+			Subscription subscription, Booking booking) {
 		super();
 		this.id = id;
 		this.startDay = startDay;
 		this.deliveryDecisionDate = deliveryDecisionDate;
 		this.deliveryDate = deliveryDate;
 		this.subscription = subscription;
+		this.booking = booking;
 	}
 
+
+
+	public Booking getBooking() {
+		return booking;
+	}
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
 	public Integer getId() {
 		return id;
 	}
