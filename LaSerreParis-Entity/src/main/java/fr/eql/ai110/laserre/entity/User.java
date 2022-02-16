@@ -85,10 +85,12 @@ public class User implements Serializable {
 
 
 
+
+
 	public User(Integer id, String firstName, String lastName, String email, String password, String salt,
 			String address, String phone, Integer homeSize, LocalDate birthDate, String validationCode,
 			LocalDate mailValidationDate, LocalDate deactivationDate, List<Comment> comments,
-			List<Subscription> subscriptions) {
+			List<Subscription> subscriptions, List<Booking> bookings) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -105,6 +107,7 @@ public class User implements Serializable {
 		this.deactivationDate = deactivationDate;
 		this.comments = comments;
 		this.subscriptions = subscriptions;
+		this.bookings = bookings;
 	}
 
 
@@ -199,6 +202,12 @@ public class User implements Serializable {
 	}
 	public void setSubscriptions(List<Subscription> subscriptions) {
 		this.subscriptions = subscriptions;
+	}
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 	
 }
