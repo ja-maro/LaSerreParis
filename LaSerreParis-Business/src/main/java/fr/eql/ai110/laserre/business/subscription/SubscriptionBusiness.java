@@ -1,9 +1,12 @@
 package fr.eql.ai110.laserre.business.subscription;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
 import fr.eql.ai110.laserre.ibusiness.subscription.SubscriptionIBusiness;
 import fr.eql.ai110.laserre.idao.subscription.SubscriptionIDAO;
@@ -38,6 +41,11 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 	@Override
 	public int getMinNbCropsSelected() {
 		return MIN_NB_CROPS_SELECTED;
+	}
+
+	@Override
+	public List<Subscription> getUserActiveSubscriptions(User user) {		
+		return subDao.getAllActive(user);
 	}
 
 }

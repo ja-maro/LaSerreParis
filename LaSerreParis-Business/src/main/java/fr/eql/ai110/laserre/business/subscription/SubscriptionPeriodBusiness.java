@@ -1,5 +1,6 @@
 package fr.eql.ai110.laserre.business.subscription;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -31,5 +32,10 @@ public class SubscriptionPeriodBusiness implements SubscriptionPeriodIBusiness {
 		            .limit(numberOfPeriods)
 		            .collect(Collectors.toList());
 		return list;
+	}
+
+	@Override
+	public LocalDate getEndDate(SubscriptionPeriod period) {	
+		return period.getStartDate().plusWeeks(period.getDuration());
 	}
 }

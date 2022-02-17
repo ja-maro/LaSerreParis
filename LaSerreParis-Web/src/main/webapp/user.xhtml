@@ -12,24 +12,32 @@
 	</ui:define>
 
 	<ui:define name="content">
-	<div style="margin: auto 0; min-width: 100%;">
-		<b:row>
-			
-			<b:panel title="Abonnements" look="success" col-sm="10" offset-sm="1">
-			<p>espace utilisateur de #{mbUser.user.firstName}}</p>
-		</b:panel>
-			
-		</b:row>
-		<b:row>
-			
-			<b:panel title="Réservations" look="success" col-sm="10" offset-sm="1">
-			<p>espace utilisateur de #{mbUser.user.firstName}}</p>
-		</b:panel>
-			
-		</b:row>
+		<div style="margin: auto 0; min-width: 100%;">
+			<b:row>
+
+				<b:panel title="Abonnements" look="success" col-sm="10"
+					offset-sm="1">
+					<p>espace utilisateur de #{mbUser.user.firstName}</p>
+					<ui:repeat value="#{mbUserSub.activeSubscriptions}" var="sub">
+						<p>#{sub.offer.size.name} #{sub.offer.size.displayHomeSize} #{sub.offer.pricePerMonth} € /mois</p>
+						<ui:repeat value="#{sub.periods}" var="period">
+							<p>#{period.season.name} #{period.startDate} fin le #{mbUserSub.displayEndOfperiod(period)}</p>
+						</ui:repeat>
+					</ui:repeat>
+				</b:panel>
+
+			</b:row>
+			<b:row>
+
+				<b:panel title="Réservations" look="success" col-sm="10"
+					offset-sm="1">
+					<p>espace utilisateur de #{mbUser.user.firstName}</p>
+				</b:panel>
+
+			</b:row>
 		</div>
 
-		
+
 
 	</ui:define>
 

@@ -1,5 +1,8 @@
 package fr.eql.ai110.laserre.ibusiness.subscription;
 
+import java.util.List;
+
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
 
 public interface SubscriptionIBusiness {
@@ -22,5 +25,12 @@ public interface SubscriptionIBusiness {
 	 * @return minimum number of premium crops to select in a premium subscription
 	 */
 	int getMinNbCropsSelected();
+	/**
+	 * Allows display and management of all currently active subscriptions of current user
+	 * 
+	 * @param connectedUser current user
+	 * @return List of user's active subscriptions
+	 */
+	List<Subscription> getUserActiveSubscriptions(User user);
 
 }

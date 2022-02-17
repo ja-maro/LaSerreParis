@@ -16,7 +16,7 @@ public class SubscriptionPeriodDAO extends GenericDAO<SubscriptionPeriod> implem
 
 	@Override
 	public Long findNbFuturePeriods() {
-		Query query = em.createQuery("SELECT COUNT(p) FROM SubscriptionPeriod p WHERE p.startDate > SYSDATE()");
+		Query query = em.createQuery("SELECT COUNT(p) FROM SubscriptionPeriod p WHERE p.startDate > CURDATE()");
 		return (Long) query.getSingleResult();
 	}
 	
