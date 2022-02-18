@@ -11,12 +11,15 @@
 		<jee.version>7.0</jee.version>
 		<java.version>1.8</java.version>
 		<ejb.version>3.1</ejb.version>
-		<log4j.version>2.17.1</log4j.version>
 		<plugin.compiler.version>3.6.0</plugin.compiler.version>
 		<plugin.ear.version>2.10.1</plugin.ear.version>
 		<plugin.ejb.version>2.5.1</plugin.ejb.version>
 		<plugin.war.version>3.0.0</plugin.war.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.version>2.17.1</log4j.version>
+		<javadoc.version>3.3.2</javadoc.version>
+		<mavensite.version>3.7.1</mavensite.version>
+		<mavenprojectinforeports.version>2.9</mavenprojectinforeports.version>
 
 	</properties>
 
@@ -78,10 +81,44 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${mavensite.version}</version>
+					<executions>
+						<execution>
+							<phase>verify</phase>
+							<goals>
+								<goal>site</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				
 			</plugins>
 		</pluginManagement>
 	</build>
 	
+	<reporting>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.version}</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${mavenprojectinforeports.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	
 
 	<modules>

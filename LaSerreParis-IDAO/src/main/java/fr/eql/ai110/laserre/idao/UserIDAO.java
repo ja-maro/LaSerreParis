@@ -13,7 +13,8 @@ public interface UserIDAO extends GenericIDAO<User>{
 	
 	/**
 	 * Authentifies user if given email and password are valid
-	 * @param email
+	 * 
+	 * @param email email given for login
 	 * @param hashedPassword salted and hashed password
 	 * @return authentified user
 	 */
@@ -22,7 +23,7 @@ public interface UserIDAO extends GenericIDAO<User>{
 	/**
 	 * Searches for user with given email in database
 	 * 
-	 * @param email 
+	 * @param email given email
 	 * @return User with given email
 	 */
 	User getByEmail(String email);

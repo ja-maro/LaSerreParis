@@ -8,6 +8,6 @@ import fr.eql.ai110.laserre.idao.GenericIDAO;
 
 public interface SubscriptionIDAO extends GenericIDAO<Subscription> {
 
-	List<Subscription> getAllActive(User user);
+	List<Subscription> getAllByUser(User user);
 
 }

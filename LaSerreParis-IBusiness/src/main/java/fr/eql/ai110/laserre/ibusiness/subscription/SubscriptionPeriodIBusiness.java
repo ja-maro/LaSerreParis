@@ -8,24 +8,24 @@ import fr.eql.ai110.laserre.entity.subscription.SubscriptionPeriod;
 public interface SubscriptionPeriodIBusiness {
 
 	/**
-	 * Retrieves all future SubscriptionPeriods.
+	 * Retrieves the number of all future SubscriptionPeriods.
 	 * 
-	 * @return a list of all the SubscriptionPeriods whose startDate is yet to come.
+	 * @return number of all SubscriptionPeriods whose startDate is yet to come.
 	 */
 	Long getNbFuturePeriods();
 
 	/**
 	 * Retrieves a number of SubscriptionPeriods starting after the present day.
 	 * 
-	 * @param numberOfPeriods
-	 * @return
+	 * @param numberOfPeriods number of next period required
+	 * @return 'numberOfPeriods' next periods
 	 */
 	List<SubscriptionPeriod> findNextPeriods(int numberOfPeriods);
 
 	/**
 	 * Calculates the end date of the given SubscriptionPeriod.
 	 * 
-	 * @param period
+	 * @param period period whose end date is needed
 	 * @return end date of the Subscription period, which equals its start date + as many weeks as its duration
 	 */
 	LocalDate getEndDate(SubscriptionPeriod period);

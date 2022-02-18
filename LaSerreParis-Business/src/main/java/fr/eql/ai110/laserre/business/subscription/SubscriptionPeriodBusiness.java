@@ -31,11 +31,31 @@ public class SubscriptionPeriodBusiness implements SubscriptionPeriodIBusiness {
 		            .stream()
 		            .limit(numberOfPeriods)
 		            .collect(Collectors.toList());
+		 
+		 
+		 System.out.println("********************** avant tri");
+		 for (SubscriptionPeriod p : list) {
+			 System.out.println("------ " + p.getStartDate());
+			
+		}
+		 list.sort((o1,o2) -> o1.getStartDate().compareTo(o2.getStartDate()));
+		 
+		 System.out.println("********************** après tri");
+		 for (SubscriptionPeriod p : list) {
+			 System.out.println("------ " + p.getStartDate());
+			
+		}
 		return list;
 	}
 
 	@Override
 	public LocalDate getEndDate(SubscriptionPeriod period) {	
-		return period.getStartDate().plusWeeks(period.getDuration());
+		System.out.println("@@@@@@@@@@@@àà getEndDate subperiodBU");
+		LocalDate date = period.getStartDate().plusWeeks(period.getDuration());
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println("$$$$$$ " + date);
+		System.out.println(period.getStartDate());
+		System.out.println(period.getDuration());
+		return date;
 	}
 }

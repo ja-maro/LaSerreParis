@@ -33,9 +33,9 @@ public class AccountBusiness implements AccountIBusiness {
 	/**
 	 * Allows secure storage of passwords in database thanks to 
 	 * salting and hashing
-	 * @param salt
-	 * @param password
-	 * @return
+	 * @param salt String to salt the password with
+	 * @param password String to be salted and hashed
+	 * @return salted and hashed password
 	 */
 	private String hashPassword(String salt, String password) {
 		String saltedPassword = salt + password;
@@ -55,7 +55,7 @@ public class AccountBusiness implements AccountIBusiness {
 	/**
 	 * Generates a random alphanumeric String
 	 * @param length Length of generated String
-	 * @return
+	 * @return random alphanumeric string of 'length' length
 	 */
 	private String alphanumericGenerator(int length) {
 		StringBuilder sb = new StringBuilder();

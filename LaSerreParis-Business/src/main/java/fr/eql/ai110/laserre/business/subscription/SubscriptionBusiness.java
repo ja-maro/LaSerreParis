@@ -10,7 +10,6 @@ import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
 import fr.eql.ai110.laserre.ibusiness.subscription.SubscriptionIBusiness;
 import fr.eql.ai110.laserre.idao.subscription.SubscriptionIDAO;
-import fr.eql.ai110.laserre.idao.subscription.WeeklyStatusIDAO;
 
 @Remote(SubscriptionIBusiness.class)
 @Stateless
@@ -18,7 +17,6 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 
 	@EJB
 	SubscriptionIDAO subDao;
-	WeeklyStatusIDAO wsDao;
 
 	@Override
 	public Subscription firstStepSubscription(Subscription sub) {
@@ -26,7 +24,7 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 	}
 
 	@Override
-	public Subscription finalizeSubscription(Subscription sub) {
+	public Subscription updateSubscription(Subscription sub) {
 		return subDao.update(sub);
 	}
 
@@ -44,8 +42,12 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 	}
 
 	@Override
-	public List<Subscription> getUserActiveSubscriptions(User user) {		
-		return subDao.getAllActive(user);
+	public List<Subscription> getSubscriptionsByUser(User user) {	
+		List<Subscription> list = subDao.getAllByUser(user);
+		for (Subscription s : list) {
+			System.out.println("$$$$$$$$$$$$ id de la subscription : " + s.getId());
+		}
+		return list;
 	}
 
 }

@@ -11,11 +11,11 @@ public interface SubscriptionIBusiness {
 
 	
 	Subscription firstStepSubscription(Subscription sub);
-	Subscription finalizeSubscription(Subscription sub);
+	Subscription updateSubscription(Subscription sub);
 	/**
 	 * Checks if the user selected enough different crops for his premium subscription.
 	 * 
-	 * @param nbCropsSelected number of différent crops selected bye the user
+	 * @param nbCropsSelected number of different crops selected bye the user
 	 * @return true if enough
 	 */
 	boolean isNbCropsSelectedEnough(int nbCropsSelected);
@@ -28,9 +28,9 @@ public interface SubscriptionIBusiness {
 	/**
 	 * Allows display and management of all currently active subscriptions of current user
 	 * 
-	 * @param connectedUser current user
-	 * @return List of user's active subscriptions
+	 * @param user current user
+	 * @return List of user's active subscriptions, sorted from earliest to latest
 	 */
-	List<Subscription> getUserActiveSubscriptions(User user);
+	List<Subscription> getSubscriptionsByUser(User user);
 
 }
