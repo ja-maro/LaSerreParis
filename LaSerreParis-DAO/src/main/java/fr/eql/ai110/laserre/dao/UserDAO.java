@@ -19,8 +19,12 @@ public class UserDAO extends GenericDAO<User> implements UserIDAO {
 		List<String> salts;
 
 		Query query = em.createQuery("SELECT u.salt FROM User u WHERE u.email = :emailParam");
-		query.setParameter("emailParam", email); 
+		query.setParameter("emailParam", email);
+		try {
 		salt = (String) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return salt;
 	}
 

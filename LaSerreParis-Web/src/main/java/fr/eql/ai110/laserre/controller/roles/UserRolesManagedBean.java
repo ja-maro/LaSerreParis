@@ -59,8 +59,8 @@ public class UserRolesManagedBean implements Serializable {
 		} else {
 			FacesMessage fMessage = new FacesMessage(
 					FacesMessage.SEVERITY_WARN, 
-					"Email et/ou mot de passe incorrect(s)",
-					"Email et/ou mot de passe incorrect(s)");
+					"Email et/ou mot de passe incorrect(s) !",
+					"Vérifiez vos informations !");
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", fMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", fMessage);
 			LOG.info("Connexion échouée : " + email);
@@ -170,8 +170,10 @@ public class UserRolesManagedBean implements Serializable {
 		if (isInfoValid) {
 			user = new User(firstName, lastName, email, address, phone, homeSize, birth);
 			accountBU.register(user, password); 
+			
+			
+			connect();
 			forward = "/index.xhtml?faces-redirection=true";
-			FacesMessages.info("Bienvenue chez La Serre Paris !");	
 		}
 	
 		return forward;
