@@ -9,38 +9,78 @@
 	<ui:define name="head">
 		<title>Accueil</title>
 		<style>
-			.carousel-control {
-			background-image: none !important;
-			}
-		</style>
+.carousel-control {
+	background-image: none !important;
+}
+</style>
 	</ui:define>
 
 	<ui:define name="content">
-		<div class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
-	
-			<b:carousel id="comments" style="width:500px" interval="4500">
+		<row>
+		<div class="col-12">
+			<h1>LA SERRE PARIS</h1>
+		</div>
+		</row>
 
-			<b:carouselItem style="width:500px; height:350px">
-				<b:carouselCaption style="min-height: 66%;">
-				<b:icon value="comment" size="5x" />
-					<h4>Commentaires</h4>
-					<p>Ce qu'en disent nos clients.</p>
-				</b:carouselCaption>
-			</b:carouselItem>
+		<row>
+		<div class="col-xs-12 col-sm-4">
+			<h4>La ferme</h4>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<h3>Devenez un fermer urbain</h3>
+			<div>Accédez à des variétés oubliées, riches en nutriments et
+				certifiées bio. Louez une parcelle grâce à notre système
+				d'abonnement personnalisé.</div>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<h4>Les variétés</h4>
+		</div>
+		</row>
+		<row>
+		<div
+			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
-			<ui:repeat value="#{mbComment.getDisplayedComments()}"
-				var="com">
+
+
+			<b:carousel id="comments" style="width:500px" interval="4500"
+				hidden="xs">
 				<b:carouselItem style="width:500px; height:350px">
 					<b:carouselCaption style="min-height: 66%;">
-						<h4>#{com.text}</h4>
-						<p>#{com.user.firstName}</p>
+						<b:icon value="comment" size="5x" />
+						<h4>Commentaires</h4>
+						<p>Ce qu'en disent nos clients.</p>
 					</b:carouselCaption>
 				</b:carouselItem>
-			</ui:repeat>
+				<ui:repeat value="#{mbComment.getDisplayedComments()}" var="com">
+					<b:carouselItem style="width:500px; height:350px">
+						<b:carouselCaption style="min-height: 66%;">
+							<h4>#{com.text}</h4>
+							<p>#{com.user.firstName}</p>
+						</b:carouselCaption>
+					</b:carouselItem>
+				</ui:repeat>
+			</b:carousel>
+			<b:carousel id="comments" style="width:250px" interval="4500"
+				hidden="sm...">
+				<b:carouselItem style="width:250px; height:350px">
+					<b:carouselCaption style="min-height: 66%;">
+						<b:icon value="comment" size="5x" />
+						<h4>Commentaires</h4>
+						<p>Ce qu'en disent nos clients.</p>
+					</b:carouselCaption>
+				</b:carouselItem>
+				<ui:repeat value="#{mbComment.getDisplayedComments()}" var="com">
+					<b:carouselItem style="width:250px; height:350px">
+						<b:carouselCaption style="min-height: 66%;">
+							<h4>#{com.text}</h4>
+							<p>#{com.user.firstName}</p>
+						</b:carouselCaption>
+					</b:carouselItem>
+				</ui:repeat>
+			</b:carousel>
 
-		</b:carousel>
-		
-			</div>
+		</div>
+		</row>
 	</ui:define>
 </ui:composition>
 
