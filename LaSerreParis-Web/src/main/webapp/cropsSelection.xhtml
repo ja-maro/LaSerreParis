@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/arch.xhtml">
+	<ui:define name="head">
+		<title>Choix des variétés</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<b:row style-class="row-flex">
+
+
+			<b:form id="cropsForm">
+			
+			<b:panel
+				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-3">
+				<h4>Vos coordonnées</h4>
+				<p>#{mbUser.user.address}</p>
+				<p>#{mbSubscription.connectedUser.phone}</p>
+				<br />
+				<h4>Offre choisie :</h4>
+				<h4>
+					<c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">Premium </c:if>
+					#{mbSubscription.offer.size.name}
+				</h4>
+				<p>Une livraison par semaine pour
+					#{mbSubscription.offer.size.displayHomeSize}</p>
+				<p>#{mbSubscription.offer.pricePerMonth} € par mois</p>
+				
+				<b:row>
+						<b:column
+							style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
+							<b:commandButton style-class="lsp-width-100" value="Souscrire" look="success" 
+								action="#{mbSubscription.selectCrops()}" />
+						</b:column>
+					</b:row>
+			</b:panel>
+			
+				<b:panel
+					style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-6">
+
+					<b:row>
+
+						<h4>Choisissez vos variétés !</h4>
+						<p>Chaque variété coûte un certain nombre de points. Vous
+							pouvez en sélectionner une plusieurs fois.</p>
+						<p>Vous devez en choisir au moins 3 différentes.</p>
+						<h4>
+							Total des points disponibles : <strong>#{mbSubscription.offer.totalHarvestQuantity}</strong>
+						</h4>
+					</b:row>
+
+					<ui:repeat value="#{mbSubscription.subscribedCrops}" var="subCrop">
+
+						<b:panelGrid colSpans="3,7,2" size="sm" style-class="crop-grid">
+							<div><h4>#{subCrop.crop.name}</h4>
+							<h5>#{subCrop.crop.harvestQty} point(s)/portion</h5>
+							</div>
+							<b:slider2 min="0"
+								max="#{mbSubscription.offer.size.homeSizeHigh*2}"
+								handleShape="md square" span="12" value="#{subCrop.quantity}"
+								style-class="margin-top-2rem" />
+							
+						</b:panelGrid>
+
+					</ui:repeat>
+				</b:panel>
+			
+
+			
+</b:form>
+
+		</b:row>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

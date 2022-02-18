@@ -3,6 +3,8 @@ package fr.eql.ai110.laserre.controller.subscription;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -42,6 +44,7 @@ public class SubscriptionManagedBean implements Serializable {
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 	private SubscriptionOffer offer;
+	private Subscription subscription;
 	private List<SubscriptionOffer> availableSimpleOffers;
 	private List<SubscriptionOffer> availablePremiumOffers;
 	private Long nbPeriod;
@@ -74,9 +77,11 @@ public class SubscriptionManagedBean implements Serializable {
 		return forward;
 	}
 
+
 	public List<PremiumCrop> getAvailablePremiumCrops() {
 		return cropBU.getAllAvailablePremiumCrops();
 	}
+
 
 	public List<PremiumSubscriptionCrop> getPossibleCrops() {
 		List<PremiumSubscriptionCrop> result = new ArrayList<PremiumSubscriptionCrop>();
@@ -90,14 +95,59 @@ public class SubscriptionManagedBean implements Serializable {
 		return result;
 	}
 
-	public String subscribe() {
 
+	public String subscribe() {
 		String forward = null;
 		Boolean isValid = true;
 
-		int requiredQty = offer.getTotalHarvestQuantity();
+		if (isValid) {
+
+			Boolean isSoonestSubscription = true;
+
+			List<SubscriptionPeriod> periods = (List<SubscriptionPeriod>) periodBU.findNextPeriods(duration);
+
+			for (SubscriptionPeriod period : periods) {
+				Subscription sub = new Subscription();
+				sub.setPeriod(period);
+				sub.setSubscriptionDate(LocalDate.now());
+				sub.setUser(connectedUser);
+				sub.setOffer(offer);
+
+				sub = subBU.firstStepSubscription(sub);
+
+				List<WeeklyStatus> statusList = new ArrayList<WeeklyStatus>();
+				for (int i = 0; i < period.getDuration(); i++) {
+					WeeklyStatus status = new WeeklyStatus();
+					status.setStartDay(period.getStartDate().plusWeeks(i));
+					status.setSubscription(sub);
+					statusList.add(status);	
+				}		
+				sub.setWeeklyStatuses(statusList);
+
+				if (isSoonestSubscription) {
+					subscription = sub;
+					isSoonestSubscription = false;
+				}
+			}
+			if (offer.getTotalHarvestQuantity() > 0) {
+				forward = "/cropsSelection.xhtml?faces-redirection=true";
+			} else {	
+				FacesMessages.info("Votre abonnement a été enregistré.");
+				forward = "/user.xhtml";
+			}
+			
+		}
+		return forward;
+	}
+
+
+	public String selectCrops() {
+		String forward = null;
+		Boolean isValid = true;
+		int requiredQty = subscription.getOffer().getTotalHarvestQuantity();
 		int nbCropsSelected = 0;
 		int totalChoice = 0;
+		
 		for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
 			int cropTotalWeight = sCrop.getQuantity()*sCrop.getCrop().getHarvestQty();
 			totalChoice += cropTotalWeight;
@@ -119,47 +169,21 @@ public class SubscriptionManagedBean implements Serializable {
 				isValid = false;
 			} 
 		}
-
-
-		Subscription sub = new Subscription();
-
-		List<SubscriptionPeriod> periods = (List<SubscriptionPeriod>) periodBU.findNextPeriods(duration);
-		sub.setPeriods(periods);
-		sub.setSubscriptionDate(LocalDate.now());
-		sub.setUser(connectedUser);
-		sub.setOffer(offer);
-
-
-
-		if (isValid) { //registerSubscription
-
-			sub = subBU.firstStepSubscription(sub);
-
-			List<WeeklyStatus> statusList = new ArrayList<WeeklyStatus>();
-			for (SubscriptionPeriod period : periods) {
-				for (int i = 0; i < period.getDuration(); i++) {
-					WeeklyStatus status = new WeeklyStatus();
-					status.setStartDay(period.getStartDate().plusWeeks(i));
-					status.setSubscription(sub);
-					statusList.add(status);	
-				}		
-			}
-			sub.setWeeklyStatuses(statusList);
-
+		if (isValid) {
 			subscribedCrops.removeIf(c->c.getQuantity() <= 0);
 			for (PremiumSubscriptionCrop sCrop : subscribedCrops) {
-				sCrop.setSubscription(sub);
+				sCrop.setSubscription(subscription);
 			}
-			sub.setSubscriptionCrops(subscribedCrops);
+			subscription.setSubscriptionCrops(subscribedCrops);
 
-			subBU.finalizeSubscription(sub);
-			forward = "/index.xhtml";	
+			subBU.updateSubscription(subscription);
+			FacesMessages.info("Votre abonnement a été enregistré.");
+			forward = "/user.xhtml";	
 		}
+
 
 		return forward;
 	}
-
-
 
 	public List<SubscriptionOffer> getAvailableSimpleOffers() {
 		return availableSimpleOffers;

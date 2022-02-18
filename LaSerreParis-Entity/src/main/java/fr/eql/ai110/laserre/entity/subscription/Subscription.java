@@ -49,21 +49,18 @@ public class Subscription implements Serializable {
 	@OneToMany(mappedBy="subscription", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<WeeklyStatus> weeklyStatuses;
 	
-	@ManyToMany
-	@JoinTable(name = "sub_duration", 
-			  joinColumns = @JoinColumn(name = "subscription_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "period_id"))
-	private List<SubscriptionPeriod> periods;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id")
+	private SubscriptionPeriod period;
 	
-	
-
-	
+		
 	
 	public Subscription() {}
 
+
 	public Subscription(Integer id, LocalDate subscriptionDate, LocalDate supensionDate, User user,
 			SubscriptionOffer offer, List<PremiumSubscriptionCrop> subscriptionCrops, List<WeeklyStatus> weeklyStatuses,
-			List<SubscriptionPeriod> periods) {
+			SubscriptionPeriod period) {
 		super();
 		this.id = id;
 		this.subscriptionDate = subscriptionDate;
@@ -72,7 +69,7 @@ public class Subscription implements Serializable {
 		this.offer = offer;
 		this.subscriptionCrops = subscriptionCrops;
 		this.weeklyStatuses = weeklyStatuses;
-		this.periods = periods;
+		this.period = period;
 	}
 
 
@@ -107,11 +104,11 @@ public class Subscription implements Serializable {
 	public void setOffer(SubscriptionOffer offer) {
 		this.offer = offer;
 	}
-	public List<SubscriptionPeriod> getPeriods() {
-		return periods;
+	public SubscriptionPeriod getPeriod() {
+		return period;
 	}
-	public void setPeriods(List<SubscriptionPeriod> periods) {
-		this.periods = periods;
+	public void setPeriod(SubscriptionPeriod period) {
+		this.period = period;
 	}
 	public List<PremiumSubscriptionCrop> getSubscriptionCrops() {
 		return subscriptionCrops;

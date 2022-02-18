@@ -1,12 +1,12 @@
 --ROLES
 
-INSERT INTO `user` (first_name, last_name, email, password, salt, mail_validation_date, phone, address, birth, home_size) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', 'Vbl���F�aw�o��u�����Z^-}ɹ��', 'UGSA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
+INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', 'Vbl���F�aw�o��u�����Z^-}ɹ��', 'UGSA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Cécile', 'Dupont');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Guillaume', 'Verboise');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Fatima', 'Soussa');
 
 --COMMENTS & CONTACT FORMS
-INSERT INTO `comment` (submission_date, text,  `validation_date`, user_id) VALUES ('2022-02-12', 'Ce fut une expérience incroyable, je recommande chaudement !', '2022-02-14', 1);
+INSERT INTO `comment` (`submission_date`, `text`,  `validation_date`, `user_id`) VALUES ('2022-02-12', 'Ce fut une expérience incroyable, je recommande chaudement !', '2022-02-14', 1);
 INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'Top ces livraisons ! Des légumes bios et locaux, et régulièrement des découvertes délicieuses !', '2022-02-14', '2');
 INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'La Serre propose de multiples plats végétariens voire vegans, et dans un cadre impressionnant ! Enfin on peut ne pas se limiter quand on sort avec des amis.', '2022-02-14', '3');
 INSERT INTO `comment` (`hide_date`, `submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-15', '2022-02-13', 'Ce commentaire devrait être masqué', '2022-02-14', '1');
@@ -59,12 +59,11 @@ INSERT INTO `premium_crop` (`carousel_description`, `complete_description`, `har
 INSERT INTO `premium_crop` (`carousel_description`, `complete_description`, `harvest_qty`, `hide_date`, `name`, `picture`) VALUES ('Donec tempus, ante eu euismod mattis, nisi dolor blandit libero, a cursus magna nibh sit amet leo.', 'Aenean a suscipit erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus sem enim, vehicula nec congue ut, posuere nec leo. Mauris lacus massa, pellentesque sed faucibus ut, tincidunt et metus. Suspendisse iaculis scelerisque lorem dapibus finibus. Quisque libero magna, egestas ac imperdiet dignissim, hendrerit quis magna. Suspendisse tincidunt fringilla tellus sit amet volutpat. Suspendisse in placerat urna, eu ornare dolor. Vestibulum in metus sit amet eros condimentum blandit. Sed molestie a felis molestie dignissim. Donec non eleifend ante. Vestibulum ut faucibus mauris, sit amet gravida leo. Fusce fermentum sagittis dolor, non feugiat lorem vehicula sit amet. Donec hendrerit sodales pellentesque. Donec porta venenatis eros eget condimentum. ', '2', '2022-01-25', 'Fraises des bois', 'fraises_bois.jpg');
 INSERT INTO `premium_crop` (`carousel_description`, `complete_description`, `harvest_qty`, `name`, `picture`) VALUES ('Donec tempus, ante eu euismod mattis, nisi dolor blandit libero, a cursus magna nibh sit amet leo.', 'Aenean a suscipit erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus sem enim, vehicula nec congue ut, posuere nec leo. Mauris lacus massa, pellentesque sed faucibus ut, tincidunt et metus. Suspendisse iaculis scelerisque lorem dapibus finibus. Quisque libero magna, egestas ac imperdiet dignissim, hendrerit quis magna. Suspendisse tincidunt fringilla tellus sit amet volutpat. Suspendisse in placerat urna, eu ornare dolor. Vestibulum in metus sit amet eros condimentum blandit. Sed molestie a felis molestie dignissim. Donec non eleifend ante. Vestibulum ut faucibus mauris, sit amet gravida leo. Fusce fermentum sagittis dolor, non feugiat lorem vehicula sit amet. Donec hendrerit sodales pellentesque. Donec porta venenatis eros eget condimentum. ', '3', 'Maïs ancien', 'ancient_corn.jpg');
 
-INSERT INTO `subscription` (`subscription_date`, `offer_id`, `user_id`) VALUES ('2021-09-15', '1', '1');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '1', '1', '1');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '2', '1', '1');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '3', '1', '1');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '4', '1', '1');
 
-INSERT INTO `sub_duration` (`subscription_id`, `period_id`) VALUES ('1', '1');
-INSERT INTO `sub_duration` (`subscription_id`, `period_id`) VALUES ('1', '2');
-INSERT INTO `sub_duration` (`subscription_id`, `period_id`) VALUES ('1', '3');
-INSERT INTO `sub_duration` (`subscription_id`, `period_id`) VALUES ('1', '4');
 
 INSERT INTO `laserre_paris_db`.`weekly_status` (`delivery_date`, `delivery_decision_date`, `start_day`, `subscription_id`) VALUES ('2021-12-25', '2021-12-21', '2021-12-20', '1');
 INSERT INTO `laserre_paris_db`.`weekly_status` (`delivery_date`, `delivery_decision_date`, `start_day`, `subscription_id`) VALUES ('2021-12-30', '2021-12-28', '2021-12-27', '1');
