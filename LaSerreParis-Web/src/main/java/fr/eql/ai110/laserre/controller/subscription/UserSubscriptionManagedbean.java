@@ -35,7 +35,7 @@ public class UserSubscriptionManagedbean implements Serializable {
 	@PostConstruct
 	void init() {
 		
-		activeSubscriptions = subBU.getUserActiveSubscriptions(connectedUser);
+		activeSubscriptions = subBU.getSubscriptionsByUser(connectedUser);
 		for (Subscription sub : activeSubscriptions) {
 			System.out.println("********************************************");
 			System.out.println(sub.getOffer().getPricePerMonth());

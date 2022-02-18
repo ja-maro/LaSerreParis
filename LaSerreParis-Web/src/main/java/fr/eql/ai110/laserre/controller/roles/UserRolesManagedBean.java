@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.ibusiness.roles.AccountIBusiness;
 import fr.eql.ai110.laserre.ibusiness.services.FormValidationIService;
+import net.bootsfaces.utils.FacesMessages;
 
 @ManagedBean(name = "mbUser")
 @SessionScoped
@@ -51,8 +52,9 @@ public class UserRolesManagedBean implements Serializable {
 
 		user = accountBU.connect(email, password);
 		if (user != null) {
-			forward = "/index.xhtml?faces-redirection=true";
+			forward = "/index.xhtml?faces-redirection=false";
 			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail());
+			FacesMessages.info("Bienvenue !");	
 			
 		} else {
 			FacesMessage fMessage = new FacesMessage(
@@ -169,6 +171,7 @@ public class UserRolesManagedBean implements Serializable {
 			user = new User(firstName, lastName, email, address, phone, homeSize, birth);
 			accountBU.register(user, password); 
 			forward = "/index.xhtml?faces-redirection=true";
+			FacesMessages.info("Bienvenue chez La Serre Paris !");	
 		}
 	
 		return forward;

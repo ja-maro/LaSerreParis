@@ -17,6 +17,7 @@ import fr.eql.ai110.laserre.entity.ContactForm;
 import fr.eql.ai110.laserre.entity.ContactFormType;
 import fr.eql.ai110.laserre.ibusiness.ContactFormIBusiness;
 import fr.eql.ai110.laserre.ibusiness.services.FormValidationIService;
+import net.bootsfaces.utils.FacesMessages;
 
 @ManagedBean(name = "mbContact")
 @SessionScoped
@@ -91,6 +92,8 @@ public class ContactFormManagedBean implements Serializable {
 			forward = "/index.xhtml?faces-redirection=true";
 			ContactForm form = new ContactForm(email, name, phone, title, body, type);
 			contactBU.save(form);
+
+			FacesMessages.info("Votre message a été envoyé.");	
 		}
 		
 		return forward;
