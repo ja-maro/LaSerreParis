@@ -2,13 +2,14 @@ package fr.eql.ai110.laserre.controller.subscription;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.Subscription;
@@ -17,7 +18,7 @@ import fr.eql.ai110.laserre.ibusiness.subscription.SubscriptionIBusiness;
 import fr.eql.ai110.laserre.ibusiness.subscription.SubscriptionPeriodIBusiness;
 
 @ManagedBean(name = "mbUserSub")
-@SessionScoped
+@ViewScoped
 public class UserSubscriptionManagedbean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,24 +32,42 @@ public class UserSubscriptionManagedbean implements Serializable {
 	@ManagedProperty(value = "#{mbUser.user}")
 	private User connectedUser;
 	private List<Subscription> activeSubscriptions;
+	private List<Subscription> pastSubscriptions;
+	private List<Subscription> futureSubscriptions;
 	
 	@PostConstruct
 	void init() {
+		activeSubscriptions = new ArrayList<Subscription>();
+		pastSubscriptions = new ArrayList<Subscription>();
+		futureSubscriptions = new ArrayList<Subscription>();
 		
-		activeSubscriptions = subBU.getSubscriptionsByUser(connectedUser);
-		for (Subscription sub : activeSubscriptions) {
-			System.out.println("********************************************");
-			System.out.println(sub.getOffer().getPricePerMonth());
-			System.out.println(sub.getOffer().getSize().getName());
+		List<Subscription> userSubs = subBU.getSubscriptionsByUser(connectedUser);	
+		for (Subscription sub : userSubs) {			
+			SubscriptionPeriod period = periodBU.getPeriodBySubscription(sub);			
+			LocalDate startDate = period.getStartDate();
+			LocalDate endDate = periodBU.calculateEndDate(period);
 			
-			
+			if (startDate.isAfter(LocalDate.now())) {
+				futureSubscriptions.add(sub);
+			} else if (endDate.isBefore(LocalDate.now()) ) {
+				pastSubscriptions.add(sub);
+			} else {
+				activeSubscriptions.add(sub);
+			}			
 		}
 	}
 	
-	public LocalDate displayEndOfperiod(SubscriptionPeriod period) {
-		LocalDate endDate = periodBU.getEndDate(period);
-		return endDate;
+	public boolean hasNoSubscription() {
+		return (futureSubscriptions.isEmpty() && activeSubscriptions.isEmpty());
 	}
+	public boolean hadSubscription() {
+		return (!pastSubscriptions.isEmpty());
+	}
+	
+	public LocalDate displayEndOfperiod(SubscriptionPeriod period) {
+		return periodBU.calculateEndDate(period);
+	}
+	
 	
 
 	public User getConnectedUser() {
@@ -65,6 +84,22 @@ public class UserSubscriptionManagedbean implements Serializable {
 
 	public void setActiveSubscriptions(List<Subscription> activeSubscriptions) {
 		this.activeSubscriptions = activeSubscriptions;
+	}
+
+	public List<Subscription> getPastSubscriptions() {
+		return pastSubscriptions;
+	}
+
+	public void setPastSubscriptions(List<Subscription> pastSubscriptions) {
+		this.pastSubscriptions = pastSubscriptions;
+	}
+
+	public List<Subscription> getFutureSubscriptions() {
+		return futureSubscriptions;
+	}
+
+	public void setFutureSubscriptions(List<Subscription> futureSubscriptions) {
+		this.futureSubscriptions = futureSubscriptions;
 	}
 	
 

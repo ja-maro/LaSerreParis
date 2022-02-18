@@ -93,7 +93,10 @@ body {
 .slider.slider-horizontal {
        width: 97%;  
 }       
-  
+.slider2 {
+	
+	margin-left: 2rem !important;
+}  
 .square-200-img {
 	max-width: 200px;
 	max-height: 200px;
@@ -106,6 +109,9 @@ body {
 }
 .slider-handle {
 	background-image: linear-gradient(to bottom,#00a1a1 0,#008b8b 100%) !important;
+}
+.margin-top-2rem {
+	margin-top: 2rem;
 }
 .panel-success > .panel-heading {
 	background-color:#00a1a1;
@@ -135,8 +141,20 @@ body {
 	width: 100%;
 	border-radius: 0 0 8px 8px;
 }
- 
 
+.user-subscription-display {
+	_border: #00a1a1 2px solid;
+	border-radius: 4px;
+	margin: 1rem 0;
+	padding: 1rem 2rem;
+	background: rgba(0,161,161,0.5);
+}
+.user-subscription-display.past {
+	background: rgba(126,126,126,0.5);
+}
+.user-subscription-display.future {
+	background: rgba(50,50,50,0.1);
+}
 
 .lsp-padding-1rem {
 padding: 1rem !important;

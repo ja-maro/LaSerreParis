@@ -43,11 +43,7 @@ public class SubscriptionBusiness implements SubscriptionIBusiness {
 
 	@Override
 	public List<Subscription> getSubscriptionsByUser(User user) {	
-		List<Subscription> list = subDao.getAllByUser(user);
-		for (Subscription s : list) {
-			System.out.println("$$$$$$$$$$$$ id de la subscription : " + s.getId());
-		}
-		return list;
+		return subDao.getAllByUser(user);
 	}
 
 }

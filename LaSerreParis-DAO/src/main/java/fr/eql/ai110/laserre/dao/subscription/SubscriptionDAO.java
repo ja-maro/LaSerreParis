@@ -16,17 +16,10 @@ import fr.eql.ai110.laserre.idao.subscription.SubscriptionIDAO;
 public class SubscriptionDAO extends GenericDAO<Subscription> implements SubscriptionIDAO {
 
 	@Override
-	public List<Subscription> getAllActive(User user) {
-		Query query = em.createQuery("SELECT s FROM Subscription s "
-				+ "INNER JOIN FETCH s.periods p "
-				+ "INNER JOIN FETCH s.offer o "
-				+ "INNER JOIN FETCH o.size si "
-				+ "INNER JOIN FETCH p.season se "
-				+ "WHERE s.user = :userParam AND CURDATE() > p.startDate");
+	public List<Subscription> getAllByUser(User user) {
+		Query query = em.createQuery("SELECT s FROM Subscription s WHERE s.user = :userParam");
 		query.setParameter("userParam", user);
 		return query.getResultList();
-		
-		
 	}
 
 	

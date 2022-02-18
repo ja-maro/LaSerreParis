@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/arch.xhtml">
 
@@ -17,13 +17,33 @@
 
 				<b:panel title="Abonnements" look="success" col-sm="10"
 					offset-sm="1">
-					<p>espace utilisateur de #{mbUser.user.firstName}</p>
+					<c:if test="#{mbUserSub.hasNoSubscription()}">
+					<p>Vous n'avez aucun abonnement en cours. Consultez nos offres !</p>
+					</c:if>
+					<c:if test="#{mbUserSub.activeSubscriptions.size() == 1}">
+					<h4>Abonnement en cours :</h4>
+					</c:if>
+					<c:if test="#{mbUserSub.activeSubscriptions.size() > 1}">
+					<h4>Abonnements en cours :</h4>
+					</c:if>
 					<ui:repeat value="#{mbUserSub.activeSubscriptions}" var="sub">
-						<p>#{sub.offer.size.name} #{sub.offer.size.displayHomeSize} #{sub.offer.pricePerMonth} € /mois</p>
-						<ui:repeat value="#{sub.periods}" var="period">
-							<p>#{period.season.name} #{period.startDate} fin le #{mbUserSub.displayEndOfperiod(period)}</p>
-						</ui:repeat>
-					</ui:repeat>
+					<div class="user-subscription-display">
+						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
+							<p>du #{sub.period.startDate} au #{mbUserSub.displayEndOfperiod(sub.period)} </p>
+					</div>	
+					</ui:repeat> 
+					<c:if test="#{mbUserSub.futureSubscriptions.size() == 1}">
+					<h4>Abonnement à venir :</h4>
+					</c:if>
+					<c:if test="#{mbUserSub.futureSubscriptions.size() > 1}">
+					<h4>Abonnements à venir :</h4>
+					</c:if>
+					<ui:repeat value="#{mbUserSub.futureSubscriptions}" var="sub">
+					<div class="user-subscription-display future">
+						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
+							<p>Commence le #{sub.period.startDate} (fin le #{mbUserSub.displayEndOfperiod(sub.period)}) </p>
+					</div>	
+					</ui:repeat> 
 				</b:panel>
 
 			</b:row>
@@ -35,6 +55,21 @@
 				</b:panel>
 
 			</b:row>
+		<c:if test="#{mbUserSub.hadSubscription()}">	
+			<b:row>
+
+				<b:panel title="Abonnements passés" collapsed="true" look="success" col-sm="10"
+					offset-sm="1">
+					<ui:repeat value="#{mbUserSub.pastSubscriptions}" var="sub">
+					<div class="user-subscription-display past">
+						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
+							<p>Terminée le #{mbUserSub.displayEndOfperiod(sub.period)} (début #{sub.period.startDate})</p>
+					</div>	
+					</ui:repeat> 
+				</b:panel>
+
+			</b:row>
+			</c:if>
 		</div>
 
 
