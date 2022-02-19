@@ -7,42 +7,139 @@
 
 <ui:composition template="/arch.xhtml">
 	<ui:define name="head">
-		<title>Accueil</title>
+		<title>LA SERRE PARIS</title>
 		<style>
 .carousel-control {
 	background-image: none !important;
 }
+.parallax-background-section {
+	position:relative;
+    z-index:1;
+    height:500px;
+    width:100%;
+    background-attachment:fixed;
+    _background-size:100% 100%;
+    background-size: cover;
+    background-repeat:no-repeat;
+}
+.parallax-background-content {
+	position:relative;
+    z-index:2;  
+    height:50%;
+}
+.content {
+    min-height: 100px;
+}
+
+.body-container {
+    min-height: 100vh;
+    border: none;
+    width: 100%;   
+    justify-content: space-between;
+}
+.flex-column-nowrap {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.flex-row-wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.item {
+    margin:auto 1rem;
+    padding: 1rem;
+}
+.item-trio {
+max-width: 500px;
+}
+
+.align-content-center {
+    align-content: center;
+}
+.align-items-center {
+    align-items: center;
+}
+
+#main-title{
+font-size: 12rem;
+text-shadow: 0 0 2px rgba(250,236,225,0.5), 0 0 2px rgba(250,236,225,0.5);
+border-top: 4px solid #015738;
+border-bottom: 4px solid #015738;
+text-align: center;
+margin: 2rem auto;
+}
+.main-subtitle {
+font-size: 4rem;
+text-align: center;
+text-shadow: 0 0 2px rgba(250,236,225,0.5), 0 0 2px rgba(250,236,225,0.5);
+}
+
+@media (max-width: 420px) {
+    #main-title{
+	font-size: 6rem;
+	max-width: 340px;
+	}
+	.main-subtitle {
+	font-size: 2.5rem;
+	}
+    
+}
+@media (min-width: 421px) and (max-width: 675px) {
+    #main-title{
+    font-size: 8rem;
+	max-width: 410px;
+	}
+	.main-subtitle {
+	font-size: 3.5rem;
+	}
+}
+@media (min-width: 676px) and (max-width: 1012px) {
+    #main-title{
+	max-width: 600px;
+	}
+}
+
 </style>
 	</ui:define>
 
 	<ui:define name="content">
-		<row>
-		<div class="col-12">
-			<h1>LA SERRE PARIS</h1>
+	
+	
+	
+	
+	<div class="body-container flex-column-nowrap">
+	
+	<div class="content flex-row-wrap justify-content-center parallax-background-section" 
+	style="background-image: url(#{request.contextPath}/resources/images/static/francesco-gallarotti-unsplash.jpg);">
+	<div class="item flex-column-nowrap justify-content-center parallax-background-content">
+		<p class="main-subtitle">- Depuis 2022 -</p>
+		
+			<h1 id="main-title" style="width: intrinsic;">LA SERRE PARIS</h1>
+		
+			<p class="main-subtitle">Un peu de nature au coeur de Paris</p>
 		</div>
-		</row>
-
-		<row>
-		<div class="col-xs-12 col-sm-4">
+	</div>
+	
+	<div class="content flex-row-wrap justify-content-center">
+	<div class="item">
 			<h4>La ferme</h4>
 		</div>
-		<div class="col-xs-12 col-sm-4">
+		<div class="">
 			<h3>Devenez un fermer urbain</h3>
 			<div>Accédez à des variétés oubliées, riches en nutriments et
 				certifiées bio. Louez une parcelle grâce à notre système
 				d'abonnement personnalisé.</div>
 		</div>
-		<div class="col-xs-12 col-sm-4">
+		<div class="">
 			<h4>Les variétés</h4>
 		</div>
-		</row>
-		<row>
-		<div
-			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
-
-
-
-			<b:carousel id="comments" style="width:500px" interval="4500"
+	</div>
+	
+	<div class="content flex-row-wrap justify-content-center">
+	<b:carousel id="comments" style="width:500px" interval="4500"
 				hidden="xs">
 				<b:carouselItem style="width:500px; height:350px">
 					<b:carouselCaption style="min-height: 66%;">
@@ -78,9 +175,13 @@
 					</b:carouselItem>
 				</ui:repeat>
 			</b:carousel>
-
-		</div>
-		</row>
+	</div>
+	
+	
+	</div>	
+	
+	
+		
 	</ui:define>
 </ui:composition>
 
