@@ -19,90 +19,96 @@
 	</ui:define>
 
 	<ui:define name="content">
-	<div class="body-container flex-column-nowrap ">
+		<div class="body-container flex-column-nowrap ">
 
-			<div class="flex-row-wrap  justify-content-center" style="margin-bottom: 0">
-	<div class="text-center">
-	<h1>Visitez la ferme</h1>
-	<p>81 Rue du Charolais, 75012 Paris, France
-<br />
-<br />Lun - Ven : 14h - 19h
-<br />Sam - Dim : 10h - 17h</p>
-	</div>
-	</div>
-	
-	<div class="flex-row-wrap  justify-content-center" style="margin-bottom: 2rem;">
-	<div class="parallax-background-section" 
-	style="background-image: url(#{request.contextPath}/resources/images/static/dagerotip-george-unsplash.jpg); max-height: 200px;"></div>
-	</div>
-	
-	
-	<div class="flex-row-wrap  justify-content-center">
-	<h1>Contactez-nous</h1>
-	
-	
-		<b:form id="contactForm">
-			<b:panel
-				style-class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
-				<b:panelGrid colSpans="2,10" size="sm">
-					<span></span>
-					<b:message for="inpEmail" />
-					<h:outputLabel value="Email*" class="lsp-padding-1rem" />
-					<b:inputText id="inpEmail" placeholder="exemple@mail.fr"
-						value="#{mbContact.email}" required="true"
-						requiredMessage="Indiquez votre email" />
+			<div class="flex-row-wrap  justify-content-center"
+				style="margin-bottom: 0">
+				
+				<div class="text-center">
+					<h1>Visitez la ferme</h1>
+					<p>
+						81 Rue du Charolais, 75012 Paris, France <br /> <br />Lun - Ven
+						: 14h - 19h <br />Sam - Dim : 10h - 17h
+					</p>
+				</div>
+				
+			</div>
 
-					<span></span>
-					<b:message for="inpName" />
-					<h:outputLabel value="Nom*" class="lsp-padding-1rem" />
-					<b:inputText id="inpName" value="#{mbContact.name}" required="true"
-						requiredMessage="Indiquez votre nom" />
+			<div class="flex-row-wrap  justify-content-center"
+				style="margin-bottom: 2rem;">
+				<div class="parallax-background-section"
+					style="background-image: url(#{request.contextPath}/resources/images/static/dagerotip-george-unsplash.jpg); max-height: 200px;"></div>
+			</div>
 
-					<span></span>
-					<b:message for="inpPhone" />
-					<h:outputLabel value="Téléphone" class="lsp-padding-1rem" />
-					<b:inputText id="inpPhone" value="#{mbContact.phone}" />
 
-					<span></span>
-					<b:message for="inpType" />
-					<h:outputLabel value="Raison*" class="lsp-padding-1rem" />
-					<b:formGroup>
-						<b:selectOneMenu id="inpType" value="#{mbContact.type}"
-							required="true"
-							requiredMessage="Renseignez une raison de contact">
-							<f:selectItem itemLabel="..." />
-							<c:forEach var="type" items="#{mbContact.types}">
-								<f:selectItem itemLabel="#{type.name}" itemValue="#{type}" />
-							</c:forEach>
-						</b:selectOneMenu>
-					</b:formGroup>
+			<div class="flex-row-wrap  justify-content-center">
+			
+				<h1>Contactez-nous</h1>
+				<b:form id="contactForm">
+					<b:panel
+						style-class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
-					<span></span>
-					<b:message for="inpTitle" />
-					<h:outputLabel value="Titre*" class="lsp-padding-1rem" />
-					<b:inputText id="inpTitle" value="#{mbContact.title}"
-						required="true" requiredMessage="Renseignez un titre" />
+						<b:panelGrid colSpans="2,10" size="sm">
+							<span></span>
+							<b:message for="inpEmail" />
+							<h:outputLabel value="Email*" class="lsp-padding-1rem" />
+							<b:inputText id="inpEmail" placeholder="exemple@mail.fr"
+								value="#{mbContact.email}" required="true"
+								requiredMessage="Indiquez votre email" />
 
-					<span></span>
-					<b:message for="inpBody" />
-					<h:outputLabel value="Message*" class="lsp-padding-1rem" />
-					<b:inputTextarea id="inpBody" value="#{mbContact.body}"
-						required="true" requiredMessage="Ecrivez votre message" />
-				</b:panelGrid>
+							<span></span>
+							<b:message for="inpName" />
+							<h:outputLabel value="Nom*" class="lsp-padding-1rem" />
+							<b:inputText id="inpName" value="#{mbContact.name}"
+								required="true" requiredMessage="Indiquez votre nom" />
 
-				<b:row>
-					<b:column
-						style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
-						<b:commandButton style-class="lsp-width-100" value="Envoyer"
-							action="#{mbContact.submitContactForm()}" />
-					</b:column>
-				</b:row>
-			</b:panel>
-		</b:form>
+							<span></span>
+							<b:message for="inpPhone" />
+							<h:outputLabel value="Téléphone" class="lsp-padding-1rem" />
+							<b:inputText id="inpPhone" value="#{mbContact.phone}" />
 
-</div>
-</div>
+							<span></span>
+							<b:message for="inpType" />
+							<h:outputLabel value="Raison*" class="lsp-padding-1rem" />
+							<b:formGroup>
+								<b:selectOneMenu id="inpType" value="#{mbContact.type}"
+									required="true"
+									requiredMessage="Renseignez une raison de contact">
+									<f:selectItem itemLabel="..." />
+									<c:forEach var="type" items="#{mbContact.types}">
+										<f:selectItem itemLabel="#{type.name}" itemValue="#{type}" />
+									</c:forEach>
+								</b:selectOneMenu>
+							</b:formGroup>
+
+							<span></span>
+							<b:message for="inpTitle" />
+							<h:outputLabel value="Titre*" class="lsp-padding-1rem" />
+							<b:inputText id="inpTitle" value="#{mbContact.title}"
+								required="true" requiredMessage="Renseignez un titre" />
+
+							<span></span>
+							<b:message for="inpBody" />
+							<h:outputLabel value="Message*" class="lsp-padding-1rem" />
+							<b:inputTextarea id="inpBody" value="#{mbContact.body}"
+								required="true" requiredMessage="Ecrivez votre message" />
+						</b:panelGrid>
+
+						<b:row>
+							<b:column
+								style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
+								<b:commandButton style-class="lsp-width-100" value="Envoyer"
+									action="#{mbContact.submitContactForm()}" />
+							</b:column>
+						</b:row>
+					</b:panel>
+				</b:form>
+
+			</div>
+			
+			
+		</div>
 	</ui:define>
 
 </ui:composition>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/arch.xhtml">
+	<ui:define name="head">
+		<title>Menu</title>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div class="body-container flex-column-nowrap"
+			style="height: auto; min-height: 0;">
+
+
+			<div
+				class="content flex-row-wrap justify-content-center parallax-background-section"
+				style="background-image: url(#{request.contextPath}/resources/images/static/jay-wennington-unsplash.jpg);
+					height: auto; margin-bottom: 0;">
+				<div class="item flex-column-nowrap justify-content-center  ">
+					<div class="restaurant-panel text-center">
+						<h1>Entrées</h1>
+						<p>Lorem ipsum</p>
+						<p>Errare humanumquem</p>
+						<p>Dolor sit amet</p>
+						<h1>Plats</h1>
+						<p>Lorem ipsum</p>
+						<p>Errare humanumquem</p>
+						<p>Lorem ipsum</p>
+						<p>Errare humanumquem</p>
+						<p>Dolor sit amet</p>
+						<p>Dolor sit amet</p>
+						<h1>Desserts</h1>
+						<p>Lorem ipsum</p>
+						<p>Errare humanumquem</p>
+						<p>Dolor sit amet</p>
+
+						<b:button look="success" value="Réserver"
+							href="#{request.contextPath}/booking.xhtml" />
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

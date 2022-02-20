@@ -32,7 +32,6 @@ a {
 	display: flex;
 	padding-right: 0;
 	padding-left: 0;
-	_background-color: rgba(255, 0, 0, 0.15) !important;
 }
 
 .lsp-footer {
@@ -57,6 +56,10 @@ a {
 
 .carousel-inner {
 	display: flex;
+}
+.carousel {
+	
+	margin-bottom: 5rem;
 }
 
 .crop-grid {
@@ -88,7 +91,7 @@ a {
 }
 
 .footer-decoration {
-	margin-top: 2rem;
+	_margin-top: 2rem;
 	min-height: 4rem;
 	background-color: #00a1a1;
 }
@@ -109,7 +112,11 @@ a {
 	max-width: 10rem;
 	max-height: 10rem;
 }
-
+.panel {
+	background-color: #FAECE1;
+	border-color: #dfd0c4;
+	margin-top: 2rem;
+}
 .slider.slider-horizontal {
 	width: 97%;
 }
@@ -355,6 +362,21 @@ strong {
 	text-decoration: underline;
 }
 
+.restaurant-panel {
+	background-color: #FAECE1;
+	padding: 2rem;
+	border-radius: 2px;
+	width: 40%;
+	margin: 8rem auto !important;
+}
+@media (max-width: 640px) {
+	.restaurant-panel {
+	width: 100% !important;
+	
+	margin: 0 auto !important;
+	}
+}
+
 ul.nav>li>a :active {
 	border: red solid 5px !important;
 }
@@ -380,6 +402,9 @@ ul.nav>li>a :active {
 }
 .text-center > h1, p {
 	margin-bottom: 3rem;
+}
+.text-center > p {
+	text-align: justify;
 }
 @media (max-width: 599px) {
 	.item-duo {

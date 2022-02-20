@@ -12,66 +12,154 @@
 	</ui:define>
 
 	<ui:define name="content">
-<div class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
+		<div class="body-container flex-column-nowrap ">
 
-		<b:carousel id="premiumCrops" style="width:500px; height: 500px;"
-			interval="3500" hidden="xs">
+<div class="flex-row-wrap  justify-content-center"
+				style="margin-bottom: 0; height:400px; 	background-size: cover; background-position: center;
+			background-image: url(#{request.contextPath}/resources/images/static/christian-joudrey-unsplash.jpg);">
+				</div>
 
-			<b:carouselItem>
-				<h:graphicImage library="images" name="static/crop.jpg"
-					alt="variétés" />
-				<b:carouselCaption
-					style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
-					<h2>Nos variétés</h2>
-					<p>Nous vous proposons de nombreuses variétés anciennes ou
-						méconnues.</p>
-				</b:carouselCaption>
-			</b:carouselItem>
+			<div class="flex-row-wrap  justify-content-center"
+				style="margin-bottom: 0;">
+				<div class="text-center" style=" max-width: 600px;">
 
-			<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
-				var="crop">
-				<b:carouselItem>
-					<h:graphicImage library="images" name="crops/#{crop.picture}"
-						alt="#{crop.name}" />
-					<b:carouselCaption
-						style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
-						<h2>#{crop.name}</h2>
-						<p>#{crop.carouselDescription}</p>
-					</b:carouselCaption>
-				</b:carouselItem>
-			</ui:repeat>
 
-		</b:carousel>
-			<b:carousel id="premiumCrops" style="width:250px; height: 250px;"
-			interval="3500" hidden="sm...">
 
-			<b:carouselItem>
-				<h:graphicImage library="images" name="static/crop.jpg"
-					alt="variétés" />
-				<b:carouselCaption
-					style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
-					<h2>Nos variétés</h2>
-					<p>Nous vous proposons de nombreuses variétés anciennes ou
-						méconnues.</p>
-				</b:carouselCaption>
-			</b:carouselItem>
+					<h1>ANCIENS, RICHES EN NUTRIMENTS ET BIOLOGIQUES</h1>
+					<p>Notre objectif est de vous fournir les meilleurs produits.
+						C'est pourquoi notre équipe a cherché pendant des mois des
+						variétés durables dans une ferme urbaine tout en
+						atteignant la meilleure qualité en termes de nutrition et de goût.
+					</p>
 
-			<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
-				var="crop">
-				<b:carouselItem>
-					<h:graphicImage library="images" name="crops/#{crop.picture}"
-						alt="#{crop.name}" />
-					<b:carouselCaption
-						style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
-						<h2>#{crop.name}</h2>
-						<p>#{crop.carouselDescription}</p>
-					</b:carouselCaption>
-				</b:carouselItem>
-			</ui:repeat>
+					<p>
+						Aujourd'hui, grâce à nos <strong>1 000 rangées</strong>, nous
+						cultivons <strong>40 variétés de cultures anciennes,
+							riches en nutriments et biologiques</strong>. Chaque jour, nous créons les
+						conditions parfaites pour cultiver avec passion fruits, légumes,
+						légumineuses, céréales, herbes et fleurs. Parmi eux ? Fruits
+						rouges, kiwis, petits pois, tomates anciennes, haricots, salades,
+						carottes, betteraves, radis, courgettes, aubergines, brocolis,
+						panais, crosnes, quinoa, maïs, herbes médicinales et fleurs.
+					</p>
 
-		</b:carousel>
-</div>
+					<p>
+						Saviez-vous que les <strong>tomates anciennes</strong> sont bonnes
+						pour la santé cardiovasculaire, réduisent la tension artérielle et
+						le stress ? Que le <strong>quinoa rouge</strong> est riche en
+						antioxydant et contient neuf acides aminés essentiels dont la
+						plupart des céréales sont dépourvues ? Manger des <strong>crosnes</strong>
+						peut vous aider à diminuer les inflammations, à réduire les maux
+						de tête et à prévenir les problèmes cardiaques. Tandis que
+						consommer de la <strong>fleur de pois de senteur</strong> vous
+						donne de l'énergie, stimule votre activité cérébrale et réduit
+						l'anxiété.
+					</p>
 
+					<p>Nous sommes ce que nous mangeons. Consommer des produits
+						frais de qualité au bon moment peut être bénéfique pour votre
+						santé et vous apporter des nutriments incroyables nécessaires pour
+						booster votre corps et votre esprit.</p>
+
+					<h3>Rejoignez-nous, nous nous occupons de tout.</h3>
+
+				</div>
+			</div>
+			<div class="flex-row-wrap  justify-content-center"
+				style="margin-bottom: 0">
+				
+				<b:carousel id="premiumCrops" style="width:800px; height: 400px;"
+					interval="3500" hidden="...sm">
+
+					<b:carouselItem>
+						<h:graphicImage library="images" name="static/basket_crops_800_400.jpg"
+							alt="variétés" />
+						<b:carouselCaption
+							style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+							<h2>Nos variétés</h2>
+							<p>Nous vous proposons de nombreuses variétés anciennes ou
+								méconnues.</p>
+						</b:carouselCaption>
+					</b:carouselItem>
+
+					<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
+						var="crop">
+						<b:carouselItem>
+							<h:graphicImage library="images" name="crops/800_400/#{crop.picture}"
+								alt="#{crop.name}" />
+							<b:carouselCaption
+								style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
+								<h2>#{crop.name}</h2>
+								<p>#{crop.carouselDescription}</p>
+							</b:carouselCaption>
+						</b:carouselItem>
+					</ui:repeat>
+
+				</b:carousel>
+				
+
+				
+				<b:carousel id="premiumCrops" style="width:600px; height: 300px;"
+					interval="3500" hidden="xs, md, lg">
+
+					<b:carouselItem>
+						<h:graphicImage library="images" name="static/basket_crops_800_400.jpg"
+							alt="variétés" />
+						<b:carouselCaption
+							style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+							<h2>Nos variétés</h2>
+							<p>Nous vous proposons de nombreuses variétés anciennes ou
+								méconnues.</p>
+						</b:carouselCaption>
+					</b:carouselItem>
+
+					<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
+						var="crop">
+						<b:carouselItem>
+							<h:graphicImage library="images" name="crops/800_400/#{crop.picture}"
+								alt="#{crop.name}" />
+							<b:carouselCaption
+								style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
+								<h2>#{crop.name}</h2>
+								<p>#{crop.carouselDescription}</p>
+							</b:carouselCaption>
+						</b:carouselItem>
+					</ui:repeat>
+				</b:carousel>
+				
+				
+				<b:carousel id="premiumCrops" style="width:300px; height: 300px;"
+					interval="3500" hidden="sm...">
+
+					<b:carouselItem>
+						<h:graphicImage library="images" name="static/crop.jpg"
+							alt="variétés" />
+						<b:carouselCaption
+							style="background-color: rgba(0,0,0,0.5); border-radius: 8px;">
+							<h2>Nos variétés</h2>
+							<p>Nous vous proposons de nombreuses variétés anciennes ou
+								méconnues.</p>
+						</b:carouselCaption>
+					</b:carouselItem>
+
+					<ui:repeat value="#{mbSubscription.getAvailablePremiumCrops()}"
+						var="crop">
+						<b:carouselItem>
+							<h:graphicImage library="images" name="crops/500_500/#{crop.picture}"
+								alt="#{crop.name}" />
+							<b:carouselCaption
+								style="background-color: rgba(0,0,0,0.5); border-radius: 8px; padding-left: 1rem; padding-right: 1rem;">
+								<h2>#{crop.name}</h2>
+								<p>#{crop.carouselDescription}</p>
+							</b:carouselCaption>
+						</b:carouselItem>
+					</ui:repeat>
+
+				</b:carousel>
+				
+				
+			</div>
+		</div>
 	</ui:define>
 
 </ui:composition>

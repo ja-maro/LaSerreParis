@@ -11,74 +11,50 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<div
-			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
-			<h1>Le Restaurant</h1>
-			<p>Situé au cœur de la ferme, notre restaurant est conçu comme
-				une véritable bulle de nature. Essayez notre table sociale ou
-				profitez d'un moment plus intime avec vos proches et vos amis. La
-				cuisine, essentiellement végétale, reflète notre philosophie de la
-				qualité, de la fraîcheur et des saisons.</p>
-			<h1>Le Restaurant</h1>
-			<p>SUn lieu pour s'évader Et s'il existait un endroit où vous
-				vous sentiez loin de la vie chaotique de la ville ? Un endroit où
-				l'on rencontre des gens qui partagent les mêmes valeurs ? La salle à
-				manger, incluant notre grande table sociale de 30 places, est
-				entourée par les cultures et un design biophilique hypnotisant. Le
-				menu met en<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+		<div class="body-container flex-column-nowrap"
+			style="height: auto; min-height: 0;">
 
-<ui:composition template="/arch.xhtml">
-	<ui:define name="head">
-		<title>Restaurant</title>
-	</ui:define>
 
-	<ui:define name="content">
-		<div
-			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
+			<div
+				class="content flex-row-wrap justify-content-center parallax-background-section"
+				style="background-image: url(#{request.contextPath}/resources/images/static/jay-wennington-unsplash.jpg);
+					height: auto; margin-bottom: 0;">
+				<div class="item flex-column-nowrap justify-content-center  ">
+					<div class="restaurant-panel text-center">
+						<h1>Le Restaurant</h1>
+						<p>Situé au cœur de la ferme, notre restaurant est conçu comme
+							une véritable bulle de nature. Essayez notre table sociale ou
+							profitez d'un moment plus intime avec vos proches et vos amis. La
+							cuisine, essentiellement végétale, reflète notre philosophie de
+							la qualité, de la fraîcheur et des saisons.</p>
+						<b:button look="success" value="Menu"
+							href="#{request.contextPath}/menu.xhtml" />
+						<h1>Un lieu pour s'évader</h1>
+						<p>Et s'il existait un endroit où vous vous sentiez à l'écart
+							de la vie chaotique de la ville ? Un endroit où l'on rencontre
+							des gens qui partagent les mêmes valeurs ? La salle à manger,
+							incluant notre grande table sociale de 30 places, est entourée
+							par les cultures et un design biophilique hypnotisant.</p>
+						<p>Le menu met en valeur notre production quotidienne ou le
+							travail de producteurs partageant nos valeurs. Nos recettes,
+							majoritairement végétales, sont élaborées dans le but de
+							surprendre et de satisfaire votre palais à travers un menu
+							succint mais diversifié. Nous avons également à cœur d'éviter le
+							gaspillage alimentaire et de tirer le meilleur parti de chaque
+							produit.</p>
+						<p>
+							Horaires d'ouverture :<br /> Du Mardi au Dimanche : 12.00 - 23.00
+						</p>
+						<b:button look="success" value="Réserver"
+							href="#{request.contextPath}/booking.xhtml" />
+					</div>
+				</div>
+			</div>
 
-			<h1>Le Restaurant</h1>
-			<p>Situé au cœur de la ferme, notre restaurant est conçu comme
-				une véritable bulle de nature. Essayez notre table sociale ou
-				profitez d'un moment plus intime avec vos proches et vos amis. La
-				cuisine, essentiellement végétale, reflète notre philosophie de la
-				qualité, de la fraîcheur et des saisons.</p>
-			<h1>Un lieu pour s'évader</h1>
-			<p>Et s'il existait un endroit où vous
-				vous sentiez loin de la vie chaotique de la ville ? Un endroit où
-				l'on rencontre des gens qui partagent les mêmes valeurs ? La salle à
-				manger, incluant notre grande table sociale de 30 places, est
-				entourée par les cultures et un design biophilique hypnotisant.</p> <p>Le
-				menu met en valeur notre production quotidienne ou le travail de
-				producteurs partageant nos valeurs. Nos recettes, majoritairement
-				végétales, sont élaborées toujours dans le but de surprendre et de
-				satisfaire votre palais à travers un menu court mais diversifié.
-				Nous avons également à cœur d'éviter le gaspillage alimentaire et de
-				tirer le meilleur parti de chaque produit.</p> Horaires d'ouverture
 
-				Mardi - Vendredi : 12.00 - 14.30 Samedi - Dimanche : 12.00 - 23.30</p>
-			<b:button look="success" value="Réserver"
-				href="#{request.contextPath}/booking.xhtml" />
 
-		</div>
-	</ui:define>
-</ui:composition>
 
-</html> valeur notre production quotidienne ou le travail de
-				producteurs partageant nos valeurs. Nos recettes, majoritairement
-				végétales, sont élaborées toujours dans le but de surprendre et de
-				satisfaire votre palais à travers un menu court mais diversifié.
-				Nous avons également à cœur d'éviter le gaspillage alimentaire et de
-				tirer le meilleur parti de chaque produit. Horaires d'ouverture
-
-				Mardi - Vendredi : 12.00 - 14.30 Samedi - Dimanche : 12.00 - 23.30</p>
-			<b:button look="success" value="Réserver"
-				href="#{request.contextPath}/booking.xhtml" />
 
 		</div>
 	</ui:define>
