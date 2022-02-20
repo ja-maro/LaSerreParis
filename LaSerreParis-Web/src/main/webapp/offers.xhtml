@@ -13,45 +13,84 @@
 	</ui:define>
 
 	<ui:define name="content">
-<h:form id="offersForm"  style-class="col-sm-offset-1 col-md-offset-2 col-xs-12 col-sm-10 col-md-8">
-		<div>
-			<h1>Abonnements classiques</h1>
-			<div class="lsp-flex-justify-content" style="background-color: red;">
 
-				<ui:repeat value="#{mbSubscription.availableSimpleOffers}" var="offer">
-					<div class="catalog-item" style="background-image: url(#{request.contextPath}/resources/images/offers/#{offer.picture});">
-						<div>
-							<h3>#{offer.size.name}</h3>
-							<h4>#{offer.size.displayHomeSize}</h4>
-							<p>#{offer.pricePerMonth} € par mois</p>
-							<p>
-								<b:commandButton look="success" value="S'abonner" action="#{mbSubscription.displayOfferDetails(offer)}"/>
-							</p>
-						</div>
-					</div>
-				</ui:repeat>
-			</div>
-			<h1>Abonnements Premium</h1>
-			<div class="lsp-flex-justify-content">
+		<div class="body-container flex-column-nowrap ">
 
-				<ui:repeat value="#{mbSubscription.availablePremiumOffers}"
-					var="offer">
-					<div class="catalog-item" style="background-image: url(#{request.contextPath}/resources/images/offers/#{offer.picture});">
-						
-						<div>
-							<h3>Premium #{offer.size.name}</h3>
-							<h4>#{offer.size.displayHomeSize}</h4>
-							<h4>#{offer.pricePerMonth} € par mois</h4>
-							<p>
-							<b:commandButton look="success" value="S'abonner" action="#{mbSubscription.displayOfferDetails(offer)}"/>
-							</p>
-						</div>
+			<div class="flex-row-wrap  justify-content-center">
+				<div
+					class="item-duo duo-text flex-column-nowrap justify-content-center parallax-background-content reverse">
+					<div class="item text-justify">
+
+						<h1>L'AVENTURE DE L'AGRICULTURE URBAINE VOUS TENTE ?</h1>
+						<h3>Choisissez l'abonnement qui vous convient</h3>
+						<p>En fonction de la taille de votre foyer, nous déterminons
+							la quantité de produits dont vous avez besoin et la surface de
+							terrain nécessaire en conséquence.</p>
+						<p>Vous décidez ensuite pour combien de temps vous souhaitez
+							participer à notre aventure. Même si nous sommes au cœur de
+							Paris, nous sommes toujours régis par la nature. C'est pourquoi
+							nos abonnements suivent les saisons et vont de 3 mois, 6 mois à
+							un an.</p>
+						<p>Enfin, vous recevez vos produits chaque semaine ou les
+							dégustez dans notre restaurant selon votre souhait.</p>
 					</div>
-				</ui:repeat>
+				</div>
+				<div class="parallax-background-section item-duo duo-img"
+					style="background-image: url(#{request.contextPath}/resources/images/static/nina-luong-unsplash.jpg); 
+					background-size:80%; background-position: top right;"></div>
 			</div>
+
+
+
+			<h:form id="offersForm" class="col-lg-offset-1 col-xs-12 col-lg-10"
+				style="
+					text-align: center;">
+				<div>
+					<h1>Abonnez-vous</h1>
+					<div class="lsp-flex-justify-content">
+
+						<ui:repeat value="#{mbSubscription.availableSimpleOffers}"
+							var="offer">
+							<div class="catalog-item"
+								style="background-image: url(#{request.contextPath}/resources/images/offers/#{offer.picture});">
+								<div>
+									<h3 style="margin-bottom: 1rem;">#{offer.size.name}</h3>
+									<h4>#{offer.size.displayHomeSize}</h4>
+									<p>#{offer.pricePerMonth} € par mois</p>
+									<p>
+										<b:commandButton look="success" value="S'abonner"
+											action="#{mbSubscription.displayOfferDetails(offer)}" />
+									</p>
+								</div>
+							</div>
+						</ui:repeat>
+					</div>
+				
+					<div class="lsp-flex-justify-content">
+
+						<ui:repeat value="#{mbSubscription.availablePremiumOffers}"
+							var="offer">
+							<div class="catalog-item"
+								style="background-image: url(#{request.contextPath}/resources/images/offers/#{offer.picture});">
+
+								<div>
+									<h3 style="margin-bottom: 1rem;">Premium
+										#{offer.size.name}</h3>
+									<h4>#{offer.size.displayHomeSize}</h4>
+									<h4>#{offer.pricePerMonth} € par mois</h4>
+									<p>
+										<b:commandButton look="success" value="S'abonner"
+											action="#{mbSubscription.displayOfferDetails(offer)}" />
+									</p>
+								</div>
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
+			</h:form>
+
+
 		</div>
-
-</h:form>
 	</ui:define>
 
 </ui:composition>
