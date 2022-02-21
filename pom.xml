@@ -17,6 +17,8 @@
 		<plugin.war.version>3.0.0</plugin.war.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<log4j.version>2.17.1</log4j.version>
+		<junit.version>5.8.0</junit.version>
+		<surefire.version>2.22.2</surefire.version>
 		<javadoc.version>3.3.2</javadoc.version>
 		<mavensite.version>3.7.1</mavensite.version>
 		<mavenprojectinforeports.version>2.9</mavenprojectinforeports.version>
@@ -39,6 +41,12 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-core</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 
@@ -79,6 +87,11 @@
 					<configuration>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${surefire.version}</version>
 				</plugin>
 				<!-- <plugin> -->
 				<!-- <groupId>org.apache.maven.plugins</groupId> -->

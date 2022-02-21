@@ -163,19 +163,16 @@ public class UserRolesManagedBean implements Serializable {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
-				"Date de naissance inappropriée", "Vous devez être majeur et avoir moins de 150 ans.");
+				"Date de naissance inappropriée", "Vous devez être majeur et avoir un âge raisonnable.");
 			FacesContext.getCurrentInstance().addMessage("registerForm:inpBirth", fMessage);
 		}
 		
 		if (isInfoValid) {
 			user = new User(firstName, lastName, email, address, phone, homeSize, birth);
-			accountBU.register(user, password); 
-			
-			
+			accountBU.register(user, password); 	
 			connect();
 			forward = "/index.xhtml?faces-redirection=true";
 		}
-	
 		return forward;
 	}
 
