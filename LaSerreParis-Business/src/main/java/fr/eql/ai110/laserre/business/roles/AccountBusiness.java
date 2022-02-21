@@ -22,12 +22,21 @@ public class AccountBusiness implements AccountIBusiness {
 	
 	@Override
 	public User register(User user, String password) {
+		
+		capitalizeFirstName(user);
+		
 		String salt = alphanumericGenerator(SALT_LENGTH);
 		user.setSalt(salt);
 		user.setPassword(hashPassword(salt, password));
 		user.setValidationCode(alphanumericGenerator(VALIDATION_CODE_LENGTH));
 		userDAO.add(user);
 		return user;
+	}
+
+	private void capitalizeFirstName(User user) {
+		String firstName = user.getFirstName();
+		String s1 = firstName.substring(0, 1).toUpperCase();
+		user.setFirstName(s1 + firstName.substring(1));
 	}
 
 	/**

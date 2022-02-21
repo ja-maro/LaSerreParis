@@ -50,7 +50,7 @@ public class UserRolesManagedBean implements Serializable {
 	public String connect() {
 		String forward = null;
 
-		user = accountBU.connect(email, password);
+		user = accountBU.connect(email.trim(), password);
 		if (user != null) {
 			forward = "/index.xhtml?faces-redirection=false";
 			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail().replaceAll("[\r\n]",""));
@@ -63,7 +63,7 @@ public class UserRolesManagedBean implements Serializable {
 					"Vérifiez vos informations !");
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", fMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", fMessage);
-			LOG.info("Connexion échouée : " + email.replaceAll("[\r\n]",""));
+			LOG.info("Connexion échouée : " + email.trim().replaceAll("[\r\n]",""));
 		}
 		return forward;
 	}
@@ -105,14 +105,14 @@ public class UserRolesManagedBean implements Serializable {
 		String forward = null;
 		boolean isInfoValid = true;
 		
-		if (!validator.isEmailAvailable(email)) {
+		if (!validator.isEmailAvailable(email.trim())) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
 				"Email existant", "Cet email est déjà utilisé.");
 			FacesContext.getCurrentInstance().addMessage("registerForm:inpEmail", fMessage);
 		}
-		if (!validator.isEmailSyntaxValid(email)) {
+		if (!validator.isEmailSyntaxValid(email.trim())) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
@@ -136,14 +136,14 @@ public class UserRolesManagedBean implements Serializable {
 					"Veuillez répéter exactement votre mot de passe.");
 			FacesContext.getCurrentInstance().addMessage("registerForm:inpPassword2", fMessage);
 		}
-		if (!validator.isNameSyntaxValid(firstName)) {
+		if (!validator.isNameSyntaxValid(firstName.trim())) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
 				"Prénom inapproprié", "Votre prénom ne peut pas contenir de chiffres ou de caractères spéciaux.");
 			FacesContext.getCurrentInstance().addMessage("registerForm:inpFirstName", fMessage);
 		}
-		if (!validator.isNameSyntaxValid(lastName)) {
+		if (!validator.isNameSyntaxValid(lastName.trim())) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
@@ -168,7 +168,7 @@ public class UserRolesManagedBean implements Serializable {
 		}
 		
 		if (isInfoValid) {
-			user = new User(firstName, lastName, email, address, phone, homeSize, birth);
+			user = new User(firstName.trim(), lastName.trim().toUpperCase(), email.trim(), address, phone, homeSize, birth);
 			accountBU.register(user, password); 	
 			connect();
 			forward = "/index.xhtml?faces-redirection=true";
