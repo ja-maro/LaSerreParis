@@ -43,7 +43,7 @@ public class FormValidationServiceTest {
 	}
 	
 	@Test
-	public void nameSyntax_whenTooShort_isIncorrect() {
+	public void nameSyntax_whenContainsNumber_isIncorrect() {
 		assertFalse(validator.isNameSyntaxValid("Valérie3"));
 	}
 	@Test
