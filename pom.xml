@@ -20,7 +20,6 @@
 		<javadoc.version>3.3.2</javadoc.version>
 		<mavensite.version>3.7.1</mavensite.version>
 		<mavenprojectinforeports.version>2.9</mavenprojectinforeports.version>
-
 	</properties>
 
 	<dependencyManagement>
@@ -81,45 +80,61 @@
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>${mavensite.version}</version>
-					<executions>
-						<execution>
-							<phase>verify</phase>
-							<goals>
-								<goal>site</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-site-plugin</artifactId> -->
+				<!-- <version>${mavensite.version}</version> -->
+				<!-- <executions> -->
+				<!-- <execution> -->
+				<!-- <phase>verify</phase> -->
+				<!-- <goals> -->
+				<!-- <goal>site</goal> -->
+				<!-- </goals> -->
+				<!-- </execution> -->
+				<!-- </executions> -->
+				<!-- </plugin> -->
+
 			</plugins>
 		</pluginManagement>
 	</build>
-	
-	<reporting>
-		<plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc.version}</version>
-				<configuration>
-					<show>private</show>
-					<nohelp>true</nohelp>
-				</configuration>
-			</plugin>
+	<!-- <reporting> -->
+	<!-- <plugins> -->
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>${mavenprojectinforeports.version}</version>
-			</plugin>
-		</plugins>
-	</reporting>
-	
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
+	<!-- <version>${javadoc.version}</version> -->
+	<!-- <configuration> -->
+	<!-- <show>private</show> -->
+	<!-- <nohelp>true</nohelp> -->
+	<!-- </configuration> -->
+	<!-- </plugin> -->
+
+	<!-- <plugin> -->
+	<!-- <groupId>org.apache.maven.plugins</groupId> -->
+	<!-- <artifactId>maven-project-info-reports-plugin</artifactId> -->
+	<!-- <version>${mavenprojectinforeports.version}</version> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </reporting> -->
+
+	<repositories>
+		<repository>
+			<id>gitlab-maven</id>
+			<url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>gitlab-maven</id>
+			<url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
+		</repository>
+		<snapshotRepository>
+			<id>gitlab-maven</id>
+			<url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<modules>
 		<module>LaSerreParis-EAR</module>
