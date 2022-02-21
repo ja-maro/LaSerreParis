@@ -41,5 +41,30 @@ public class FormValidationServiceTest {
 	public void phoneSyntax_whenValid_IsCorrect2() {
 		assertTrue(validator.isPhoneSyntaxValid("+33 689524896"));
 	}
+	
+	@Test
+	public void nameSyntax_whenTooShort_isIncorrect() {
+		assertFalse(validator.isNameSyntaxValid("Valérie3"));
+	}
+	@Test
+	public void nameSyntax_whenValid_IsCorrect() {
+		assertTrue(validator.isNameSyntaxValid("Valérie"));
+	}
+	@Test
+	public void nameSyntax_whenValid_IsCorrect2() {
+		assertTrue(validator.isNameSyntaxValid("Thibault"));
+	}
 
+	@Test
+	public void PasswordSyntaxvalid_WhenOnlyNumbers_isIncorrect() {
+		assertFalse(validator.isPasswordSyntaxvalid("123456"));
+	}
+	@Test
+	public void PasswordSyntaxvalid_WhenTooShort_isIncorrect() {
+		assertFalse(validator.isPasswordSyntaxvalid("1aA$"));
+	}
+	@Test
+	public void PasswordSyntaxvalid_WhenIs_IsCorrect() {
+		assertTrue(validator.isPasswordSyntaxvalid("Aa1$aaaa"));
+	}
 }
