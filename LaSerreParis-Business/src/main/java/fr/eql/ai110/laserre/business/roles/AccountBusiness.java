@@ -38,7 +38,7 @@ public class AccountBusiness implements AccountIBusiness {
 	 * @return salted and hashed password
 	 */
 	private String hashPassword(String salt, String password) {
-		String saltedPassword = salt + password;
+		String saltedPassword = new StringBuffer(password).insert(2, salt).toString();
 		String HashedPassword = null;
 		try {
 			MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);

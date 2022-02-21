@@ -1,6 +1,6 @@
 --ROLES
 
-INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', 'Vbl���F�aw�o��u�����Z^-}ɹ��', 'UGSA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
+INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', '���A`/r�Ouq�npű����;�6��{�(�Q', 'PQHA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Cécile', 'Dupont');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Guillaume', 'Verboise');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Fatima', 'Soussa');

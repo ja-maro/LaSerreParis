@@ -53,7 +53,7 @@ public class UserRolesManagedBean implements Serializable {
 		user = accountBU.connect(email, password);
 		if (user != null) {
 			forward = "/index.xhtml?faces-redirection=false";
-			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail());
+			LOG.info("Connexion de l'utilisateur : " + user.getId() + " " + user.getEmail().replaceAll("[\r\n]",""));
 			FacesMessages.info("Bienvenue !");	
 			
 		} else {
@@ -63,7 +63,7 @@ public class UserRolesManagedBean implements Serializable {
 					"Vérifiez vos informations !");
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpEmail", fMessage);
 			FacesContext.getCurrentInstance().addMessage("loginForm:inpPassword", fMessage);
-			LOG.info("Connexion échouée : " + email);
+			LOG.info("Connexion échouée : " + email.replaceAll("[\r\n]",""));
 		}
 		return forward;
 	}
@@ -93,7 +93,7 @@ public class UserRolesManagedBean implements Serializable {
 	
 	/**
 	 * Allows user to register to the application after checking the 
-	 * validity of their information.
+	 * validity of their information and logs them in.
 	 * 
 	 * @return Redirects to index.
 	 */
