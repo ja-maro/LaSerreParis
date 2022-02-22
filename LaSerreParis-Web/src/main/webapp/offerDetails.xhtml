@@ -64,12 +64,11 @@
 
 			<b:panel
 				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-3">
-				<h4>Vos coordonnées</h4>
+				<h3>Vos coordonnées</h3>
 				<p>#{mbUser.user.address}</p>
 				<p>#{mbSubscription.connectedUser.phone}</p>
-				<br />
-				<h4>Offre choisie :</h4>
-				<h4><c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">Premium </c:if>#{mbSubscription.offer.size.name}</h4>
+				<h3>Offre choisie :</h3>
+				<p><strong><c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">Premium </c:if>#{mbSubscription.offer.size.name}</strong></p>
 				<p>Une livraison par semaine pour #{mbSubscription.offer.size.displayHomeSize}</p>
 				<p>#{mbSubscription.offer.pricePerMonth} € par mois</p>
 			</b:panel>
