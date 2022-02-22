@@ -2,6 +2,7 @@ package fr.eql.ai110.laserre.idao.restaurant;
 import java.time.LocalDate;
 
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
+import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
 import fr.eql.ai110.laserre.idao.GenericIDAO;
 
@@ -10,9 +11,19 @@ public interface SocialTableBookingIDAO extends GenericIDAO<SocialTableBooking> 
 	/**
 	 * Sums all guests for the Social table at specified Day and BookingTime
 	 * 
-	 * @param date
-	 * @param time
+	 * @param date given day
+	 * @param time given BookingTime
 	 * @return sum of all
 	 */
 	Integer getTotalGuestNumberByBookedDateAndBookingTime(LocalDate date, BookingTime time);
+	
+	/**
+	 * Sums all guests for the Social table at specified Day and BookingTime for given SocialTable
+	 * 
+	 * @param date given day
+	 * @param time BookingTime
+	 * @param table given SocialTable
+	 * @return sum of all seats taken for given day and time for given SocialTable
+	 */
+	Integer getTotalGuestNumberByBookedDateAndBookingTimeAndSocialTable(LocalDate date, BookingTime time, SocialTable table);
 }

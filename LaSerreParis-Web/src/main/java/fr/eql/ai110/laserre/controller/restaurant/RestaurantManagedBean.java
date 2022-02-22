@@ -8,9 +8,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
+import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
+import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
 import fr.eql.ai110.laserre.ibusiness.restaurant.BookingIBusiness;
 
 @ManagedBean(name = "mbRestaurant")
@@ -22,10 +26,12 @@ public class RestaurantManagedBean implements Serializable {
 	private List<LocalDate> currentSevenDays;
 	private LocalDate today;
 	private Integer guestNumber;
-	
+	@ManagedProperty(value = "#{mbUser.user}")
+	private User connectedUser;
+
 	@EJB
 	private BookingIBusiness bookingBU;
-	
+
 	@PostConstruct
 	public void init() {
 		currentSevenDays = new ArrayList<LocalDate>();
@@ -36,7 +42,7 @@ public class RestaurantManagedBean implements Serializable {
 		}
 		guestNumber = 3;
 	}
-	
+
 	/**
 	 * Checks whether the given day is part of an opening period.
 	 * 
@@ -46,7 +52,7 @@ public class RestaurantManagedBean implements Serializable {
 	public Boolean isOpenDay(LocalDate day) {
 		return bookingBU.isOpenDay(day);
 	}
-	
+
 	/**
 	 * Get generic BookingTimes for given day, depending on which day of the week it is.
 	 * 
@@ -59,31 +65,73 @@ public class RestaurantManagedBean implements Serializable {
 	}
 
 	/**
-	 * Checks if booking of social table is possible for given time and date.
+	 * Checks if booking of social table is possible for given time and date and guestNumber of the ManagedBean.
 	 * 
 	 * @param day day to check
 	 * @param time time of day to check
 	 * @return true if booking is possible
 	 */
 	public Boolean isBookingPossibleSocial(LocalDate day, BookingTime time) {
-
-		System.out.println("@@@@@@@@@@@@@ RestaurantManagedBean  isBookingPossibleSocial ");
 		Boolean isPossible = false;
-		Integer availableSeats = bookingBU.getSocialSeatsAvailable(day, time);
-		System.out.println("@@@@@@@@@@@@@ RestaurantMB  isBookingPossibleSocial available seats : " + availableSeats);
+		Integer availableSeats = bookingBU.getMostSocialSeatsAvailable(day, time);
 		if (availableSeats >= guestNumber) {
 			isPossible = true;
 		}	
 		return isPossible;
 	}
-	
+
+	//TODO
 	public Boolean isWaitlistPossibleSocial(LocalDate day, BookingTime time) {
-		
+
 		//TODO
-		
+
 		return false;
 	}
-	
+	/**
+	 * Checks if booking of private table is possible for given time and date and guestNumber of the ManagedBean.
+	 * 
+	 * @param day day to check
+	 * @param time time of day to check
+	 * @return true if booking is possible
+	 */
+	public Boolean isBookingPossiblePrivate(LocalDate day, BookingTime time) {
+
+		//TODO
+
+		return false;
+	}
+
+	//TODO
+	public String bookSocial(LocalDate day, BookingTime time) {
+		String forward = null;
+		
+		if (connectedUser == null) {
+			forward = "/bookingDetailsSocial.xhtml?faces-redirection=true";
+		}
+		if (isBookingPossibleSocial(day, time)) {
+			SocialTableBooking booking = new SocialTableBooking();
+			booking.setBookedDate(day);
+			booking.setBookingTime(time);
+			booking.setGuestNumber(guestNumber);
+			booking.setUser(connectedUser);
+			
+			SocialTable table = bookingBU.getFirstAvailableSocialTableForGuestNumber(booking);
+			booking.setSocialTable(table);
+			booking.setBookingDate(LocalDate.now());
+			
+			bookingBU.saveSocial(booking);
+			
+			forward ="/user.xhtml?faces-redirection=false";
+		}
+		return forward;
+	}
+
+	//TODO
+	public String bookPrivate(LocalDate day, BookingTime time) {
+		//TODO
+		return null;
+	}
+
 	public List<LocalDate> getCurrentSevenDays() {
 		return currentSevenDays;
 	}
@@ -104,8 +152,8 @@ public class RestaurantManagedBean implements Serializable {
 	public void setGuestNumber(Integer guestNumber) {
 		this.guestNumber = guestNumber;
 	}
-	
-	
-	
-	
+
+
+
+
 }

@@ -16,23 +16,21 @@ public class SocialTableDAO extends GenericDAO<SocialTable> implements SocialTab
 
 	@Override
 	public Integer getTotalSeatsNotHidden() {
-
-
-		
-System.out.println("&&&&&&&&&&&&&&&& SocialTableDAO");
-		
 		Integer sumOfSeats = 0;
 		Query query = em.createQuery("SELECT st.seatsQuantity FROM SocialTable st WHERE st.hideDate IS NULL");
 
 		List<Integer> seatQuantities = query.getResultList();
 		
-		System.out.println("size " + seatQuantities.size());
-		
 		for (Integer seats : seatQuantities) {
 			sumOfSeats += seats;
 		}
-		System.out.println(sumOfSeats);
 		return sumOfSeats;
+	}
+
+	@Override
+	public List<SocialTable> getAllAvailable() {
+		Query query = em.createQuery("SELECT st FROM SocialTable st WHERE st.hideDate IS NULL");
+		return query.getResultList();
 	}
 	
 	

@@ -11,18 +11,31 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<div class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
+		<div
+			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
 
 			<p>Réservations</p>
-<b:iconAwesome value="comment" size="2x" />
-<b:iconAwesome value="cutlery" size="2x" />
+			<b:iconAwesome value="comment" size="2x" />
+			<b:iconAwesome value="cutlery" size="2x" />
 
-<b:label value="Aujourd'hui est un jour d'ouverture" rendered="#{mbRestaurant.isOpenDay(mbRestaurant.today)}" />
+			<b:label value="Aujourd'hui est un jour d'ouverture"
+				rendered="#{mbRestaurant.isOpenDay(mbRestaurant.today)}" />
+			<div class="flex-row-wrap">
+				<ui:repeat var="day" value="#{mbRestaurant.currentSevenDays}">
 
-				<ui:repeat var="bTime" value="#{mbRestaurant.getBookingTimes(mbRestaurant.today)}">
-					<p>#{bTime.time}</p>
-					<b:label value="SocialReservation possible" rendered="#{mbRestaurant.isBookingPossibleSocial(mbRestaurant.today, bTime)}" />
+					<div class="flex-column-nowrap">
+						<ui:repeat var="bTime"
+							value="#{mbRestaurant.getBookingTimes(day)}">
+							<p>
+								#{bTime.time}
+								<b:button icon="comment" icon-size="3x" look="link" action="#{mbRestaurant.bookSocial(day, bTime)}"
+									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" />
+								
+							</p>
+						</ui:repeat>
+					</div>
 				</ui:repeat>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>
