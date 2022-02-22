@@ -33,6 +33,11 @@ public class AccountBusiness implements AccountIBusiness {
 		return user;
 	}
 
+	/**
+	 * Formats user firstName to have first letter as upper case.
+	 * 
+	 * @param user user whose firstName will be formated
+	 */
 	private void capitalizeFirstName(User user) {
 		String firstName = user.getFirstName();
 		String s1 = firstName.substring(0, 1).toUpperCase();
@@ -42,6 +47,7 @@ public class AccountBusiness implements AccountIBusiness {
 	/**
 	 * Allows secure storage of passwords in database thanks to 
 	 * salting and hashing
+	 * 
 	 * @param salt String to salt the password with
 	 * @param password String to be salted and hashed
 	 * @return salted and hashed password
@@ -63,6 +69,7 @@ public class AccountBusiness implements AccountIBusiness {
 
 	/**
 	 * Generates a random alphanumeric String
+	 * 
 	 * @param length Length of generated String
 	 * @return random alphanumeric string of 'length' length
 	 */
