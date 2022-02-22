@@ -81,25 +81,36 @@ h1 {
 .logoNavbar {
 	position: relative;
 	top: -50%;
-	margin-right: 1rem;
 }
 
 .navbar-brand {
 	color: #FAECE1 !important;
 }
+.nav>li>a {
+	margin-right: 1rem;
+	min-width: 15rem;
+	text-align: center;
+}
 .nav>li>a:hover {
-	outline: 2px solid #FAECE1 !important;
-	outline-offset: 2px;
+	border-left: 2px solid #FAECE1 !important;
+	border-right: 2px solid #FAECE1 !important;
 	border-radius: 6px;
+	font-size: small;
 }
 .nav>li>a:focus {
-	outline: 2px solid #015738 !important;
-	outline-offset: -2px;
+	border-left: 2px solid #015738 !important;
+	border-right: 2px solid #015738 !important;
 	border-radius: 6px;
+	outline: none;
 }
 .deco-icon>a {
-	padding-top: 14.5px !important;
-	padding-bottom: 14.5px !important;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	min-width: 6rem !important;
+	margin-right: 1rem;
+}
+.deco-icon>a:hover {
+	font-size: 15px !important;
 }
 
 .footer-decoration {
