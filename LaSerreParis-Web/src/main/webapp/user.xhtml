@@ -9,6 +9,10 @@
 
 	<ui:define name="head">
 		<title>Votre espace</title>
+		<f:metadata>
+    <f:event type="preRenderView"
+        listener="#{mbUser.forbidIfUserNotLoggedIn()}" />
+</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">

@@ -1,5 +1,6 @@
 package fr.eql.ai110.laserre.controller.roles;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -9,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -77,6 +79,18 @@ public class UserRolesManagedBean implements Serializable {
 	}
 	
 	/**
+	 * Redirects unauthenticated user to login page
+	 * 
+	 * @throws IOException
+	 */
+	public void forbidIfUserNotLoggedIn() throws IOException {
+        if (!isConnected()) {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+        }
+    }
+	
+	/**
 	 * Disconnects the user by invalidating the session and erasing user data from the managedBean.
 	 * @return Redirects to login page.
 	 */
@@ -143,7 +157,7 @@ public class UserRolesManagedBean implements Serializable {
 				"Prénom inapproprié", "Votre prénom ne peut pas contenir de chiffres ou de caractères spéciaux.");
 			FacesContext.getCurrentInstance().addMessage("registerForm:inpFirstName", fMessage);
 		}
-		if (!validator.isNameSyntaxValid(lastName.trim())) {
+		if (!validator.isNameSyntaxValid(lastName.trim().toUpperCase())) {
 			isInfoValid = false;
 			FacesMessage fMessage = new FacesMessage(
 				FacesMessage.SEVERITY_WARN, 
