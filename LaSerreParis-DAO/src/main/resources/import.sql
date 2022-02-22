@@ -113,12 +113,17 @@ INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('5', 'Jeudi');
 INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('6', 'Vendredi');
 INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('7', 'Samedi');
 
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '2');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '2');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '3');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '3');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '4');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '4');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '5');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '5');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '5');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '5');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '5');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '6');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '6');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '6');
@@ -129,9 +134,4 @@ INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '7');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '7');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '7');
-INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '1');
-INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '1');
-INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '1');
-INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '1');
-INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '1');
 

@@ -16,6 +16,13 @@
 			<p>Réservations</p>
 <b:iconAwesome value="comment" size="2x" />
 <b:iconAwesome value="cutlery" size="2x" />
+
+<b:label value="Aujourd'hui est un jour d'ouverture" rendered="#{mbRestaurant.isOpenDay(mbRestaurant.today)}" />
+
+				<ui:repeat var="bTime" value="#{mbRestaurant.getBookingTimes(mbRestaurant.today)}">
+					<p>#{bTime.time}</p>
+					<b:label value="SocialReservation possible" rendered="#{mbRestaurant.isBookingPossibleSocial(mbRestaurant.today, bTime)}" />
+				</ui:repeat>
 		</div>
 	</ui:define>
 </ui:composition>
