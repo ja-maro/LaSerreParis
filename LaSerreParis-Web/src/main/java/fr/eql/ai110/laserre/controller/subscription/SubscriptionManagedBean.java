@@ -3,15 +3,15 @@ package fr.eql.ai110.laserre.controller.subscription;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.subscription.PremiumCrop;
@@ -61,6 +61,12 @@ public class SubscriptionManagedBean implements Serializable {
 
 	}
 
+	/**
+	 * Redirects to first step of subscription for selected offer.
+	 * 
+	 * @param detailedOffer selected offer
+	 * @return redirection to offerDetails.xhtml page for selected offer
+	 */
 	public String displayOfferDetails(SubscriptionOffer detailedOffer) {
 		String forward = null;
 
@@ -77,12 +83,22 @@ public class SubscriptionManagedBean implements Serializable {
 		return forward;
 	}
 
-
+	/**
+	 * Gets all premium crops customers are allowed to choose for upcoming subscriptions.
+	 * 
+	 * @return available premium crops
+	 */
 	public List<PremiumCrop> getAvailablePremiumCrops() {
 		return cropBU.getAllAvailablePremiumCrops();
 	}
 
 
+	/**
+	 * Gets all premium crops customers are allowed to choose for upcoming subscriptions as 
+	 * PremiumSubscriptionCrops objects for easier manipulation. Sets all quantities to 0.
+	 * 
+	 * @return List of PremiumSubscriptionCrops with quantity set to 0.
+	 */
 	public List<PremiumSubscriptionCrop> getPossibleCrops() {
 		List<PremiumSubscriptionCrop> result = new ArrayList<PremiumSubscriptionCrop>();
 		List<PremiumCrop> list = cropBU.getAllAvailablePremiumCrops();
@@ -96,9 +112,23 @@ public class SubscriptionManagedBean implements Serializable {
 	}
 
 
+	/**
+	 * Checks for duration validity, then saves user's subscriptions (if multiple) and generates all corresponding weeklyStatuses.
+	 * Redirects to user personal page or to premium crops selection page for premium soonest subscription.
+	 * 
+	 * @return Redirection
+	 */
 	public String subscribe() {
 		String forward = null;
 		Boolean isValid = true;
+		
+		if (duration > 4 ||duration < 1) {
+			FacesMessage fMessage = new FacesMessage(
+					FacesMessage.SEVERITY_WARN, 
+					"Durée d'abonnement invalide", "La durée d'abonnement doit être comprise entre 1 et 4 mois.");
+				FacesContext.getCurrentInstance().addMessage("registerForm:inpDuration", fMessage);
+				isValid = false;
+		}
 
 		if (isValid) {
 
@@ -123,7 +153,6 @@ public class SubscriptionManagedBean implements Serializable {
 					statusList.add(status);	
 				}		
 				sub.setWeeklyStatuses(statusList);
-
 				if (isSoonestSubscription) {
 					subscription = sub;
 					isSoonestSubscription = false;
@@ -140,7 +169,11 @@ public class SubscriptionManagedBean implements Serializable {
 		return forward;
 	}
 
-
+	/**
+	 * Checks if premium crops were selected appropriately, then adds them to the subscription and saves them.
+	 * 
+	 * @return Redirection to user personal page if success.
+	 */
 	public String selectCrops() {
 		String forward = null;
 		Boolean isValid = true;
@@ -180,8 +213,6 @@ public class SubscriptionManagedBean implements Serializable {
 			FacesMessages.info("Votre abonnement a été enregistré.");
 			forward = "/user.xhtml";	
 		}
-
-
 		return forward;
 	}
 
