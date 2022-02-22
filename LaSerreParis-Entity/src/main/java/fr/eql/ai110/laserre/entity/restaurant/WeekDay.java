@@ -1,7 +1,6 @@
 package fr.eql.ai110.laserre.entity.restaurant;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,49 +14,54 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "opening_day")
-public class OpeningDay implements Serializable {
+@Table(name = "week_day")
+public class WeekDay implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	@Column(name = "name")
+	private String name;
 	
-	@Column(name = "day")
-	private LocalDate day;
+	@OneToMany(mappedBy = "weekDay", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<WeeklyBookingTime> weeklyTimes;
+
 	
-	@OneToMany(mappedBy = "openingDay", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<DaySlot> daySlot;
+	public WeekDay() {}
 
-	public OpeningDay() {}
-
-	public OpeningDay(Integer id, LocalDate day, List<DaySlot> daySlot) {
+	public WeekDay(Integer id, String name, List<WeeklyBookingTime> weeklyTimes) {
 		super();
 		this.id = id;
-		this.day = day;
-		this.daySlot = daySlot;
+		this.name = name;
+		this.weeklyTimes = weeklyTimes;
 	}
 
+	
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public LocalDate getDay() {
-		return day;
-	}
-	public void setDay(LocalDate day) {
-		this.day = day;
-	}
-	public List<DaySlot> getDaySlot() {
-		return daySlot;
-	}
-	public void setDaySlot(List<DaySlot> daySlot) {
-		this.daySlot = daySlot;
+
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public List<WeeklyBookingTime> getWeeklyTimes() {
+		return weeklyTimes;
+	}
+
+	public void setWeeklyTimes(List<WeeklyBookingTime> weeklyTimes) {
+		this.weeklyTimes = weeklyTimes;
+	}
+	
 }

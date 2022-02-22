@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.eql.ai110.laserre.entity.restaurant.Booking;
-import fr.eql.ai110.laserre.entity.restaurant.DaySlot;
 
 @Entity
 @Table(name = "weekly_status")

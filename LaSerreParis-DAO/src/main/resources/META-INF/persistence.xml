@@ -23,9 +23,10 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 <class>fr.eql.ai110.laserre.entity.restaurant.RestaurantTable</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.PrivateTableBooking</class>
 <class>fr.eql.ai110.laserre.entity.restaurant.SocialTable</class>
-<class>fr.eql.ai110.laserre.entity.restaurant.DaySlot</class>
-<class>fr.eql.ai110.laserre.entity.restaurant.TimeSlot</class>
-<class>fr.eql.ai110.laserre.entity.restaurant.OpeningDay</class>
+<class>fr.eql.ai110.laserre.entity.restaurant.BookingTime</class>
+<class>fr.eql.ai110.laserre.entity.restaurant.WeeklyBookingTime</class>
+<class>fr.eql.ai110.laserre.entity.restaurant.WeekDay</class>
+<class>fr.eql.ai110.laserre.entity.restaurant.OpeningPeriod</class>
 
 <properties>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

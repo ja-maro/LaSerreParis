@@ -1,11 +1,11 @@
---ROLES
+-- ROLES
 
 INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', '���A`/r�Ouq�npű����;�6��{�(�Q', 'PQHA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Cécile', 'Dupont');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Guillaume', 'Verboise');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Fatima', 'Soussa');
 
---COMMENTS & CONTACT FORMS
+-- COMMENTS & CONTACT FORMS
 INSERT INTO `comment` (`submission_date`, `text`,  `validation_date`, `user_id`) VALUES ('2022-02-12', 'Ce fut une expérience incroyable, je recommande chaudement !', '2022-02-14', 1);
 INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'Top ces livraisons ! Des légumes bios et locaux, et régulièrement des découvertes délicieuses !', '2022-02-14', '2');
 INSERT INTO `comment` (`submission_date`, `text`, `validation_date`, `user_id`) VALUES ('2022-02-13', 'La Serre propose de multiples plats végétariens voire vegans, et dans un cadre impressionnant ! Enfin on peut ne pas se limiter quand on sort avec des amis.', '2022-02-14', '3');
@@ -21,7 +21,7 @@ INSERT INTO `contact_form_type` (name) VALUES ('Mon compte');
 INSERT INTO `contact_form_type` (name) VALUES ('Autre');
 INSERT INTO `contact_form` (`body`, `creation_date`, `email`, `name`, `title`, `type_id`) VALUES ('Bonjour ! Peut-on visiter la ferme ?', '2022-02-12', 'curieux@mail.net', 'Monsieur Curieux', 'Visite', '3');
 
---SUBSCRIPTIONS
+-- SUBSCRIPTIONS
 INSERT INTO `subscription_size` (`display_home_size`, `home_size_high`, `home_size_low`, `name`) VALUES ('1 personne', '1', '1', 'Small');
 INSERT INTO `subscription_size` (`display_home_size`, `home_size_high`, `home_size_low`, `name`) VALUES ('2/3 personnes', '3', '2', 'Medium');
 INSERT INTO `subscription_size` (`display_home_size`, `home_size_high`, `home_size_low`, `name`) VALUES ('4/5 personnes', '5', '4', 'Large');
@@ -79,9 +79,59 @@ INSERT INTO `laserre_paris_db`.`weekly_status` (`delivery_date`, `start_day`, `s
 INSERT INTO `laserre_paris_db`.`weekly_status` (`start_day`, `subscription_id`) VALUES ('2022-03-07', '1');
 INSERT INTO `laserre_paris_db`.`weekly_status` (`start_day`, `subscription_id`) VALUES ('2022-03-14', '1');
 
+-- RESTAURANT
 
+-- TABLES
+INSERT INTO `laserre_paris_db`.`social_table` (`seats_quantity`, `subscriptors_held_seats`) VALUES ('30', '6');
 
+INSERT INTO `laserre_paris_db`.`restaurant_table` (`max_guests`, `min_guests`) VALUES ('4', '3');
+INSERT INTO `laserre_paris_db`.`restaurant_table` (`max_guests`, `min_guests`) VALUES ('4', '3');
+INSERT INTO `laserre_paris_db`.`restaurant_table` (`max_guests`, `min_guests`) VALUES ('2', '1');
+INSERT INTO `laserre_paris_db`.`restaurant_table` (`max_guests`, `min_guests`) VALUES ('6', '5');
 
---RESTAURANT
+-- BOOKING
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-02-22', '2022-02-27');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-03-01', '2022-03-06');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-03-08', '2022-03-13');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-03-15', '2022-03-20');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-03-22', '2022-03-27');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-03-29', '2022-04-03');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-04-05', '2022-04-10');
+INSERT INTO `laserre_paris_db`.`opening_period` (`first_day`, `last_day`) VALUES ('2022-04-12', '2022-04-17');
 
+INSERT INTO `laserre_paris_db`.`booking_time` (`time`) VALUES ('12:00:00');
+INSERT INTO `laserre_paris_db`.`booking_time` (`time`) VALUES ('13:00:00');
+INSERT INTO `laserre_paris_db`.`booking_time` (`time`) VALUES ('19:00:00');
+INSERT INTO `laserre_paris_db`.`booking_time` (`time`) VALUES ('20:30:00');
+INSERT INTO `laserre_paris_db`.`booking_time` (`time`) VALUES ('22:00:00');
+
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('1', 'Dimanche');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('2', 'Lundi');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('3', 'Mardi');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('4', 'Mercredi');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('5', 'Jeudi');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('6', 'Vendredi');
+INSERT INTO `laserre_paris_db`.`week_day` (`id`, `name`) VALUES ('7', 'Samedi');
+
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '3');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '3');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '4');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '4');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '5');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '5');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '6');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '6');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '6');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '6');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '6');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '7');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '7');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '7');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '7');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '7');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('1', '1');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('2', '1');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('3', '1');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '1');
+INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '1');
 

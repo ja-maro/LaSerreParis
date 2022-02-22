@@ -32,6 +32,8 @@ public abstract class Booking implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+	@Column(name = "booked_date")
+	private LocalDate bookedDate;
 	@Column(name = "booking_date")
 	private LocalDate bookingDate;
 	@Column(name = "cancel_date")
@@ -43,9 +45,9 @@ public abstract class Booking implements Serializable {
 	@Column(name = "contact_info")
 	private String contactInfo;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "day_slot_id", referencedColumnName = "id")
-	private DaySlot daySlot;
+	@ManyToOne
+	@JoinColumn(referencedColumnName = "id")
+	private BookingTime bookingTime;
 	
 	@OneToOne(mappedBy = "booking")
 	private WeeklyStatus weeklyStatus;
@@ -57,22 +59,22 @@ public abstract class Booking implements Serializable {
 
 	public Booking() {}
 
-
-	public Booking(Integer id, LocalDate bookingDate, LocalDate cancelDate, String details, String name,
-			String contactInfo, DaySlot daySlot, WeeklyStatus weeklyStatus, User user) {
+	public Booking(Integer id, LocalDate bookedDate, LocalDate bookingDate, LocalDate cancelDate, String details,
+			String name, String contactInfo, BookingTime bookingTime, WeeklyStatus weeklyStatus, User user) {
 		super();
 		this.id = id;
+		this.bookedDate = bookedDate;
 		this.bookingDate = bookingDate;
 		this.cancelDate = cancelDate;
 		this.details = details;
 		this.name = name;
 		this.contactInfo = contactInfo;
-		this.daySlot = daySlot;
+		this.bookingTime = bookingTime;
 		this.weeklyStatus = weeklyStatus;
 		this.user = user;
 	}
-
-
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -109,11 +111,17 @@ public abstract class Booking implements Serializable {
 	public void setContactInfo(String contactInfo) {
 		this.contactInfo = contactInfo;
 	}
-	public DaySlot getDaySlot() {
-		return daySlot;
+	public LocalDate getBookedDate() {
+		return bookedDate;
 	}
-	public void setDaySlot(DaySlot dayslot) {
-		this.daySlot = dayslot;
+	public void setBookedDate(LocalDate bookedDate) {
+		this.bookedDate = bookedDate;
+	}
+	public BookingTime getBookingTime() {
+		return bookingTime;
+	}
+	public void setBookingTime(BookingTime bookingTime) {
+		this.bookingTime = bookingTime;
 	}
 	public WeeklyStatus getWeeklyStatus() {
 		return weeklyStatus;
