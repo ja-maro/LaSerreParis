@@ -17,12 +17,40 @@
 
 	<ui:define name="content">
 		<div style="margin: auto 0; min-width: 100%;">
+		
+		
+		<c:if test="#{mbUserBook.futureSocialBookings.size() > 0}">
+		<b:row>
+
+				<b:panel title="Réservations" look="success" col-sm="10"
+					offset-sm="1">	
+					
+					<c:if test="#{mbUserBook.futureSocialBookings.size() == 1}">
+					<h4>Réservation à venir :</h4>
+					</c:if>
+					<c:if test="#{mbUserBook.futureSocialBookings.size() > 1}">
+					<h4>Réservations à venir :</h4>
+					</c:if>
+					<ui:repeat value="#{mbUserBook.futureSocialBookings}" var="booking">
+					<div class="user-subscription-display">
+						<p>Le <strong>#{booking.bookedDate} à #{booking.bookingTime.time}</strong> pour #{booking.guestNumber} personne(s) </p>
+							<p>#{booking.details} </p>
+					</div>	
+					</ui:repeat> 
+
+				</b:panel>
+
+			</b:row>
+		</c:if>
+		
+		
 			<b:row>
 
 				<b:panel title="Abonnements" look="success" col-sm="10"
 					offset-sm="1">
 					<c:if test="#{mbUserSub.hasNoSubscription()}">
-					<p>Vous n'avez aucun abonnement en cours. Consultez nos offres !</p>
+					<p>Vous n'avez aucun abonnement en cours. </p>
+					<b:button look="success" href="#{request.contextPath}/offers.xhtml" value="Consultez nos offres !"/>
 					</c:if>
 					<c:if test="#{mbUserSub.activeSubscriptions.size() == 1}">
 					<h4>Abonnement en cours :</h4>
@@ -51,14 +79,22 @@
 				</b:panel>
 
 			</b:row>
+			
+			<c:if test="#{mbUserBook.hasNoSocialBooking()}">
 			<b:row>
 
 				<b:panel title="Réservations" look="success" col-sm="10"
-					offset-sm="1">
-					<p>espace utilisateur de #{mbUser.user.firstName}</p>
+					offset-sm="1">		
+					
+					<p>Vous n'avez pas de réservation actuellement. </p>
+					<b:button look="success" href="#{request.contextPath}/restaurant.xhtml" value="Venez au restaurant !"/>
+
 				</b:panel>
 
 			</b:row>
+			</c:if>
+			
+			
 		<c:if test="#{mbUserSub.hadSubscription()}">	
 			<b:row>
 
