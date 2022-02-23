@@ -9,6 +9,8 @@ import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
 
 public interface BookingIBusiness {
+	
+	static final int MAX_GUEST_NUMBER_FOR_BOOKING = 15;
 
 	/**
 	 * Checks if given day in part of an opening period.
@@ -49,5 +51,13 @@ public interface BookingIBusiness {
 	 * @return all SocialTableBookings of user
 	 */
 	List<SocialTableBooking> finbdAllSocialTableBookingByUser(User user);
+
+	/**
+	 * Checks whether the given number of guests is valid.
+	 * 
+	 * @param nbr number of guests to check
+	 * @return true if valid
+	 */
+	boolean checkGuestNumber(Integer nbr);
 
 }

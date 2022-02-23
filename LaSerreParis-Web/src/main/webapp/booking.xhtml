@@ -11,27 +11,31 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<div
-			class="col-sm-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-12 col-sm-10 col-md-8 col-lg-6">
+		<div class="body-container flex-column-nowrap align-items-center"
+			style="height: auto; min-height: 0;">
 
-			<p>Réservations</p>
-			<b:iconAwesome value="comment" size="2x" />
-			<b:iconAwesome value="cutlery" size="2x" />
+			<h1>Réservations</h1>
+		
 
 			<b:form id="bookingForm">
 			<div class="flex-row-wrap">
 			
 				<ui:repeat var="day" value="#{mbRestaurant.currentSevenDays}">
 
-					<div class="flex-column-nowrap">
-					<p> #{day.dayOfWeek.name()}"</p>
+					<div class="flex-column-nowrap" style="margin: 1rem;">
+					<p> #{day.dayOfWeek.name()}
+					<br/>#{day}</p>
 						<ui:repeat var="bTime"
 							value="#{mbRestaurant.getBookingTimes(day)}">
-							<p>
+							<p style="border-left: solid 1px black;">
 								#{bTime.time}
 								<b:commandButton look="link" action="#{mbRestaurant.bookSocial(day, bTime)}"
-									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" ><b:iconAwesome value="comment" size="4x" /></b:commandButton>
-								
+									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" >
+									<b:iconAwesome value="comment" size="4x" /></b:commandButton>
+								<b:iconAwesome value="comment" size="3x" style="color:grey;" 
+								rendered="#{!mbRestaurant.isBookingPossibleSocial(day, bTime)}" />
+								<b:iconAwesome value="cutlery" size="3x" style="color:grey;" 
+								rendered="true" />
 							</p>
 						</ui:repeat>
 					</div>

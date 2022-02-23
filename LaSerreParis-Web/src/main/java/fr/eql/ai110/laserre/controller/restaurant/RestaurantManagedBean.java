@@ -16,6 +16,7 @@ import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
 import fr.eql.ai110.laserre.ibusiness.restaurant.BookingIBusiness;
+import net.bootsfaces.utils.FacesMessages;
 
 @ManagedBean(name = "mbRestaurant")
 @SessionScoped
@@ -27,7 +28,7 @@ public class RestaurantManagedBean implements Serializable {
 	private LocalDate today;
 	private Integer guestNumber;
 	@ManagedProperty(value="#{mbUser}")
-    private UserRolesManagedBean mbUser;
+	private UserRolesManagedBean mbUser;
 
 	@EJB
 	private BookingIBusiness bookingBU;
@@ -40,18 +41,19 @@ public class RestaurantManagedBean implements Serializable {
 			LocalDate day = today.plusDays(i);
 			currentSevenDays.add(day);
 		}
-//		guestNumber = 3;
 	}
 
 	/**
+	 * Controls navigation towards booking.xhtml by verifying if guestNumber is valid.
 	 * 
-	 * 
-	 * @return
+	 * @return redirection to booking.xhtml
 	 */
 	public String displayBookings() {
 		String forward = null;
-		if (guestNumber != null && guestNumber > 0 && guestNumber < 16) {
+		if (bookingBU.checkGuestNumber(guestNumber)) {
 			forward = "booking.xhtml?faces-redirect=true";
+		}else {
+			FacesMessages.error("Erreur :", "Le nombre de convives n'est pas valide.");
 		}
 		return forward;
 	}
@@ -84,11 +86,11 @@ public class RestaurantManagedBean implements Serializable {
 	 */
 	public Boolean isBookingPossibleSocial(LocalDate day, BookingTime time) {
 		Boolean isPossible = false;
-		
+
 		SocialTableBooking booking = new SocialTableBooking(day, time, guestNumber);
 		System.out.println(booking.getBookedDate() + " " + booking.getGuestNumber() + " " + booking.getBookingTime().getTime());
 		SocialTable opentable = bookingBU.getFirstAvailableSocialTableForBooking(booking);
-		
+
 		if (opentable != null) {
 			isPossible = true;
 		}	
@@ -119,21 +121,23 @@ public class RestaurantManagedBean implements Serializable {
 	//TODO
 	public String bookSocial(LocalDate day, BookingTime time) {
 		String forward = null;
-		
-		if (!mbUser.isConnected()) {
-			forward = "/bookingDetailsSocial.xhtml?faces-redirection=true";
-		}
-		if (isBookingPossibleSocial(day, time)) {
-			SocialTableBooking booking = new SocialTableBooking(day, time, guestNumber);
-			booking.setUser(mbUser.getUser());
-	
-			SocialTable table = bookingBU.getFirstAvailableSocialTableForBooking(booking);
-			booking.setSocialTable(table);
-			booking.setBookingDate(LocalDate.now());
-			
-			bookingBU.saveSocial(booking);
-			
-			forward ="/user.xhtml?faces-redirection=false";
+
+		if (mbUser.isConnected()) {
+
+			if (isBookingPossibleSocial(day, time)) {
+				SocialTableBooking booking = new SocialTableBooking(day, time, guestNumber);
+				booking.setUser(mbUser.getUser());
+
+				SocialTable table = bookingBU.getFirstAvailableSocialTableForBooking(booking);
+				booking.setSocialTable(table);
+				booking.setBookingDate(LocalDate.now());
+
+				bookingBU.saveSocial(booking);
+
+				forward ="/user.xhtml?faces-redirection=false";
+			}
+		} else {
+			FacesMessages.error("Erreur :", "Vous devez être inscrit et authentifié pour continuer.");
 		}
 		return forward;
 	}
@@ -144,7 +148,7 @@ public class RestaurantManagedBean implements Serializable {
 		return null;
 	}
 
-	
+
 	public List<LocalDate> getCurrentSevenDays() {
 		return currentSevenDays;
 	}

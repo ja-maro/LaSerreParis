@@ -6,6 +6,8 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import javax.faces.application.FacesMessage;
+
 import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.OpeningPeriod;
@@ -29,8 +31,8 @@ public class BookingBusiness implements BookingIBusiness {
 	private SocialTableBookingIDAO socTBookingDAO;
 	@EJB
 	private SocialTableIDAO socTableDAO;
-	
-	
+
+
 	@Override
 	public Boolean isOpenDay(LocalDate day) {
 		Boolean isOpen = false;
@@ -93,5 +95,14 @@ public class BookingBusiness implements BookingIBusiness {
 		return list;
 	}
 
-	
+	@Override
+	public boolean checkGuestNumber(Integer nbr) {
+		Boolean isValid = false;
+		if (nbr != null && nbr > 0 && nbr <= MAX_GUEST_NUMBER_FOR_BOOKING) {
+			isValid = true;
+		}
+		return isValid;
+	}
+
+
 }
