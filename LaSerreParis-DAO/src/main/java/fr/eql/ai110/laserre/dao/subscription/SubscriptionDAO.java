@@ -17,7 +17,7 @@ public class SubscriptionDAO extends GenericDAO<Subscription> implements Subscri
 
 	@Override
 	public List<Subscription> getAllByUser(User user) {
-		Query query = em.createQuery("SELECT s FROM Subscription s WHERE s.user = :userParam");
+		Query query = em.createQuery("SELECT s FROM Subscription s WHERE s.user = :userParam ORDER BY s.period.startDate");
 		query.setParameter("userParam", user);
 		return query.getResultList();
 	}
