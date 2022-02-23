@@ -1,6 +1,8 @@
 -- ROLES
 
 INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('Jean-Antoine', 'Maro', 'jeanantoine.maro@gmail.com', '���A`/r�Ouq�npű����;�6��{�(�Q', 'PQHA', '2022-02-10', '0674809592', '57 avenue de la République 75011 Paris', '1990-03-27', '1');
+INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('VisiteurCDA', 'ANONYME', 'visiteur@cda.eql', '��+�k/4p|,��q]{*k���،��jOk�', 'y8LC', '2022-02-10', '01 00 00 00 00', '9 Bd du Général de Gaulle, 92120 Montrouge', '1990-03-27', '10');
+INSERT INTO `user` (`first_name`, `last_name`, `email`, `password`, `salt`, `mail_validation_date`, `phone`, `address`, `birth`, `home_size`) VALUES ('VisiteurCDA2', 'ANONYME', 'visiteur@cda.eql2', 'EU���&����L���?�#�G��*�F�Y', 'Iy1N', '2022-02-10', '01 00 00 00 00', '9 Bd du Général de Gaulle, 92120 Montrouge', '1990-03-27', '10');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Cécile', 'Dupont');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Guillaume', 'Verboise');
 INSERT INTO `user` (`first_name`, `last_name`) VALUES ('Fatima', 'Soussa');
@@ -63,6 +65,14 @@ INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_
 INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '2', '1', '1');
 INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '3', '1', '1');
 INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '4', '1', '1');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '1', '3', '2');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '2', '3', '2');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '3', '3', '2');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '4', '3', '2');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '1', '1', '3');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '2', '1', '3');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '3', '1', '3');
+INSERT INTO `subscription` (`subscription_date`, `period_id`, `offer_id`, `user_id`) VALUES ('2021-09-15', '4', '1', '3');
 
 
 INSERT INTO `laserre_paris_db`.`weekly_status` (`delivery_date`, `delivery_decision_date`, `start_day`, `subscription_id`) VALUES ('2021-12-25', '2021-12-21', '2021-12-20', '1');
