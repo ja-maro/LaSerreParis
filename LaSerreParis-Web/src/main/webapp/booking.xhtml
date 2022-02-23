@@ -18,24 +18,28 @@
 			<b:iconAwesome value="comment" size="2x" />
 			<b:iconAwesome value="cutlery" size="2x" />
 
-			<b:label value="Aujourd'hui est un jour d'ouverture"
-				rendered="#{mbRestaurant.isOpenDay(mbRestaurant.today)}" />
+			<b:form id="bookingForm">
 			<div class="flex-row-wrap">
+			
 				<ui:repeat var="day" value="#{mbRestaurant.currentSevenDays}">
 
 					<div class="flex-column-nowrap">
+					<p> #{day.dayOfWeek.name()}"</p>
 						<ui:repeat var="bTime"
 							value="#{mbRestaurant.getBookingTimes(day)}">
 							<p>
 								#{bTime.time}
-								<b:button icon="comment" icon-size="3x" look="link" action="#{mbRestaurant.bookSocial(day, bTime)}"
-									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" />
+								<b:commandButton look="link" action="#{mbRestaurant.bookSocial(day, bTime)}"
+									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" ><b:iconAwesome value="comment" size="4x" /></b:commandButton>
 								
 							</p>
 						</ui:repeat>
 					</div>
 				</ui:repeat>
+				
 			</div>
+			</b:form>
+			<b:button look="success" href="#{request.contextPath}/restaurant.xhtml" value="Retour"/>
 		</div>
 	</ui:define>
 </ui:composition>

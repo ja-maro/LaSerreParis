@@ -44,10 +44,23 @@
 							gaspillage alimentaire et de tirer le meilleur parti de chaque
 							produit.</p>
 						<p>
-							Horaires d'ouverture :<br /> Du Mardi au Dimanche : 12.00 - 23.00
+							Horaires d'ouverture :<br /> Du Mardi au Dimanche : 12.00 -
+							23.00
 						</p>
-						<b:button look="success" value="Réserver"
-							href="#{request.contextPath}/booking.xhtml" />
+						<b:form id="restaurantForm">
+						Nombre de convives : <b:slider2 min="1" max="15"
+								handleShape="md square" span="11"
+								value="#{mbRestaurant.guestNumber}"
+								style-class="margin-top-2rem" />
+							<b:commandButton value="Réserver" look="success"
+								action="#{mbRestaurant.displayBookings()}" />
+							<br />
+							<p>
+								Pour les grands groupes, <a
+									href="#{request.contextPath}/contact.xhtml">contactez-nous</a>
+								directement.
+							</p>
+						</b:form>
 					</div>
 				</div>
 			</div>

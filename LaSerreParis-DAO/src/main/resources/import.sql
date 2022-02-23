@@ -135,3 +135,7 @@ INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('4', '7');
 INSERT INTO `laserre_paris_db`.`weekly_booking_time` (`bookingTime_id`, `weekDay_id`) VALUES ('5', '7');
 
+INSERT INTO `laserre_paris_db`.`booking` (`booking_type`, `id`, `booked_date`, `booking_date`, `bookingTime_id`, `user_id`) VALUES ('social', '1', '2022-02-26', '2022-02-23', '1', '1');
+INSERT INTO `laserre_paris_db`.`social_table_booking` (`guest_number`, `id`, `socialTable_id`) VALUES ('30', '1', '1');
+
+

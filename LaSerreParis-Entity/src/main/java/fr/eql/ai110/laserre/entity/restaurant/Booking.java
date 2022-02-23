@@ -58,6 +58,16 @@ public abstract class Booking implements Serializable {
 	
 
 	public Booking() {}
+	
+	
+
+	public Booking(LocalDate bookedDate, BookingTime bookingTime) {
+		super();
+		this.bookedDate = bookedDate;
+		this.bookingTime = bookingTime;
+	}
+
+
 
 	public Booking(Integer id, LocalDate bookedDate, LocalDate bookingDate, LocalDate cancelDate, String details,
 			String name, String contactInfo, BookingTime bookingTime, WeeklyStatus weeklyStatus, User user) {

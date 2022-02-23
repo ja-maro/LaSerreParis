@@ -3,6 +3,7 @@ package fr.eql.ai110.laserre.ibusiness.restaurant;
 import java.time.LocalDate;
 import java.util.List;
 
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
@@ -26,28 +27,12 @@ public interface BookingIBusiness {
 	List<BookingTime> getBookingTimes(LocalDate day);
 	
 	/**
-	 * Highest number of seats not booked or on waitlist on a social table for the given BookingTime and date
-	 * 
-	 * @param date given date
-	 * @param time given BookingTime
-	 * @return Sum of all seats booked or on waitlist 
-	 */
-	Integer getMostSocialSeatsAvailable(LocalDate date, BookingTime time);
-
-	/**
-	 * Returns all non hidden SocialTables
-	 * 
-	 * @return available social tables
-	 */
-	List<SocialTable> getAllAvailableSocialTables();
-	
-	/**
 	 * Returns any SocialTable with enough empty seats for the given booking.
 	 * 
 	 * @param booking the SocialTableBooking needing a table
 	 * @return SocialTable with enough free seats
 	 */
-	SocialTable getFirstAvailableSocialTableForGuestNumber(SocialTableBooking booking);
+	SocialTable getFirstAvailableSocialTableForBooking(SocialTableBooking booking);
 	
 	/**
 	 * Saves given booking to BDD.
@@ -56,5 +41,13 @@ public interface BookingIBusiness {
 	 * @return saved booking
 	 */
 	SocialTableBooking saveSocial(SocialTableBooking booking);
+	
+	/**
+	 * Returns all SocialTableBookings of given User and sorts them.
+	 * 
+	 * @param user whose SocialtableBookings are needed
+	 * @return all SocialTableBookings of user
+	 */
+	List<SocialTableBooking> finbdAllSocialTableBookingByUser(User user);
 
 }

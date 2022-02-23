@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import fr.eql.ai110.laserre.entity.User;
+import fr.eql.ai110.laserre.controller.roles.UserRolesManagedBean;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
@@ -26,8 +26,8 @@ public class RestaurantManagedBean implements Serializable {
 	private List<LocalDate> currentSevenDays;
 	private LocalDate today;
 	private Integer guestNumber;
-	@ManagedProperty(value = "#{mbUser.user}")
-	private User connectedUser;
+	@ManagedProperty(value="#{mbUser}")
+    private UserRolesManagedBean mbUser;
 
 	@EJB
 	private BookingIBusiness bookingBU;
@@ -40,9 +40,21 @@ public class RestaurantManagedBean implements Serializable {
 			LocalDate day = today.plusDays(i);
 			currentSevenDays.add(day);
 		}
-		guestNumber = 3;
+//		guestNumber = 3;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public String displayBookings() {
+		String forward = null;
+		if (guestNumber != null && guestNumber > 0 && guestNumber < 16) {
+			forward = "booking.xhtml?faces-redirect=true";
+		}
+		return forward;
+	}
 	/**
 	 * Checks whether the given day is part of an opening period.
 	 * 
@@ -60,7 +72,6 @@ public class RestaurantManagedBean implements Serializable {
 	 * @return List of all BookingTimes for given day.
 	 */
 	public List<BookingTime> getBookingTimes(LocalDate day) {
-		int weekDayId = day.getDayOfWeek().getValue();
 		return bookingBU.getBookingTimes(day);
 	}
 
@@ -73,8 +84,12 @@ public class RestaurantManagedBean implements Serializable {
 	 */
 	public Boolean isBookingPossibleSocial(LocalDate day, BookingTime time) {
 		Boolean isPossible = false;
-		Integer availableSeats = bookingBU.getMostSocialSeatsAvailable(day, time);
-		if (availableSeats >= guestNumber) {
+		
+		SocialTableBooking booking = new SocialTableBooking(day, time, guestNumber);
+		System.out.println(booking.getBookedDate() + " " + booking.getGuestNumber() + " " + booking.getBookingTime().getTime());
+		SocialTable opentable = bookingBU.getFirstAvailableSocialTableForBooking(booking);
+		
+		if (opentable != null) {
 			isPossible = true;
 		}	
 		return isPossible;
@@ -105,17 +120,14 @@ public class RestaurantManagedBean implements Serializable {
 	public String bookSocial(LocalDate day, BookingTime time) {
 		String forward = null;
 		
-		if (connectedUser == null) {
+		if (!mbUser.isConnected()) {
 			forward = "/bookingDetailsSocial.xhtml?faces-redirection=true";
 		}
 		if (isBookingPossibleSocial(day, time)) {
-			SocialTableBooking booking = new SocialTableBooking();
-			booking.setBookedDate(day);
-			booking.setBookingTime(time);
-			booking.setGuestNumber(guestNumber);
-			booking.setUser(connectedUser);
-			
-			SocialTable table = bookingBU.getFirstAvailableSocialTableForGuestNumber(booking);
+			SocialTableBooking booking = new SocialTableBooking(day, time, guestNumber);
+			booking.setUser(mbUser.getUser());
+	
+			SocialTable table = bookingBU.getFirstAvailableSocialTableForBooking(booking);
 			booking.setSocialTable(table);
 			booking.setBookingDate(LocalDate.now());
 			
@@ -132,6 +144,7 @@ public class RestaurantManagedBean implements Serializable {
 		return null;
 	}
 
+	
 	public List<LocalDate> getCurrentSevenDays() {
 		return currentSevenDays;
 	}
@@ -144,13 +157,17 @@ public class RestaurantManagedBean implements Serializable {
 	public void setToday(LocalDate today) {
 		this.today = today;
 	}
-
 	public Integer getGuestNumber() {
 		return guestNumber;
 	}
-
 	public void setGuestNumber(Integer guestNumber) {
 		this.guestNumber = guestNumber;
+	}
+	public UserRolesManagedBean getMbUser() {
+		return mbUser;
+	}
+	public void setMbUser(UserRolesManagedBean mbUser) {
+		this.mbUser = mbUser;
 	}
 
 

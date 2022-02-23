@@ -29,6 +29,7 @@ public class SocialTableDAO extends GenericDAO<SocialTable> implements SocialTab
 
 	@Override
 	public List<SocialTable> getAllAvailable() {
+		List<SocialTable> list = null;
 		Query query = em.createQuery("SELECT st FROM SocialTable st WHERE st.hideDate IS NULL");
 		return query.getResultList();
 	}

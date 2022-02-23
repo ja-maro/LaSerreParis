@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import fr.eql.ai110.laserre.entity.User;
+import fr.eql.ai110.laserre.entity.subscription.WeeklyStatus;
+
 @Entity
 @DiscriminatorValue("social")
 @Table(name = "social_table_booking")
@@ -28,6 +31,15 @@ public class SocialTableBooking extends Booking implements Serializable {
 
 	
 	public SocialTableBooking() {}
+	
+	
+
+	public SocialTableBooking(LocalDate bookedDate, BookingTime bookingTime, Integer guestNumber) {
+		super(bookedDate, bookingTime);
+		this.guestNumber = guestNumber;
+	}
+
+
 
 	public SocialTableBooking(Integer guestNumber, LocalDate waitlistInscriptionDate, SocialTable socialTable) {
 		super();

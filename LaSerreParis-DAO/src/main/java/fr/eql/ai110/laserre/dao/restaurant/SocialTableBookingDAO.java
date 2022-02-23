@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 import fr.eql.ai110.laserre.dao.GenericDAO;
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTableBooking;
@@ -33,6 +34,7 @@ public class SocialTableBookingDAO extends GenericDAO<SocialTableBooking> implem
 		return sumOfGuests;
 	}
 
+	@Override
 	public Integer getTotalGuestNumberByBookedDateAndBookingTimeAndSocialTable(LocalDate date, BookingTime time, SocialTable table) {
 		Integer sumOfGuests = 0;
 		Query query = em.createQuery("SELECT b.guestNumber FROM SocialTableBooking b "
@@ -42,10 +44,18 @@ public class SocialTableBookingDAO extends GenericDAO<SocialTableBooking> implem
 		query.setParameter("tableParam", table);
 
 		List<Integer> bookingGuests = query.getResultList();
-
-		for (Integer guestNumber : bookingGuests) {
-			sumOfGuests += guestNumber;
+		if (bookingGuests.size() > 0) {
+			for (Integer guestNumber : bookingGuests) {
+				sumOfGuests += guestNumber;
+			}
 		}
 		return sumOfGuests;
+	}
+
+	@Override
+	public List<SocialTableBooking> getAllByUser(User user) {
+		Query query = em.createQuery("SELECT b FROM SocialTableBooking b WHERE b.user = :userParam");
+		query.setParameter("userParam", user);
+		return query.getResultList();
 	}
 }

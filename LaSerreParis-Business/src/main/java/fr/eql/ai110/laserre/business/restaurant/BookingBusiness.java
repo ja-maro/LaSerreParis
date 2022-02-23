@@ -2,11 +2,11 @@ package fr.eql.ai110.laserre.business.restaurant;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import fr.eql.ai110.laserre.entity.User;
 import fr.eql.ai110.laserre.entity.restaurant.BookingTime;
 import fr.eql.ai110.laserre.entity.restaurant.OpeningPeriod;
 import fr.eql.ai110.laserre.entity.restaurant.SocialTable;
@@ -48,37 +48,16 @@ public class BookingBusiness implements BookingIBusiness {
 	}
 
 	@Override
-	public Integer getMostSocialSeatsAvailable(LocalDate date, BookingTime time) {	
-		int availableSeats = 0;
-		int mostAvailableSeats = 0;
+	public SocialTable getFirstAvailableSocialTableForBooking(SocialTableBooking booking) {
+		SocialTable openTable = null;
 		List<SocialTable> tables = socTableDAO.getAllAvailable();
-		for (SocialTable table : tables) {
-			availableSeats = table.getSeatsQuantity() - socTBookingDAO.getTotalGuestNumberByBookedDateAndBookingTimeAndSocialTable(date, time, table);
-			if (availableSeats > mostAvailableSeats) {
-				mostAvailableSeats = availableSeats;
-			}
-		}
-		return mostAvailableSeats;
-		
-//		Integer availableSeats = socTableDAO.getTotalSeatsNotHidden();
-//		Integer bookedSeats = socTBookingDAO.getTotalGuestNumberByBookedDateAndBookingTime(date, time);
-//		return availableSeats - bookedSeats;
-
-	}
-
-	@Override
-	public List<SocialTable> getAllAvailableSocialTables() {
-		return socTableDAO.getAllAvailable();
-	}
-
-	@Override
-	public SocialTable getFirstAvailableSocialTableForGuestNumber(SocialTableBooking booking) {
-		for ( SocialTable table : getAllAvailableSocialTables()) {
+		for ( SocialTable table : tables) {
 			if (hasEnoughSeats(table, booking.getGuestNumber(), booking.getBookedDate(), booking.getBookingTime())) {
-				
-			}
+				openTable = table;
+				break;
+			} 
 		}
-		return null;
+		return openTable;
 	}
 
 	/**
@@ -90,9 +69,10 @@ public class BookingBusiness implements BookingIBusiness {
 	 * @param time
 	 * @return true if the booking can happen
 	 */
-	private boolean hasEnoughSeats(SocialTable table, Integer guestNumber, LocalDate date, BookingTime time) {
+	public boolean hasEnoughSeats(SocialTable table, Integer guestNumber, LocalDate date, BookingTime time) {
 		Boolean hasEnoughSeats = false;
-		int availableSeats = socTBookingDAO.getTotalGuestNumberByBookedDateAndBookingTimeAndSocialTable(date, time, table);
+		int bookedSeats = socTBookingDAO.getTotalGuestNumberByBookedDateAndBookingTimeAndSocialTable(date, time, table);
+		int availableSeats = table.getSeatsQuantity() - bookedSeats;
 		if (availableSeats - guestNumber >= 0) {
 			hasEnoughSeats = true;
 		}
@@ -102,6 +82,15 @@ public class BookingBusiness implements BookingIBusiness {
 	@Override
 	public SocialTableBooking saveSocial(SocialTableBooking booking) {
 		return socTBookingDAO.add(booking);
+	}
+
+	@Override
+	public List<SocialTableBooking> finbdAllSocialTableBookingByUser(User user) {
+		List<SocialTableBooking> list = socTBookingDAO.getAllByUser(user);
+
+		list.sort((o1,o2) -> o1.getBookingTime().getTime().compareTo(o2.getBookingTime().getTime()));
+		list.sort((o1,o2) -> o1.getBookedDate().compareTo(o2.getBookedDate()));
+		return list;
 	}
 
 	
