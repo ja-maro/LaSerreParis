@@ -2,8 +2,10 @@ package fr.eql.ai110.laserre.controller.restaurant;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -146,6 +148,16 @@ public class RestaurantManagedBean implements Serializable {
 	public String bookPrivate(LocalDate day, BookingTime time) {
 		//TODO
 		return null;
+	}
+	
+	/**
+	 * Formats a LocalDate as a String in french language, following pattern "lun. 12/03".
+	 * 
+	 * @param date LocalDate to format
+	 * @return formatted date as a String
+	 */
+	public String formatDateShort(LocalDate date) {
+		return date.format(DateTimeFormatter.ofPattern("EEE dd/MM",Locale.FRENCH));
 	}
 
 

@@ -483,3 +483,7 @@ strong {
 	transition: 5s;
 	color: #015738;
 }
+.booking-item {
+	border-left: solid 1px black;
+	padding-left: 1rem;
+}

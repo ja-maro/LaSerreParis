@@ -2,8 +2,10 @@ package fr.eql.ai110.laserre.controller.subscription;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -57,18 +59,53 @@ public class UserSubscriptionManagedbean implements Serializable {
 		}
 	}
 	
+	/**
+	 * Checks whether active user has no active or future subscription.
+	 * 
+	 * @return true if hasn't any
+	 */
 	public boolean hasNoSubscription() {
 		return (futureSubscriptions.isEmpty() && activeSubscriptions.isEmpty());
 	}
+	/**
+	 * Checks whether active user has any past subscription.
+	 * 
+	 * @return true if had at least one.
+	 */
 	public boolean hadSubscription() {
 		return (!pastSubscriptions.isEmpty());
 	}
 	
+	/**
+	 * Calculates date of end of given Subscription period (based on its startDate and duration).
+	 * 
+	 * @param period of which end date is needed
+	 * @return period's end date
+	 */
 	public LocalDate displayEndOfperiod(SubscriptionPeriod period) {
 		return periodBU.calculateEndDate(period);
 	}
 	
+	/**
+	 * Formats a LocalDate as a String in french language, following pattern "lundi 12 mars 2020".
+	 * 
+	 * @param date LocalDate to format
+	 * @return formatted date as a String
+	 */
+	public String formatDateFull(LocalDate date) {
+		return date.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy",Locale.FRENCH));
+	}
+	/**
+	 * Formats a LocalDate as a String in french language, following pattern "lundi 12 mars".
+	 * 
+	 * @param date LocalDate to format
+	 * @return formatted date as a String
+	 */
+	public String formatDateNoYear(LocalDate date) {
+		return date.format(DateTimeFormatter.ofPattern("EEEE dd MMMM",Locale.FRENCH));
+	}
 	
+
 
 	public User getConnectedUser() {
 		return connectedUser;

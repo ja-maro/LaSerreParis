@@ -33,7 +33,7 @@
 					</c:if>
 					<ui:repeat value="#{mbUserBook.futureSocialBookings}" var="booking">
 					<div class="user-subscription-display">
-						<p>Le <strong>#{booking.bookedDate} à #{booking.bookingTime.time}</strong> pour #{booking.guestNumber} personne(s) </p>
+						<p>Le <strong>#{mbUserSub.formatDateNoYear(booking.bookedDate)} à #{booking.bookingTime.time}</strong> pour #{booking.guestNumber} personne(s) </p>
 							<p>#{booking.details} </p>
 					</div>	
 					</ui:repeat> 
@@ -61,7 +61,7 @@
 					<ui:repeat value="#{mbUserSub.activeSubscriptions}" var="sub">
 					<div class="user-subscription-display">
 						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
-							<p>du #{sub.period.startDate} au #{mbUserSub.displayEndOfperiod(sub.period)} </p>
+							<p>Du #{mbUserSub.formatDateFull(sub.period.startDate)} au #{mbUserSub.formatDateFull(mbUserSub.displayEndOfperiod(sub.period))} </p>
 					</div>	
 					</ui:repeat> 
 					<c:if test="#{mbUserSub.futureSubscriptions.size() == 1}">
@@ -73,7 +73,7 @@
 					<ui:repeat value="#{mbUserSub.futureSubscriptions}" var="sub">
 					<div class="user-subscription-display future">
 						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
-							<p>Commence le #{sub.period.startDate} (fin le #{mbUserSub.displayEndOfperiod(sub.period)}) </p>
+							<p>Commence #{mbUserSub.formatDateFull(sub.period.startDate)} (fin #{mbUserSub.formatDateFull(mbUserSub.displayEndOfperiod(sub.period))}) </p>
 					</div>	
 					</ui:repeat> 
 				</b:panel>
@@ -103,7 +103,7 @@
 					<ui:repeat value="#{mbUserSub.pastSubscriptions}" var="sub">
 					<div class="user-subscription-display past">
 						<p><strong>#{sub.period.season.name} : #{sub.offer.size.name} #{sub.offer.size.displayHomeSize}</strong> #{sub.offer.pricePerMonth}€/mois</p>
-							<p>Terminée le #{mbUserSub.displayEndOfperiod(sub.period)} (début #{sub.period.startDate})</p>
+							<p>Terminé depuis le #{mbUserSub.formatDateFull(mbUserSub.displayEndOfperiod(sub.period))} (début #{mbUserSub.formatDateFull(sub.period.startDate)})</p>
 					</div>	
 					</ui:repeat> 
 				</b:panel>

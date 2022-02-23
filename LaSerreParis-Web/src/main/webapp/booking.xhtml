@@ -15,35 +15,74 @@
 			style="height: auto; min-height: 0;">
 
 			<h1>Réservations</h1>
-		
 
 			<b:form id="bookingForm">
-			<div class="flex-row-wrap">
-			
-				<ui:repeat var="day" value="#{mbRestaurant.currentSevenDays}">
+				<div class="flex-row-wrap">
 
-					<div class="flex-column-nowrap" style="margin: 1rem;">
-					<p> #{day.dayOfWeek.name()}
-					<br/>#{day}</p>
-						<ui:repeat var="bTime"
-							value="#{mbRestaurant.getBookingTimes(day)}">
-							<p style="border-left: solid 1px black;">
-								#{bTime.time}
-								<b:commandButton look="link" action="#{mbRestaurant.bookSocial(day, bTime)}"
-									rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}" >
-									<b:iconAwesome value="comment" size="4x" /></b:commandButton>
-								<b:iconAwesome value="comment" size="3x" style="color:grey;" 
-								rendered="#{!mbRestaurant.isBookingPossibleSocial(day, bTime)}" />
-								<b:iconAwesome value="cutlery" size="3x" style="color:grey;" 
-								rendered="true" />
-							</p>
-						</ui:repeat>
-					</div>
-				</ui:repeat>
-				
-			</div>
+					<ui:repeat var="day" value="#{mbRestaurant.currentSevenDays}">
+						<div class="flex-column-nowrap"
+							style="margin: 1rem; min-width: 20rem; margin-top: 3rem;">
+							<p>#{mbRestaurant.formatDateShort(day)}</p>
+							<ui:repeat var="bTime"
+								value="#{mbRestaurant.getBookingTimes(day)}">
+								<div class="booking-item">
+									#{bTime.time}
+									<b:commandButton look="link"
+										action="#{mbRestaurant.bookSocial(day, bTime)}" style="color:#015738;"
+										rendered="#{mbRestaurant.isBookingPossibleSocial(day, bTime)}">
+										<b:iconAwesome value="comment" size="4x" />
+									</b:commandButton>
+
+									<b:commandButton look="link" disabled="true"
+										rendered="#{!mbRestaurant.isBookingPossibleSocial(day, bTime)}">
+										<b:iconAwesome value="comment" size="4x" style="color:grey;" />
+									</b:commandButton>
+
+									<b:commandButton look="link"
+										action="#{mbRestaurant.bookPrivate(day, bTime)}"  style="color:#015738;"
+										rendered="#{mbRestaurant.isBookingPossiblePrivate(day, bTime)}">
+										<b:iconAwesome value="cutlery" size="4x" />
+									</b:commandButton>
+
+									<b:commandButton look="link" disabled="true"
+										rendered="#{!mbRestaurant.isBookingPossiblePrivate(day, bTime)}">
+										<b:iconAwesome value="cutlery" size="4x" style="color:grey;" />
+									</b:commandButton>
+								</div>
+							</ui:repeat>
+						</div>
+					</ui:repeat>
+				</div>
 			</b:form>
-			<b:button look="success" href="#{request.contextPath}/restaurant.xhtml" value="Retour"/>
+			
+								<div class="flex-row-wrap" style="width: 100%; justify-content: space-evenly;">
+								<div class="flex-column-nowrap align-items-center lsp-padding-1rem">
+								<div>
+								<b:iconAwesome value="comment" size="3x"  style="color:#015738;" />
+								<b:iconAwesome value="cutlery" size="3x"  style="color:#015738;" />
+								</div>
+								Réservation possible
+								</div>
+								<div class="flex-column-nowrap align-items-center lsp-padding-1rem">
+								<div>
+								<b:iconAwesome value="comment" size="3x" style="color:grey;" />
+								<b:iconAwesome value="cutlery" size="3x" style="color:grey;" />
+								</div>
+								Plus assez de places
+								</div>
+								
+								<div class="flex-column-nowrap align-items-center lsp-padding-1rem">
+								<div>
+								<b:iconAwesome value="comment" size="3x" style="color:orange;" />
+								</div>
+								File d'attente en table sociale 
+								</div>
+								<div class="lsp-padding-1rem">
+								<b:button look="success"
+				href="#{request.contextPath}/restaurant.xhtml" value="Retour" style="padding: 1rem 3rem; margin-top: 1rem;" />
+								</div>
+								</div>
+								
 		</div>
 	</ui:define>
 </ui:composition>
