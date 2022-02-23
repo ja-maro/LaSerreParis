@@ -97,8 +97,6 @@ h1 {
 	border-left: 2px solid #FAECE1 !important;
 	border-right: 2px solid #FAECE1 !important;
 	border-radius: 6px;
-	_font-size: small;
-	_color: #d9cbc1 !important;
 	color: white !important;
 }
 .nav>li>a:focus {
@@ -106,6 +104,7 @@ h1 {
 	border-right: 2px solid #015738 !important;
 	border-radius: 6px;
 	outline: none;
+	color: #015738 !important;
 }
 .deco-icon>a {
 	padding-top: 15px !important;
@@ -468,4 +467,19 @@ strong {
 		padding: 10rem 10rem;
 		margin-top: 5rem;
 	}
+}
+#cropsForm\:harvest-calculator-btn {
+	color: #00a1a1;
+	border-radius: 50%;
+	outline: solid 0px #00a1a1;
+}
+#cropsForm\:harvest-calculator-btn:focus {
+	outline: none;
+}
+#cropsForm\:harvest-calculator-btn:hover {
+	_outline: dotted 1px #00a1a1;
+	_outline-offset: -10px;
+	transform: rotate(360deg);
+	transition: 5s;
+	color: #015738;
 }

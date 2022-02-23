@@ -212,6 +212,7 @@ public class SubscriptionManagedBean implements Serializable {
 			subBU.updateSubscription(subscription);
 			FacesMessages.info("Votre abonnement a été enregistré.");
 			forward = "/user.xhtml";	
+			subscribedCrops = getPossibleCrops();
 		}
 		return forward;
 	}

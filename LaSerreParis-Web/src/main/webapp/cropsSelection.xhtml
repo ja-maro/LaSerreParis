@@ -9,6 +9,7 @@
 <ui:composition template="/arch.xhtml">
 	<ui:define name="head">
 		<title>Choix des variétés</title>
+		 <script type="text/javascript" src="#{request.contextPath}/resources/script/harvestCalculator.js"></script>
 	</ui:define>
 
 	<ui:define name="content">
@@ -20,11 +21,11 @@
 			
 			<b:panel
 				style-class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-3">
-				<h4>Vos coordonnées</h4>
+				<h4><strong>Vos coordonnées</strong></h4>
 				<p>#{mbUser.user.address}</p>
 				<p>#{mbSubscription.connectedUser.phone}</p>
 				<br />
-				<h4>Offre choisie :</h4>
+				<h4><strong>Offre choisie :</strong></h4>
 				<h4>
 					<c:if test="#{mbSubscription.offer.totalHarvestQuantity > 0}">Premium </c:if>
 					#{mbSubscription.offer.size.name}
@@ -35,7 +36,7 @@
 				
 				<b:row>
 						<b:column
-							style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
+							style-class="lsp-padding-1rem col-xs-offset-2 col-sm-offset-3 col-md-offset-2 col-xs-8 col-sm-6 col-md-8">
 							<b:commandButton style-class="lsp-width-100" value="Valider mon choix" look="success" 
 								action="#{mbSubscription.selectCrops()}" />
 						</b:column>
@@ -47,20 +48,22 @@
 
 					<b:row>
 
-						<h4>Choisissez vos variétés !</h4>
+						<h4><strong>Choisissez vos variétés !</strong></h4>
 						<p>Chaque variété coûte un certain nombre de points. Vous
 							pouvez en sélectionner une plusieurs fois.</p>
 						<p>Vous devez en choisir au moins 3 différentes.</p>
 						<h4>
-							Total des points disponibles : <strong>#{mbSubscription.offer.totalHarvestQuantity}</strong>
+							Total des points disponibles : <span id="harvest-result">#{mbSubscription.offer.totalHarvestQuantity}</span> / <strong id="total-points">#{mbSubscription.offer.totalHarvestQuantity}</strong>
+							<b:button value="" look="link" icon-awesome="refresh" icon-size="2x"
+							onclick="calculateHarvest()" id="harvest-calculator-btn"/> 
 						</h4>
 					</b:row>
 
 					<ui:repeat value="#{mbSubscription.subscribedCrops}" var="subCrop">
 
-						<b:panelGrid colSpans="3,7,2" size="sm" style-class="crop-grid">
+						<b:panelGrid colSpans="3,7,2" size="sm" style-class="crop-grid harvest-calculator">
 							<div><h4>#{subCrop.crop.name}</h4>
-							<h5>#{subCrop.crop.harvestQty} point(s)/portion</h5>
+							<h5 data-points="#{subCrop.crop.harvestQty}">#{subCrop.crop.harvestQty} point(s)/portion</h5>
 							</div>
 							<b:slider2 min="0"
 								max="#{mbSubscription.offer.size.homeSizeHigh*2}"
