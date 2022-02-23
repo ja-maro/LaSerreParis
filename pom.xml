@@ -93,44 +93,44 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${surefire.version}</version>
 				</plugin>
-				<!-- <plugin> -->
-				<!-- <groupId>org.apache.maven.plugins</groupId> -->
-				<!-- <artifactId>maven-site-plugin</artifactId> -->
-				<!-- <version>${mavensite.version}</version> -->
-				<!-- <executions> -->
-				<!-- <execution> -->
-				<!-- <phase>verify</phase> -->
-				<!-- <goals> -->
-				<!-- <goal>site</goal> -->
-				<!-- </goals> -->
-				<!-- </execution> -->
-				<!-- </executions> -->
-				<!-- </plugin> -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${mavensite.version}</version>
+					<executions>
+						<execution>
+							<phase>verify</phase>
+							<goals>
+								<goal>site</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
 			</plugins>
 		</pluginManagement>
 	</build>
 
-	<!-- <reporting> -->
-	<!-- <plugins> -->
+	<reporting>
+		<plugins>
 
-	<!-- <plugin> -->
-	<!-- <groupId>org.apache.maven.plugins</groupId> -->
-	<!-- <artifactId>maven-javadoc-plugin</artifactId> -->
-	<!-- <version>${javadoc.version}</version> -->
-	<!-- <configuration> -->
-	<!-- <show>private</show> -->
-	<!-- <nohelp>true</nohelp> -->
-	<!-- </configuration> -->
-	<!-- </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.version}</version>
+				<configuration>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+			</plugin>
 
-	<!-- <plugin> -->
-	<!-- <groupId>org.apache.maven.plugins</groupId> -->
-	<!-- <artifactId>maven-project-info-reports-plugin</artifactId> -->
-	<!-- <version>${mavenprojectinforeports.version}</version> -->
-	<!-- </plugin> -->
-	<!-- </plugins> -->
-	<!-- </reporting> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${mavenprojectinforeports.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<repositories>
 		<repository>
@@ -138,7 +138,7 @@
 			<url>${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/maven</url>
 		</repository>
 	</repositories>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>gitlab-maven</id>
